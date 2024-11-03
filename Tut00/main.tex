@@ -1,5 +1,7 @@
 \documentclass[aspectratio=169,usepdftitle=true,t]{beamer}
 
+\input{../.vscode/user.tex}
+
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{microtype}
@@ -27,8 +29,8 @@
 
 \date{11. Oktober 2024}
 
-\author{Vorname Nachname}
-\email{vorname.nachname@uni-muenster.de}
+\author{\lqfullname}
+\email{{\lqemail}@uni-muenster.de}
 
 \outro{Münster, \today}
 
@@ -101,9 +103,9 @@
         \item Vorkenntnisse?
     \end{itemize}
     \vspace*{\fill}}
-    \begin{block}{Vorname}
+    \begin{block}{\lqfirstname}
     \begin{itemize}
-        \item \href{mailto:vorname.nachname@uni-muenster.de}{vorname.nachname@uni-muenster.de}
+        \item \href{mailto:{\lqemail}@uni-muenster.de}{{\lqemail}@uni-muenster.de}
     \end{itemize}
     \end{block}
 \end{frame}
