@@ -4,9 +4,10 @@
 
 Quellcode meiner LaTeX-Folien für das "Informatik I" Tutorium an der Universität Münster im Wintersemester 2024/2025.
 
+Alle persönlichen Daten sind aus dem Code entfernt und in der [user.tex](.vscode/user.tex) definiert.
+
 ## TODO
 
-- [ ] Konfigurationsdatei für persönliche Daten, wie z.B. Name und Email.
 - [ ] CI compile
 
 ## Lizenz
