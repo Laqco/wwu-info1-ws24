@@ -1,0 +1,36 @@
+\begin{frame}<handout:11>{$0.4$ \faAngleRight~IEEE 754 \faAngleRight~\textit{???}}
+    \begin{alignat*}{4}
+        0.4_{(10)} = 0.0\overline{1100}_{(2)} &=&~0.\tikzmark{mark0}0\tikzmark{mark1}1\tikzmark{mark2}&100110011..._{(2)}\\
+        \only<1|handout:0>{&&&\hphantom{100110011..._{(2)}\cdot 2^{-2}}} % to align
+        \only<2|handout:0>{&=& 1.&100110011..._{(2)}\cdot 2^{-2}}
+        \only<3->{&=& {\color{red}+}1.&10\mathclap{\underbrace{\hphantom{1001}}_\text{\color{blue}Mantisse}}0110011..._{(2)}\cdot 2^{\color{green}-2}}
+    \end{alignat*}
+    \only<2->{\begin{tikzpicture}[overlay,remember picture]
+        \tikzstyle{smallarrow} = []
+        \only<3->{\tikzset{smallarrow/.append style={draw=green}}}
+        \node [inner sep=0,below = 0.05cm of pic cs:mark0] (n0) {};
+        \node [inner sep=0,below = 0.05cm of pic cs:mark1] (n1) {};
+        \node [inner sep=0,below = 0.05cm of pic cs:mark2] (n2) {};
+        \draw (n0) edge[->,bend right,smallarrow] (n1);
+        \draw (n1) edge[->,bend right,smallarrow] (n2);
+    \end{tikzpicture}}
+    \\\par
+    \only<4->{8-Bit IEEE 754 Gleitkommazahl: \texttt{\textcolor{red}{S} \textcolor{green}{EE\tikzmark{mark3}E} \textcolor{blue}{MMMM}}
+    \begin{tikzpicture}[overlay,remember picture]
+        \node [inner sep=0,below = 0.05ex of pic cs:mark3] (n0) {};
+        \node [inner sep=2pt,right = 3.7cm of pic cs:mark3,draw,rounded corners] (n1) {$\text{bias: }2^{\only<4|handout:0>{r}\only<5->{3}-1}-1\only<5->{=3}$};
+        \node [inner sep=0,below left = -0.2cm and 0.05cm of n1] (n2) {};
+        \draw (n0) edge[->,bend right=10] (n2);
+    \end{tikzpicture}
+    \\\par}
+    \[\begin{array}{w{c}{0.3\linewidth} w{c}{0.3\linewidth} w{c}{0.3\linewidth}}
+        \only<6->{\textcolor{red}{+} & \textcolor{green}{-2}+3=\textcolor{orange}{1} & 1.\textcolor{blue}{1001}}
+        \only<7|handout:0>{\\\textcolor{red}{0} & \hphantom{-2+3=1}\llap{\textcolor{orange}{001}} & \hphantom{1.}\textcolor{blue}{1001}}
+        \only<8->{\\\textcolor{red}{0} & \hphantom{-2+3=1}\llap{\textcolor{orange}{001}} & \underbrace{\hphantom{1.}\textcolor{blue}{1001}}_{~~2^0+2^{-1}+2^{-4}}}
+    \end{array}\]
+    \[
+        \only<9|handout:0>{\textcolor{red}{+}2^{\color{green}-2}\cdot(2^0+\textcolor{blue}{2^{-1}}+\textcolor{blue}{2^{-4}})\hphantom{~=0.390625}}
+        \only<10->{\textcolor{red}{+}2^{\color{green}-2}\cdot(2^0+\textcolor{blue}{2^{-1}}+\textcolor{blue}{2^{-4}})=0.390625}%
+        \only<11->{\rlap{\hspace{0.5em}\tiny$\rightarrow$2.34\% Abweichung}}
+    \]
+    \end{frame}

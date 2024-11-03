@@ -1,0 +1,41 @@
+\begin{frame}{Ist doch ganz normal, oder?}
+    \only<1-2|handout:0>{\begin{exercise}
+        \begin{enumerate}[a)]
+            \item Welchen Wert hat $0~100~1000$?
+            \item $0.75$ \faAngleRight~IEEE
+            \item kleinste und größte positive Zahl: IEEE \only<2>{\bfseries}und Dezimal
+        \end{enumerate}
+    \end{exercise}}
+    \only<3-5|handout:1>{\begin{exercise}[Welchen Wert hat $0~100~1000$?]\end{exercise}\begin{solve}[a)]\vspace*{-1em}
+        \only<3|handout:0>{\vspace{-3pt}}
+        \[\begin{array}{w{c}{0.3\linewidth} w{c}{0.3\linewidth} w{c}{0.3\linewidth}}
+            \only<3|handout:0>{\textcolor{red}{0} & \textcolor{orange}{100} & \hphantom{1.}\textcolor{blue}{1000}}
+            \only<4->{\textcolor{red}{0} & \underbrace{\textcolor{orange}{100}}_{\textcolor{orange}{4}-3=\textcolor{green}{1}} & \underbrace{1.\textcolor{blue}{1000}}_{2^0+2^{-1}\hspace*{1.7em}}}
+        \end{array}\]
+        \[
+            \only<5>{\textcolor{red}{+}2^{\color{green}1}\cdot(2^0+\textcolor{blue}{2^{-1}})=2\cdot1.5=3}
+        \]
+    \end{solve}}
+    \only<6-10|handout:2>{\begin{exercise}[$0.75$ \faAngleRight~IEEE]\end{exercise}\begin{solve}[b)]\vspace*{-1em}
+        \[
+            0.75_{(10)} = 0.\tikzmark{a4m0}1\tikzmark{a4m1}1_{(2)} = \only<6|handout:0>{\hphantom{+1.1000_{(2)}\cdot2^{-1}}} \only<7->{\only<8->{\textcolor{red}{+}}\only<-7|handout:0>{\hphantom{+}}1.1000\only<8->{\hspace{3pt}\mathllap{\underbrace{\hphantom{1000}}_\text{\color{blue}Mantisse}}\hspace{-3pt}}_{(2)}\cdot 2^{\only<9->{\color{green}}-1}}
+        \]
+        \only<7->{\begin{tikzpicture}[overlay,remember picture]
+            \tikzstyle{smallarrow} = []
+            \only<8->{\tikzset{smallarrow/.append style={draw=green}}}
+            \node [inner sep=0,below = 0.05cm of pic cs:a4m0] (n0) {};
+            \node [inner sep=0,below = 0.05cm of pic cs:a4m1] (n1) {};
+            \draw (n0) edge[->,bend right,smallarrow] (n1);
+        \end{tikzpicture}}
+        \[\begin{array}{w{c}{0.3\linewidth} w{c}{0.3\linewidth} w{c}{0.3\linewidth}}
+            \only<9->{\textcolor{red}{+} & \textcolor{green}{-1}+3=\textcolor{orange}{2} & 1.\textcolor{blue}{1000}}
+            \only<10->{\\\textcolor{red}{0} & \hphantom{-2+3=1}\llap{\textcolor{orange}{010}} & \hphantom{1.}\textcolor{blue}{1000}}
+        \end{array}\]
+    \end{solve}}
+    \only<11-|handout:3>{\begin{exercise}[kleinste und größte positive Zahl]\end{exercise}\begin{solve}[c)]
+        \begin{itemize}
+            \item kleinste: kleinstmöglicher Exponent \textcolor{orange}{$000$} (definiert $\overline{e}=-2$), kleinstmögliche Mantisse \textcolor{blue}{$0001$} (mit impliziter $0$ vor dem Komma, da denormalisiert) $\Rightarrow (2^{-4})\cdot2^{-2}=2^{-6}=0.015625$
+            \item<12-> größte: größtmöglicher Exponent \textcolor{orange}{$110$} (nur $1$en wäre unendlich), größtmögliche Mantisse \textcolor{blue}{$1111$} (mit impliziter $1$ vor dem Komma) $\Rightarrow (2^0+2^{-1}+2^{-2}+2^{-3}+2^{-4})\cdot2^3=15.5$
+        \end{itemize}
+    \end{solve}}
+\end{frame}

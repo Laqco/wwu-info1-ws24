@@ -1,0 +1,28 @@
+\begin{frame}{Wie in der Grundschule}
+    \begin{exercise}
+        Interpretieren Sie die Binärzahlen $0110\tikzmark{e3whitespace0}~0100$ und $1100\tikzmark{e3whitespace1}~0110$ im Zweierkomplement.
+    \end{exercise}
+    \begin{tikzpicture}[overlay,remember picture]
+        \node [inner sep=0,right = 2pt of pic cs:e3whitespace0] (w0) {};
+        \node [inner sep=0,right = 2pt of pic cs:e3whitespace1] (w1) {};
+        \node [inner sep=2pt,below right = 0.5em and 1.1em of pic cs:e3whitespace0,draw,rounded corners] (n1) {\textbf{\color{red}Zwei} Zahlen!};
+        \node [inner sep=0,below left = -0.2cm and 0.05cm of n1] (n2) {};
+        \node [inner sep=0,below right = -0.2cm and 0.05cm of n1] (n3) {};
+        \draw (w0) edge[->,bend right=20] (n2);
+        \draw (w1) edge[->,bend left=20] (n3);
+    \end{tikzpicture}
+    \begin{solve}[b)]
+        \vspace*{-2em}\begin{alignat*}{3}
+             &\only<9|handout:0>{\textcolor{blue}}0\only<8|handout:0>{\textcolor{blue}}1\only<7|handout:0>{\textcolor{blue}}1\only<6|handout:0>{\textcolor{blue}}0~&\only<5|handout:0>{\textcolor{blue}}0\only<4|handout:0>{\textcolor{blue}}1\only<3|handout:0>{\textcolor{blue}}0\only<2|handout:0>{\textcolor{blue}}0\\
+            +~&\tikzmark{saue1}\only<9|handout:0>{\textcolor{blue}}1\only<8|handout:0>{\textcolor{blue}}1\only<7|handout:0>{\textcolor{blue}}0\only<6|handout:0>{\textcolor{blue}}0~&\tikzmark{saue0}\only<5|handout:0>{\textcolor{blue}}0\only<4|handout:0>{\textcolor{blue}}1\only<3|handout:0>{\textcolor{blue}}1\only<2|handout:0>{\textcolor{blue}}0\\
+            \addlinespace[-2\belowrulesep]\cmidrule[\lightrulewidth]{2-3}
+             &\uncover<9->{\only<9|handout:0>{\textcolor{orange}}0}\uncover<8->{\only<8|handout:0>{\textcolor{orange}}0}\uncover<7->{\only<7|handout:0>{\textcolor{orange}}1}\uncover<6->{\only<6|handout:0>{\textcolor{orange}}0}~&\uncover<5->{\only<5|handout:0>{\textcolor{orange}}1}\uncover<4->{\only<4|handout:0>{\textcolor{orange}}0}\uncover<3->{\only<3|handout:0>{\textcolor{orange}}1}\uncover<2->{\only<2|handout:0>{\textcolor{orange}}0}
+        \end{alignat*}
+        \begin{tikzpicture}[overlay,remember picture]
+            \node [inner sep=0,below right = 1em and 0.3ex of pic cs:saue0] (u0) {\only<4->{\tiny\only<5|handout:0>{\textcolor{blue}}{\only<4|handout:0>{\textcolor{orange}}1}}};
+            \node [inner sep=0,below right = 1em and 0.3ex of pic cs:saue1] (u1) {\only<8->{\tiny\only<9|handout:0>{\textcolor{blue}}{\only<8|handout:0>{\textcolor{orange}}1}}};
+            \node [inner sep=0,below left = 1em and 0.5ex of pic cs:saue1] (u2) {\only<9->{\tiny\only<9|handout:0>{\textcolor{orange}}1}};
+        \end{tikzpicture}
+        \onslide<10->$0010~1010_{(2)}=2^5+2^3+2^1=42=100-58$
+    \end{solve}
+\end{frame}
