@@ -1,0 +1,304 @@
+% Florian Sihler, 2024
+% Licensed under GNU General Public License version 3
+% https://opensource.org/licenses/gpl-3.0.html
+\def\filename{fancyqr}
+\ProvidesPackage{\filename}[2024/10/05 version v2.1 Fancy QR-Codes]
+\RequirePackage{pict2e, xfp, qrcode}
+
+% element
+% x: {\the\j}; y: {\the\i} | \@max@x \@max@y
+\def\@@fancyqr@color@gradient#1{\edef\angle{\fpeval{%
+   % approximate mod
+   \fancyqr@gradient@angle+225 - floor((\fancyqr@gradient@angle+225)/360)*360
+}}% rotate to align 0 to the right
+\edef\gradient{\fpeval{%
+   % we do rotate the x and y points before color drawing by
+   % Mod(\fancyqr@gradient@angle,360) with the shifted origin
+   % Old: #3/2 #4/2
+   ((\the\j-\@half@max@x)*cos(\angle) - (\the\i-\@half@max@y)*sin(\angle) + \@half@max@x)/\@max@x * 50% rel x [0,1]
+   + ((\the\j-\@half@max@x)*sin(\angle) + (\the\i-\@half@max@y)*cos(\angle) + \@half@max@y)/\@max@y * 50% rel y [0,1]
+   }}\@declaredcolor{qr@fancy@gradient@br!\gradient!qr@fancy@gradient@tl}{#1}}
+\def\@@fancyqr@color@default#1{\@declaredcolor{qr@fancy@gradient@tl}{#1}}
+\def\@@fancyqr@color@random#1{\pgfmathrandomitem{\@fancyqr@random@c@l@r}{@@fancyqr@@randomcol}\@declaredcolor{\@fancyqr@random@c@l@r}{#1}}
+\let\FancyQrColor\@@fancyqr@color@default
+
+\def\fancyqr@rounding@factor{.5}
+\edef\fancyqr@rounding@other{\fpeval{1-\fancyqr@rounding@factor}}
+
+% O 1 O
+% 2 X 3
+% O 4 O
+% uses \@up\@left\@right\@down
+\def\GetPattern{%
+\ifcsname qcc\@up\@left\@right\@down\endcsname
+   \csname qcc\@up\@left\@right\@down\endcsname
+\fi}
+
+% backwards compatibility
+\def\fancyqr@clap#1{\hb@xt@\z@{\hss#1\hss}}
+\newdimen\fancyqr@edge@compensate \fancyqr@edge@compensate=.15\p@
+
+% is larger to be compensated by overlaps
+\def\qrm{\dimexpr\qr@modulesize+\fancyqr@edge@compensate\relax}
+\long\def\qr@newpattern#1#2#3#4#5{%
+\expandafter\def\csname qcc#1#2#3#4\endcsname{% scaling happens implicitly by the unitlength
+   \put(\the\j,\the\numexpr\@max@y-\the\i){%
+      \advance\unitlength by\fancyqr@edge@compensate\relax
+      #5%
+   }}%
+}
+
+% [#3][#2]
+% [#4][#1]
+\def\fancyqr@rounded@rect#1#2#3#4{%
+   \ifnum#4=\@ne\relax \moveto(\fancyqr@rounding@factor,\z@)\else\moveto(\z@,\z@)\fi
+   \ifnum#1=\@ne
+      \lineto(\fancyqr@rounding@other,\z@)%
+      \circlearc\fancyqr@rounding@other\fancyqr@rounding@factor\fancyqr@rounding@factor{270}{360}
+   \else\lineto(\@ne,\z@)\fi
+   \ifnum#2=\@ne
+      \lineto(\@ne,\fancyqr@rounding@other)%
+      \circlearc\fancyqr@rounding@other\fancyqr@rounding@other\fancyqr@rounding@factor{0}{90}
+   \else\lineto(\@ne,\@ne)\fi
+   \ifnum#3=\@ne
+      \lineto(\fancyqr@rounding@factor,\@ne)%
+      \circlearc\fancyqr@rounding@factor\fancyqr@rounding@other\fancyqr@rounding@factor{90}{180}
+   \else\lineto(\z@,\@ne)\fi
+   \ifnum#4=\@ne
+      \lineto(\z@,\fancyqr@rounding@factor)%
+      \circlearc\fancyqr@rounding@factor\fancyqr@rounding@factor\fancyqr@rounding@factor{180}{270}
+   \else\lineto(\z@,\z@)\fi
+   \fancyqr@rounded@rect@close
+}
+\def\fancyqr@rounded@rect@close{\fillpath}
+
+\def\FancyQrLoadDefault{%
+% .
+\qr@newpattern0000{\fancyqr@rounded@rect1111}%
+% | | - -
+\qr@newpattern1000{\fancyqr@rounded@rect1001}%
+\qr@newpattern0001{\fancyqr@rounded@rect0110}%
+\qr@newpattern0100{\fancyqr@rounded@rect1100}%
+\qr@newpattern0010{\fancyqr@rounded@rect0011}%
+% corners
+\qr@newpattern1100{\fancyqr@rounded@rect1000}% bottom right
+\qr@newpattern1010{\fancyqr@rounded@rect0001}% bottom left
+\qr@newpattern0101{\fancyqr@rounded@rect0100}% top right
+\qr@newpattern0011{\fancyqr@rounded@rect0010}% top left
+% straights | --
+\qr@newpattern1001{\fancyqr@rounded@rect0000}%
+\qr@newpattern0110{\fancyqr@rounded@rect0000}%
+% enclosed
+\qr@newpattern1111{\fancyqr@rounded@rect0000}%
+% t's
+\qr@newpattern0111{\fancyqr@rounded@rect0000}%
+\qr@newpattern1011{\fancyqr@rounded@rect0000}%
+\qr@newpattern1101{\fancyqr@rounded@rect0000}%
+\qr@newpattern1110{\fancyqr@rounded@rect0000}%
+}
+\FancyQrLoadDefault % allows to reset the style after other loads
+\def\@fancy@qr@default@name{default}
+
+\def\FancyQrLoad#1{%
+\protected@edef\fancyqr@loaded@style{#1}%
+\def\fancyqr@rounded@rect@close{\fillpath}%
+\let\@tmp\newpattern\let\newpattern\qr@newpattern\@bsphack\def\@@tmp{#1}%
+\ifx\@@tmp\@fancy@qr@default@name\FancyQrLoadDefault\else
+\expandafter\edef\csname pingu@lib@#1@atcode\endcsname{\the\catcode`\@}%
+\catcode`\@=11\relax
+\input{fancyqr-style-#1.code}%
+\catcode`\@=\csname pingu@lib@#1@atcode\endcsname
+\fi\@esphack\let\newpattern\@tmp\let\@tmp\relax}
+
+
+% modify the getter so everything that is not defined is white:
+\def\fancy@qr@matrixentry#1#2#3{%
+   \ifcsname #1@#2@#3\endcsname
+   % #1 = matrix name
+   % #2 = row number
+   % #3 = column number
+   \csname #1@#2@#3\endcsname
+   \else\qr@white@format\fi
+}%
+
+\def\FancyQrDoNotPrintSquare#1#2{\def\fancy@qr@donotprint@center@x{#1}\def\fancy@qr@donotprint@center@y{#2}}
+\FancyQrDoNotPrintSquare00
+
+\newif\iffancy@qr@do@print@
+\def\qr@fancy@updateif#1#2{\fancy@qr@do@print@true
+\ifnum#1>\@do@y@min\relax \ifnum#1<\@do@y@max\relax \ifnum#2>\@do@x@min\relax \ifnum#2<\@do@x@max\relax \fancy@qr@do@print@false \fi\fi\fi\fi}
+
+\newif\iffancy@qr@roundcut@
+\fancy@qr@roundcut@true
+\let\FancyQrHardCut\fancy@qr@roundcut@false
+\let\FancyQrRoundCut\fancy@qr@roundcut@true
+
+% clear plus if not to be printed
+\def\qr@fancy@clear@surround#1#2#3{%
+   \qr@fancy@updateif{\the\numexpr#2-1}{#3}%
+   \iffancy@qr@do@print@\else \expandafter\let\csname #1@\the\numexpr#2-1 @#3\endcsname\@undefined \fi
+   \qr@fancy@updateif{\the\numexpr#2+1}{#3}%
+   \iffancy@qr@do@print@\else \expandafter\let\csname #1@\the\numexpr#2+1 @#3\endcsname\@undefined \fi
+   \qr@fancy@updateif{#2}{\the\numexpr#3-1}%
+   \iffancy@qr@do@print@\else \expandafter\let\csname #1@#2@\the\numexpr#3-1\endcsname\@undefined \fi
+   \qr@fancy@updateif{#2}{\the\numexpr#3+1}%
+   \iffancy@qr@do@print@\else \expandafter\let\csname #1@#2@\the\numexpr#3+1\endcsname\@undefined \fi
+}
+
+\newif\if@fancyqr@image@
+
+\def\fancy@qr@printmatrix#1{%
+   \def\qr@white{0}\def\qr@black{1}%
+   \protected@edef\fancyqr@currprint{#1}%
+   \let\qr@black@fixed\qr@black \let\qr@white@fixed\qr@white
+   \let\qr@black@format\qr@black \let\qr@white@format\qr@white
+  %Set module size
+  \qr@modulesize=\qr@desiredheight\relax
+  \divide\qr@modulesize by \qr@size\relax
+  \unitlength=\dimexpr\qr@modulesize\relax % will be re-set in placement
+  \if@fancyqr@image@% image is in \fancyqr@imgbox
+   \edef\@x{\fpeval{ceil((.5\wd\fancyqr@imgbox)/\qr@modulesize)+\fancyqr@img@padding@x}}%
+   \edef\@y{\fpeval{ceil((.5\ht\fancyqr@imgbox+.5\dp\fancyqr@imgbox)/\qr@modulesize)+\fancyqr@img@padding@y}}%
+   \FancyQrDoNotPrintSquare\@x\@y
+  \fi
+  \qr@minipagewidth=\qr@desiredheight
+  \ifqr@tight\else \advance\qr@minipagewidth by 8\qr@modulesize\relax \fi
+  \begingroup
+      \edef\@max@x{\qr@numberofrowsinmatrix\fancyqr@currprint}\edef\@half@max@x{\the\numexpr\@max@x/2}%
+      \edef\@max@y{\qr@numberofcolsinmatrix\fancyqr@currprint}\edef\@half@max@y{\the\numexpr\@max@y/2}%
+      % redefine the border to be white!
+      \qr@for \i=\@ne to \@max@y by \@ne{%
+      % redefine the limits to be white!
+      \qr@storetomatrix\fancyqr@currprint{\the\numexpr\z@}{\the\i}{\qr@white}%
+      \qr@storetomatrix\fancyqr@currprint{\the\numexpr\@max@x+\@ne}{\the\i}{\qr@white}%
+      }%
+      \qr@for \i=\@ne to \@max@x by \@ne{%
+         \qr@storetomatrix\fancyqr@currprint{\the\i}{\the\numexpr\z@}{\qr@white}%
+         \qr@storetomatrix\fancyqr@currprint{\the\i}{\the\numexpr\@max@y+\@ne}{\qr@white}%
+      }%
+      \edef\@do@x@min{\the\numexpr\@half@max@x-\fancy@qr@donotprint@center@x-\@ne}%
+      \edef\@do@x@max{\the\numexpr\@half@max@x+\fancy@qr@donotprint@center@x+\@ne}%
+      \edef\@do@y@min{\the\numexpr\@half@max@y-\fancy@qr@donotprint@center@y-\@ne}%
+      \edef\@do@y@max{\the\numexpr\@half@max@y+\fancy@qr@donotprint@center@y+\@ne}%
+      \edef\@tmp@tight{\ifqr@tight\z@\else-4\fi}%
+      \picture(\qr@minipagewidth,\qr@minipagewidth)(\the\numexpr\@ne+\@tmp@tight,\@tmp@tight)
+      \qr@for \i=\@ne to \@max@y by \@ne{\qr@for \j=\@ne to \@max@x by \@ne{%
+         \qr@fancy@updateif\i\j
+         \iffancy@qr@do@print@
+            \edef\@mid{\qr@matrixentry\fancyqr@currprint{\the\i}{\the\j}}%
+            \ifnum\@mid=\qr@black\relax
+               \iffancy@qr@roundcut@\qr@fancy@clear@surround\fancyqr@currprint{\the\i}{\the\j}\fi
+               \edef\@up{\qr@matrixentry\fancyqr@currprint{\the\numexpr\the\i-\@ne}{\the\j}}%
+               \edef\@left{\qr@matrixentry\fancyqr@currprint{\the\i}{\the\numexpr\the\j-\@ne}}%
+               \edef\@right{\qr@matrixentry\fancyqr@currprint{\the\i}{\the\numexpr\the\j+\@ne}}%
+               \edef\@down{\qr@matrixentry\fancyqr@currprint{\the\numexpr\the\i+\@ne}{\the\j}}%
+               \FancyQrColor{\GetPattern}%
+         \fi\fi
+      }}%
+      \if@fancyqr@image@
+         % floating point mid
+         \put(\fpeval{.5*\@max@x+.5},\fpeval{.5*\@max@y}){%
+            \edef\@halfcheck{\fpeval{round(\fancy@qr@donotprint@center@x/2)}}%
+            \raisebox{-.5\height}{\clap{% TODO: remove this offset
+               \ifodd\@halfcheck \else\kern\qr@modulesize\fi
+               \usebox\fancyqr@imgbox
+            }}%
+         }%
+      \fi
+      \endpicture
+   \endgroup
+}%
+
+\def\fancy@qr@setup#1{%
+   \qr@creatematrix{#1}%
+   \expandafter\gdef\csname #1@numrows\endcsname{\qr@size}%
+   \expandafter\gdef\csname #1@numcols\endcsname{\qr@size}%
+   % we do not need to create blank because we store all
+   \qr@placefinderpatterns{#1}%
+   \qr@placetimingpatterns{#1}%
+   \qr@placealignmentpatterns{#1}%
+}
+
+\newcount\c@fancy@a \newcount\c@fancy@b
+% the normal data is... well...
+\def\fancy@qr@writedata#1#2{%
+  % #1 = name of a matrix that has been prepared with finder patterns, timing patterns, etc.
+  % #2 = a string consisting of 0's and 1's to write into the matrix.
+  \expandafter\c@fancy@a\the\numexpr\qr@numberofrowsinmatrix{#1}\relax
+  \expandafter\c@fancy@b\the\numexpr\qr@numberofcolsinmatrix{#1}\relax
+  \edef\qr@datatowrite{#2\relax}%
+  \c@qr@i0\relax
+  \@whilenum\c@qr@i<\c@fancy@a\do{%
+      \c@qr@j0 \advance\c@qr@i\@ne
+      \@whilenum\c@qr@j<\c@fancy@b\do{%
+         \advance\c@qr@j\@ne
+         \expandafter\fancy@qr@writebit\qr@datatowrite:{#1}%
+      }%
+  }%
+}
+
+\def\fancy@qr@writebit#1#2:#3{%
+  % #3 = matrix name
+  % (qr@i,qr@j) = position to write in (LaTeX counters)
+  % #1 = bit to be written
+  % #2 = remaining bits plus '\relax' as an end-of-file marker
+  \edef\qr@datatowrite{#2}%
+  \ifnum#1=1
+    \qr@storetomatrix{#3}{\number\c@qr@i}{\number\c@qr@j}{\qr@black}%
+  \else
+    \qr@storetomatrix{#3}{\number\c@qr@i}{\number\c@qr@j}{\qr@white}%
+  \fi
+}%
+
+
+\def\fancy@qr@printsavedbinarymatrix#1{%
+   \def\qr@binarystring{#1\relax\relax}%
+   \fancy@qr@setup{@tmp}%
+   \fancy@qr@writedata{@tmp}{\qr@binarystring}%
+   \fancy@qr@printmatrix{@tmp}%
+}%
+
+\newsavebox\fancyqr@imgbox
+\newif\if@fancyqr@randomcolor@
+\define@key{fancyqr}{image x padding}{\def\fancyqr@img@padding@x{#1}}
+\define@key{fancyqr}{image y padding}{\def\fancyqr@img@padding@y{#1}}
+\define@key{fancyqr}{image padding}{\def\fancyqr@img@padding@x{#1}\def\fancyqr@img@padding@y{#1}}
+\define@key{fancyqr}{image}{\@fancyqr@image@true\savebox\fancyqr@imgbox{#1}}
+\define@key{fancyqr}{color}{\@fancyqr@randomcolor@false\@fancyqr@gradientfalse\colorlet{qr@fancy@gradient@tl}{#1}}
+\define@key{fancyqr}{left color}{\@fancyqr@randomcolor@false\colorlet{qr@fancy@gradient@br}{#1}}
+\define@key{fancyqr}{l color}{\@fancyqr@randomcolor@false\colorlet{qr@fancy@gradient@br}{#1}}
+\define@key{fancyqr}{right color}{\@fancyqr@randomcolor@false\colorlet{qr@fancy@gradient@tl}{#1}}
+\define@key{fancyqr}{r color}{\@fancyqr@randomcolor@false\colorlet{qr@fancy@gradient@tl}{#1}}
+\define@key{fancyqr}{gradient angle}{\@fancyqr@randomcolor@false\def\fancyqr@gradient@angle{#1}}
+\define@boolkey{fancyqr}[@fancyqr@]{gradient}[true]{}% if@fancyqr@gradient
+\define@key{fancyqr}{random color}{\@fancyqr@randomcolor@true\def\@fancyqr@random@colors{#1}}
+\define@key{fancyqr}{width}{\setkeys{qr}{height=#1}}
+\define@key{fancyqr}{size}{\setkeys{qr}{height=#1}}
+% \fancyqr@loaded@style
+\def\fancyqr@flat@style{flat}
+\define@boolkey{fancyqr}[@fancyqr@]{classic}[true]{} % if@fancyqr@classic
+\def\fancyqr@classic{%
+\ifx\fancyqr@loaded@style\fancyqr@flat@style\else\FancyQrLoad{\fancyqr@flat@style}\fi
+\setkeys{fancyqr}{%
+   gradient=false,color=black,l color=black,r color=black%
+}%
+}
+
+\def\fancyqrset#1{\setkeys{qr,fancyqr}{#1}}
+\fancyqrset{image padding=0,gradient=true,gradient angle=135,r color=teal,l color=purple}
+
+\def\@fancyqr@init{\let\qr@printsavedbinarymatrix\fancy@qr@printsavedbinarymatrix\let\qr@matrixentry\fancy@qr@matrixentry\let\qr@printmatrix\fancy@qr@printmatrix}
+\def\fancyqr{\@ifstar\s@fancyqr\ns@fancyqr}
+% we rebuild some parts of qrcode to allow this macro to extend the keys while keeping the wrapper
+\def\s@fancyqr{\qr@starinvokedtrue\@@fancyqr}
+\def\ns@fancyqr{\qr@starinvokedfalse\@@fancyqr}
+\newcommand\@@fancyqr[1][]{\begingroup\@fancyqr@init
+\ifqr@starinvoked\qr@hyperlinkfalse\fi
+\setkeys{qr,fancyqr}{#1}%
+\if@fancyqr@classic\fancyqr@classic\fi%
+\if@fancyqr@randomcolor@%
+\ifcsname pgfmathdeclarerandomlist\endcsname\else
+\PackageError{fancyqr}{Random colors requested but pgfmath not loaded}{Please load pgfmath if you want this}\fi
+\pgfmathdeclarerandomlist{@@fancyqr@@randomcol}{\@fancyqr@random@colors}\let\FancyQrColor\@@fancyqr@color@random\else\if@fancyqr@gradient\let\FancyQrColor\@@fancyqr@color@gradient\fi\fi
+\bgroup\qr@verbatimcatcodes\qr@setescapedspecials\qrcode@in}
+\endinput

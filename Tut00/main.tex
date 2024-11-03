@@ -1,0 +1,268 @@
+\documentclass[aspectratio=169,usepdftitle=true,t]{beamer}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage[english,main=ngerman]{babel}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{fancyqr}
+\usepackage{biblatex}
+
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{decorations.pathreplacing,decorations.pathmorphing}
+
+\usetheme[theorems]{colorful-dream}
+
+\renewcommand\printbibliography[1][1]{\begin{center}\Huge\textbf{Viel Erfolg im Studium!}\end{center}}
+
+%%%%%%%%%%%%
+% SETTINGS %
+%%%%%%%%%%%%
+
+\title{Informatik I}
+\subtitle{Tutorium 0}
+\institute{Universität Münster}
+
+\date{11. Oktober 2024}
+
+\author{Vorname Nachname}
+\email{vorname.nachname@uni-muenster.de}
+
+\outro{Münster, \today}
+
+%%%%%%%%%%%%%%%%%%
+% TEMPLATE HACKS %
+%%%%%%%%%%%%%%%%%%
+
+% add credit to flo + this took way to long why is latex sometimes so weird :c
+\addtobeamertemplate{title page}{}{%
+\scriptsize\color{gray}\begin{tikzpicture}[overlay, remember picture]
+    \node[above left = 1em and 1em of current page.south east,align=center] (n0) {\LaTeX-Vorlage von\\\href{https://github.com/EagleoutIce}{Florian Sihler}};
+    \node[above = 0cm of n0] (n1) {\fancyqr[size=1.5cm,tight]{https://eagleoutice.github.io/beamer-themes/\#colorful-dream}};
+\end{tikzpicture}}
+
+% prevent error
+\titleimage{\begin{tikzpicture}
+    \node (n0) {};
+\end{tikzpicture}}
+
+%%%%%%%
+% IDK %
+%%%%%%%
+
+% just an example command
+\newcommand\twosplit[3][t]{%
+    \begin{columns}[#1]
+    \begin{column}{0.475\linewidth}
+        #2
+    \end{column}\hfill
+    \begin{column}{0.475\linewidth}
+        #3
+    \end{column}
+    \end{columns}
+}
+
+%%%%%%%%%
+% NOTES %
+%%%%%%%%%
+
+
+
+%%%%%%%%%%%%
+% DOCUMENT %
+%%%%%%%%%%%%
+
+% \section - Titelfolie
+
+% \subsection - Footer subsection
+
+% \begin{frame}{Was ist ein Algorithmus?} - Folie
+% option: c - center vertically
+
+% \begin{definition}[Algorithmus] - Defintion
+
+% \begin{block}{Robust} - Block
+% alertblock
+% exampleblock
+
+% \twosplit - links rechts
+
+\begin{document}
+
+\section{Willkommen}
+\subsection{Vorstellungsrunde}
+
+\begin{frame}{\only<1|beamer>{Über mich}\only<2|beamer>{Und ihr?}\only<0|handout:1>{Vorstellungsrunde}}
+    \only<2>{\begin{itemize}
+        \item Welches Fach?
+        \item Warum Informatik?
+        \item Vorkenntnisse?
+    \end{itemize}
+    \vspace*{\fill}}
+    \begin{block}{Vorname}
+    \begin{itemize}
+        \item \href{mailto:vorname.nachname@uni-muenster.de}{vorname.nachname@uni-muenster.de}
+    \end{itemize}
+    \end{block}
+\end{frame}
+
+\section{Organisatorisches}
+\subsection{Tutorium}
+
+\begin{frame}{Tutorium}
+    \begin{itemize}
+        \item<1-> \texttt{I10}: Freitag 10:15-11:45 Uhr (ct), SRZ 104
+        \item<1-> \texttt{I13}: Freitag 12:30-14:00 Uhr (cct), SRZ 105
+    \end{itemize}
+    \vspace{\fill}
+    \begin{itemize}
+        \item<2-> keine Anwesenheitspflicht, aber \textbf{sinnvoll!}
+        \item<2-> beste Gelegenheit, um Fragen zu stellen
+    \end{itemize}
+\end{frame}
+
+\subsection{Übungsgruppen}
+
+\begin{frame}{Abgabegruppen}
+    \begin{itemize}
+        \item<1-> Gruppengröße $\leq$ \textbf{3}\begin{itemize}
+            \item \textbf{Alle} müssen arbeiten!
+        \end{itemize}
+        \only<2|handout:0>{\item \textbf{NEIN}}
+        \item<3-> Nur im \textbf{selben} Tutorium.
+        \vspace{\fill}
+        \item<4-> \alert{\textbf{Altzulassung?}}
+    \end{itemize}
+    \begin{tikzpicture}[overlay, remember picture]
+        \tikzset{
+            disable rounded corners for decorations/.style={
+                /pgf/every decoration/.style={
+                    /tikz/sharp corners
+                },
+            }
+        }
+
+        \node[above left = 2.1cm and 1.7cm of current page.center] (n0) {};
+        \node[above right = 1.6cm and 0.15cm of current page.center] (n1) {};
+        \node[above right = 1.5cm and 0.17cm of current page.center,rotate=-10,rounded corners=8pt,draw,decorate,disable rounded corners for decorations,decoration={
+            snake,
+            amplitude=1pt,
+            segment length=5pt
+        }] (n2) {\footnotesize\hspace{-2pt}Meldet euch bei mir, wenn das nicht klappt!};
+
+        \draw[decorate,decoration={snake,amplitude=0.6mm,segment length=5mm},->] (n0) -- (n1);
+    \end{tikzpicture}
+\end{frame}
+
+\subsection{Abgabe}
+
+\begin{frame}{Learnweb}
+    \begin{itemize}
+        \item<1-> Wöchentliche Übungszettel
+        \item<2-> Abgabe der Lösungen
+        \item<3-> \textit{\color{lightgray}Verbesserung von mir}
+        \item<4-> Bewertung im Learnweb mit Kommentar
+        \only<5-|handout:0>{\begin{tikzpicture}[overlay, remember picture]
+            \node[draw] (n0) at (current page.center) {$\rightarrow$ Demo};
+        \end{tikzpicture}}
+        \vspace{\fill}
+        \item<6-> Klausurzulassung: \textbf{50\%} der Punkte
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Format}
+    \only<2->{\begin{itemize}
+        \item<2-> Text: \textbf{\texttt{\alert{PDF}}}\only<4->{\begin{itemize}
+            \item tastet euch gerne mal an \href{https://www.latex-project.org/}{\LaTeX} ran
+        \end{itemize}}
+        \item<2-> Code: \textbf{\texttt{\alert{ZIP}}}\begin{itemize}
+            \item<3-> Code im Text: \textbf{lesbar!} (d.h. eingerückt, Fotos vermeiden etc.)
+            \item<3-> In den meisten IDEs gibt es eine Druck-Funktion
+            \only<3->{\begin{tikzpicture}[overlay,remember picture]
+                \node (n0) at (current page.center) {Vorlesung: \href{https://www.eclipse.org/downloads/}{eclipse}};
+                \node[above left = 0.6cm and 2.9cm of current page.center] (ide) {};
+                \node[above left = -0.4cm and -0.3cm of n0] (_n0) {};
+                \draw[arrows={-Triangle[line width=10pt]}] (ide) to[bend right] (_n0);
+            \end{tikzpicture}}
+        \end{itemize}
+    \end{itemize}
+    \vspace{\fill}}
+    \begin{block}{Wichtig}
+        Abgaben im falschen Format werden nicht verbessert.
+    \end{block}
+\end{frame}
+
+\subsection{Tutorium}
+
+\begin{frame}{Inhalt}
+    \begin{itemize}
+        \item<1-> {\color{lightgray}\emph{``Besprechung der (Lösungen der) Übungsaufgaben''}}
+        \item<2-> aufgetretene Probleme und Fragen klären
+        \only<2|handout:0>{\vspace{\fill}\begin{block}{Eure Lösungen?}
+            Darf ich Abgaben als Beispiele anführen? Mit oder ohne Quelle?
+        \end{block}}
+        \item<3-> Übungsblätter vorbesprechen
+        \item<4-> zusammen Beispiele bearbeiten
+        \only<0|handout:1>{\vspace{\fill}\begin{block}{Eure Lösungen zeigen?}
+            Ich werde manchmal (mit Vorwarnung!) euren Code auf meinen Folien zeigen. Falls ihr das nicht wollt, schreibt mir das direkt oder in einem Kommentar in eurem Code!
+        \end{block}}
+    \end{itemize}
+\end{frame}
+
+\section{Bevor es losgeht...}
+\subsection{Hardwarecheck}
+
+\begin{frame}{Programmieren auf Laptop? iPad? Papier?!}
+    \vspace{-2em}\twosplit{\only<1->{\begin{block}{gut}
+        Laptop, Macbook, PC
+    \end{block}}}{\only<2->{\begin{block}{schlecht}
+        Tablet, iPad, Handy
+    \end{block}}}
+    \vspace{\fill}
+    \only<3->{\begin{block}{PC-Pool}
+        An der Brücke gibt es einen PC-Pool, an dem ihr arbeiten könnt.
+    \end{block}}
+    \only<0|handout:1>{\begin{block}{ASTA Laptop}
+        \begin{minipage}{0.85\linewidth}
+            Der ASTA kann euch auch Laptops für zwei Monate verleihen.
+        \end{minipage}\nolinebreak\hfill\begin{minipage}{0.107\linewidth}
+            \vspace{0.107cm}\fancyqr[size=1.5cm]{https://www.asta.ms/laptop-verleih}
+        \end{minipage}\end{block}}
+    \vspace{\fill}
+    \only<4->{Auf Papier werdet ihr nur in der Klausur programmieren müssen, also keine Sorge!}
+\end{frame}
+
+\subsection{Hilfe}
+
+\begin{frame}{Hilfe ich komm' nicht weiter!}
+    \only<1->{\begin{block}{\href{https://www.uni-muenster.de/Informatik/learningcenter/}{LearningCenter}}
+        \begin{minipage}{0.85\linewidth}
+            Im LearningCenter Informatik könnt ihr Hilfestellung zum\\Studienstart und im Studium bekommen. Die Öffnungszeiten findet ihr auf der Website.
+        \end{minipage}\nolinebreak\hfill\begin{minipage}{0.107\linewidth}
+            \vspace{0.107cm}\fancyqr[size=1.5cm]{https://www.uni-muenster.de/Informatik/learningcenter/}
+        \end{minipage}
+    \end{block}}
+    \vspace{\fill}
+    \only<2->{\begin{block}{Zusammen schafft man mehr!}
+        Arbeitet mit euren Übungsgruppen zusammen, fragt im Learnweb nach und fragt vor allem mich!
+    \end{block}}
+\end{frame}
+
+\subsection{Fragen}
+
+\begin{frame}<presentation:0|handout:1>{Nachtrag}
+    \begin{block}{KI mit Stift und Papier?}
+        \begin{minipage}{0.85\linewidth}
+            Ein kleines Spiel für einsame Abende... Oder ein 60 Jahre altes Experiment!
+        \end{minipage}\nolinebreak\hfill\begin{minipage}{0.107\linewidth}
+            \vspace{0.107cm}\fancyqr[size=1.5cm]{https://www.i-am.ai/de/build-your-own-ai.html}
+        \end{minipage}
+    \end{block}
+    \begin{block}{Folien}
+        Ich werde meine vollständigen Folien ohne Gewähr auf Richtigkeit im Learnweb hochladen. Feedback gerne jederzeit an mich! :)
+    \end{block}
+\end{frame}
+
+\end{document}
