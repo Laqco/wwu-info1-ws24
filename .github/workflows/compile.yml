@@ -6,11 +6,23 @@ jobs:
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v4
+      - name: Download LaTeX Libraries
+        run: |
+          mkdir -p ./texinputs
+          cd ./texinputs
+          git clone https://github.com/EagleoutIce/beamer-themes.git
+          git clone https://github.com/EagleoutIce/code-animation.git
+          git clone https://github.com/EagleoutIce/color-palettes.git
+          git clone https://github.com/EagleoutIce/sopra-collection.git
+          cd -
+          export TEXINPUTS="$(find my_subdir -type f -name "*.sty" | tr '\n' ':' | sed 's/:$//')"
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v3
         with:
           root_file: Tut*/*.tex
+          work_in_root_file_dir: true
       - name: Upload PDF file
         uses: actions/upload-artifact@v4
         with:
-          path: *.pdf
+          name: PDF
+          path: ./*.pdf
