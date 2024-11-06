@@ -11,7 +11,7 @@ jobs:
         uses: zauguin/install-texlive@v3
         with:
           packages: >
-            latexmk texliveonfly
+            latexmk latex texliveonfly
 
       - name: Download custom libraries
         run: |
@@ -25,18 +25,13 @@ jobs:
 
       - name: Compile LaTeX document
         run: |
-          ls .
-          echo "---"
-          ls ..
-          echo "---"
-          ls ../..
           for dir in Tut*
           do
-            echo $dir
+            echo Directory: $dir
             cd $dir
             for texfile in *.tex
             do
-              echo $texfile
+              echo File: $texfile
               texliveonfly --compiler=latexmk --arguments="-interaction=nonstopmode -file-line-error -pdf" $texfile
             done
             cd ..
