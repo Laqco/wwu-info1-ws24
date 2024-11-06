@@ -4,6 +4,13 @@ jobs:
   build_latex:
     runs-on: ubuntu-latest
     steps:
+      - name: 'Cleanup build folder'
+        run: |
+          ls -la ./
+          rm -rf ./* || true
+          rm -rf ./.??* || true
+          ls -la ./
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
