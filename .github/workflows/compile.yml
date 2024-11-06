@@ -25,11 +25,15 @@ jobs:
 
       - name: Compile LaTeX document
         run: |
+          ls .
+          ls ..
           for dir in Tut*
           do
+            echo $dir
             cd $dir
             for texfile in *.tex
             do
+              echo $texfile
               texliveonfly --compiler=latexmk --arguments="-interaction=nonstopmode -file-line-error -pdf" $texfile
             done
             cd ..
