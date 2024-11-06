@@ -1,0 +1,13 @@
+#!/bin/bash
+
+for dir in Tut*
+do
+    echo Directory: $dir
+    cd $dir
+    for texfile in *.tex
+    do
+        echo File: $texfile
+        texliveonfly $texfile
+    done
+    cd ..
+done

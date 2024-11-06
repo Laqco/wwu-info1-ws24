@@ -8,11 +8,7 @@ jobs:
         uses: actions/checkout@v4
       
       - name: Install LaTeX
-        run: |
-          sudo apt-get install texlive-latex-base
-          sudo apt install latexmk
-          tlmgr init-usertree
-          tlmgr install texliveonfly
+        run: docker build --pull --tag 'sauerburger/pdflatex'
 
       - name: Download custom libraries
         run: |
@@ -25,15 +21,4 @@ jobs:
           export TEXINPUTS=./texinputs//:
       
       - name: Compile LaTeX Document
-        run: |
-          for dir in Tut*
-          do
-            echo Directory: $dir
-            cd $dir
-            for texfile in *.tex
-            do
-              echo File: $texfile
-              texliveonfly $texfile
-            done
-            cd ..
-          done
+        run: docker run sauerburger/pdflatex:latest ".github/workflows/dockerrun"
