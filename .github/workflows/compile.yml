@@ -1,28 +1,33 @@
-name: Build LaTeX document
+name: Compile Slides
 on: [push]
 jobs:
   build_latex:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Git repository
+      - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Install latexmk
+        run: |
+          sudo apt-get install latexmk
+
       - name: Download LaTeX Libraries
         run: |
-          mkdir -p ./texinputs
-          cd ./texinputs
+          mkdir -p ./texinputs/tex/latex
+          cd ./texinputs/tex/latex
           git clone https://github.com/EagleoutIce/beamer-themes.git
           git clone https://github.com/EagleoutIce/code-animation.git
           git clone https://github.com/EagleoutIce/color-palettes.git
           git clone https://github.com/EagleoutIce/sopra-collection.git
-          cd -
-          export TEXINPUTS="$(find my_subdir -type f -name "*.sty" | tr '\n' ':' | sed 's/:$//')"
+          export TEXINPUTS=./texinputs//:
       - name: Compile LaTeX document
-        uses: xu-cheng/latex-action@v3
-        with:
-          root_file: Tut*/*.tex
-          work_in_root_file_dir: true
-      - name: Upload PDF file
-        uses: actions/upload-artifact@v4
-        with:
-          name: PDF
-          path: ./*.pdf
+        run: |
+          for texfile in Tut*/*.tex
+          do
+            latexmk -interaction=nonstopmode -file-line-error -cd -pdf $texfile
+          done
+      # - name: Upload PDF file
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: PDF
+      #     path: ./*.pdf
