@@ -32,7 +32,7 @@ jobs:
             for texfile in *.tex
             do
               echo File: $texfile
-              texliveonfly --compiler=latexmk --arguments="-interaction=nonstopmode -file-line-error -pdf" $texfile
+              texliveonfly --compiler=latexmk --arguments="-pdf" $texfile
             done
             cd ..
           done
