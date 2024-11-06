@@ -6,9 +6,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      
-      - name: Install LaTeX
-        run: docker build --pull --tag 'sauerburger/pdflatex' .
 
       - name: Download custom libraries
         run: |
@@ -19,6 +16,9 @@ jobs:
           git clone https://github.com/EagleoutIce/color-palettes.git
           git clone https://github.com/EagleoutIce/sopra-collection.git
           export TEXINPUTS=./texinputs//:
+
+      - name: Setup docker/Prepare
+        run: docker build --pull --tag 'mydocker' --file '.github/workflows/Dockerfile' .
       
-      - name: Compile LaTeX Document
-        run: docker run sauerburger/pdflatex:latest ".github/workflows/dockerrun"
+      - name: Run docker/Compile
+        run: docker run mydocker:latest
