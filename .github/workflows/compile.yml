@@ -7,11 +7,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install latexmk
-        run: |
-          sudo apt-get install latexmk
+      - name: Install TeX Live
+        uses: zauguin/install-texlive@v3
+        packages: >
+            latex texliveonfly
 
-      - name: Download LaTeX Libraries
+      - name: Download custom libraries
         run: |
           mkdir -p ./texinputs/tex/latex
           cd ./texinputs/tex/latex
@@ -20,10 +21,12 @@ jobs:
           git clone https://github.com/EagleoutIce/color-palettes.git
           git clone https://github.com/EagleoutIce/sopra-collection.git
           export TEXINPUTS=./texinputs//:
+
       - name: Compile LaTeX document
         run: |
           for texfile in Tut*/*.tex
           do
+            texliveonfly $texfile
             latexmk -interaction=nonstopmode -file-line-error -cd -pdf $texfile
           done
       # - name: Upload PDF file
