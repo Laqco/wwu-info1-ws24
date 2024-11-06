@@ -22,27 +22,10 @@ jobs:
           git clone https://github.com/EagleoutIce/color-palettes.git
           git clone https://github.com/EagleoutIce/sopra-collection.git
           export TEXINPUTS=./texinputs//:
-
-      - name: Compile LaTeX document
-        run: |
-          for dir in Tut*
-          do
-            echo Directory: $dir
-            cd $dir
-            for texfile in *.tex
-            do
-              echo File: $texfile
-              texliveonfly --compiler=latexmk --arguments="-interaction=nonstopmode -file-line-error -pdf" $texfile
-            done
-            cd ..
-          done
-
-  upload_artifact:
-    needs: build_latex
-    runs-on: ubuntu-latest
-    steps:
-      - name: Upload PDF file
-        if: always()
-        uses: actions/upload-artifact@v4
+      
+      - name: Compile LaTeX Document
+        uses: yegor256/latexmk-action@0.15.0
         with:
-          path: .
+          cmd: latexmk
+          path: Tut00
+          opts: -interaction=nonstopmode -file-line-error -pdf
