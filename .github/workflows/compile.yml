@@ -30,10 +30,13 @@ jobs:
             cd $dir
             for texfile in *.tex
             do
-              texliveonfly $texfile
+              texliveonfly --engine=latexmk --arguments="-interaction=nonstopmode -file-line-error -pdf" $texfile
             done
             cd ..
           done
+
+      - name: Text compilation
+        run: echo $(*/*.pdf)
       # - name: Upload PDF file
       #   uses: actions/upload-artifact@v4
       #   with:
