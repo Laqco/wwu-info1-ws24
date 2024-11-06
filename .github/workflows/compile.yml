@@ -40,8 +40,8 @@ jobs:
       - name: Test for PDF files
         if: always()
         run: |
-          cd ..
-          find -iname '*.pdf'
+          cd ../..
+          ls *.pdf */*.pdf */*/*.pdf */*/*/*.pdf
       # - name: Upload PDF file
       #   uses: actions/upload-artifact@v4
       #   with:
