@@ -6,14 +6,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Install sltx
-        run: pip3 install sltx
       
       - name: Install LaTeX
         run: |
           sudo apt-get install texlive-latex-base
           sudo apt install latexmk
+          tlmgr init-usertree
+          tlmgr install texliveonfly
 
       - name: Download custom libraries
         run: |
@@ -34,7 +33,7 @@ jobs:
             for texfile in *.tex
             do
               echo File: $texfile
-              sltx raw-compile $texfile
+              texliveonfly $texfile
             done
             cd ..
           done
