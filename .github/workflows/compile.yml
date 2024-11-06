@@ -11,7 +11,7 @@ jobs:
         uses: zauguin/install-texlive@v3
         with:
           packages: >
-            texliveonfly latexmk pdftex
+            l3build latex latex-bin luatex latex-bin-dev scheme-basic latexmk texliveonfly
 
       - name: Download custom libraries
         run: |
