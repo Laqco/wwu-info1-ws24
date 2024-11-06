@@ -11,7 +11,7 @@ jobs:
         uses: zauguin/install-texlive@v3
         with:
           packages: >
-            latex latex-bin luatex latex-bin-dev scheme-basic texliveonfly
+            texliveonfly
 
       - name: Download custom libraries
         run: |
@@ -30,7 +30,7 @@ jobs:
             cd $dir
             for texfile in *.tex
             do
-              texliveonfly --engine=latexmk --arguments="-interaction=nonstopmode -file-line-error -pdf" $texfile
+              texliveonfly --compiler=latexmk --arguments="-interaction=nonstopmode -file-line-error -pdf" $texfile
             done
             cd ..
           done
