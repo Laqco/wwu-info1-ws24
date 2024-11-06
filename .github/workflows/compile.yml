@@ -26,7 +26,10 @@ jobs:
       - name: Compile LaTeX document
         run: |
           ls .
+          echo "---"
           ls ..
+          echo "---"
+          ls ../..
           for dir in Tut*
           do
             echo $dir
