@@ -9,7 +9,8 @@ jobs:
 
       - name: Install TeX Live
         uses: zauguin/install-texlive@v3
-        packages: >
+        with:
+          packages: >
             latex texliveonfly
 
       - name: Download custom libraries
