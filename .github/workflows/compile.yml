@@ -36,7 +36,11 @@ jobs:
             done
             cd ..
           done
-          
+
+  upload_artifact:
+    needs: build_latex
+    runs-on: ubuntu-latest
+    steps:
       - name: Upload PDF file
         uses: actions/upload-artifact@v4
         with:
