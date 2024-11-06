@@ -21,4 +21,4 @@ jobs:
         run: docker build --pull --tag 'mydocker' --file '.github/workflows/Dockerfile' .
       
       - name: Run docker/Compile
-        run: docker run mydocker:latest
+        run: docker run --volume "$(pwd):/root/data" mydocker:latest

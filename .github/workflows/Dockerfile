@@ -1,4 +1,4 @@
-FROM docker.io/sauerburger/pdflatex:latest
+FROM docker.io/eagleoutice/lithie-tx-full:latest
 
 USER root
 
