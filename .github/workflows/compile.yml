@@ -11,7 +11,7 @@ jobs:
         uses: zauguin/install-texlive@v3
         with:
           packages: >
-            l3build latex latex-bin luatex latex-bin-dev scheme-basic latexmk texliveonfly
+            texliveonfly
 
       - name: Download custom libraries
         run: |
@@ -26,6 +26,6 @@ jobs:
       - name: Compile LaTeX Document
         uses: yegor256/latexmk-action@0.15.0
         with:
-          cmd: latexmk
+          cmd: texliveonfly
           path: Tut00
-          opts: -interaction=nonstopmode -file-line-error -pdf
+          opts: --compiler=latexmk --arguments="-interaction=nonstopmode -file-line-error -pdf"
