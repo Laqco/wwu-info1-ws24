@@ -4,21 +4,11 @@ jobs:
   build_latex:
     runs-on: ubuntu-latest
     steps:
-      - name: 'Cleanup build folder'
-        run: |
-          ls -la ./
-          rm -rf ./* || true
-          rm -rf ./.??* || true
-          ls -la ./
-
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install TeX Live
-        uses: zauguin/install-texlive@v3
-        with:
-          packages: >
-            l3build latex latex-bin luatex latex-bin-dev scheme-basic latexmk texliveonfly
+      - name: Install sltx
+        run: pip3 install sltx
 
       - name: Download custom libraries
         run: |
@@ -39,8 +29,7 @@ jobs:
             for texfile in *.tex
             do
               echo File: $texfile
-              latexmk -c $texfile
-              texliveonfly --compiler=latexmk --arguments="-pdf" $texfile
+              sltx raw-compile $texfile
             done
             cd ..
           done
