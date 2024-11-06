@@ -10,11 +10,10 @@ jobs:
       - name: Install sltx
         run: pip3 install sltx
       
-      - name: Install TeX Live
-        uses: zauguin/install-texlive@v3
-        with:
-          packages: >
-            latexmk
+      - name: Install LaTeX
+        run: |
+          sudo apt-get install texlive-latex-base
+          tlmgr install latexmk
 
       - name: Download custom libraries
         run: |
