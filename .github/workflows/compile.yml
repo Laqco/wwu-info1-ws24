@@ -25,10 +25,15 @@ jobs:
 
       - name: Compile LaTeX document
         run: |
-          for texfile in Tut*/*.tex
+          for dir in Tut*
           do
-            texliveonfly $texfile
-            latexmk -interaction=nonstopmode -file-line-error -cd -pdf $texfile
+            cd $dir
+            for texfile in *.tex
+            do
+              texliveonfly $texfile
+              latexmk -interaction=nonstopmode -file-line-error -cd -pdf $texfile
+            done
+            cd ..
           done
       # - name: Upload PDF file
       #   uses: actions/upload-artifact@v4
