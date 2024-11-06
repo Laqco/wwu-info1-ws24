@@ -11,7 +11,7 @@ jobs:
         uses: zauguin/install-texlive@v3
         with:
           packages: >
-            latex-base fonts-recommended fonts-extra latex-extra texliveonfly
+            latex pdflatex texliveonfly
 
       - name: Download custom libraries
         run: |
