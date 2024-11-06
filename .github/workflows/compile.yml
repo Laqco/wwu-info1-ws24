@@ -38,6 +38,7 @@ jobs:
           done
 
       - name: Test for PDF files
+        if: always()
         run: echo $(*/*.pdf)
       # - name: Upload PDF file
       #   uses: actions/upload-artifact@v4
