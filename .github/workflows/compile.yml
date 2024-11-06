@@ -13,7 +13,6 @@ jobs:
       - name: Install LaTeX
         run: |
           sudo apt-get install texlive-latex-base
-          tlmgr install latexmk
 
       - name: Download custom libraries
         run: |
