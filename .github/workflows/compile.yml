@@ -11,7 +11,7 @@ jobs:
         uses: zauguin/install-texlive@v3
         with:
           packages: >
-            l3build latex latex-bin luatex latex-bin-dev scheme-basic texliveonfly
+            l3build latex latex-bin luatex latex-bin-dev scheme-basic latexmk texliveonfly
 
       - name: Download custom libraries
         run: |
@@ -36,12 +36,9 @@ jobs:
             done
             cd ..
           done
-
-      - name: Test for PDF files
-        if: always()
-        run: |
           cd ../..
           find . -name '.pdf'
+          
       # - name: Upload PDF file
       #   uses: actions/upload-artifact@v4
       #   with:
