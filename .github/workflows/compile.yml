@@ -9,6 +9,12 @@ jobs:
 
       - name: Install sltx
         run: pip3 install sltx
+      
+      - name: Install TeX Live
+        uses: zauguin/install-texlive@v3
+        with:
+          packages: >
+            latexmk
 
       - name: Download custom libraries
         run: |
