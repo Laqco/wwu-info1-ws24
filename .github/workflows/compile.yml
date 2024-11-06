@@ -39,7 +39,9 @@ jobs:
 
       - name: Test for PDF files
         if: always()
-        run: ls -lR | grep '/\|pdf$'
+        run: |
+          cd ..
+          find -iname '*.pdf'
       # - name: Upload PDF file
       #   uses: actions/upload-artifact@v4
       #   with:
