@@ -3,7 +3,7 @@ on: [push]
 jobs:
   build_latex:
     runs-on: ubuntu-latest
-    container: kjarosh/latex:2024.4-minimal
+    container: kjarosh/latex:2024.4-basic
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
