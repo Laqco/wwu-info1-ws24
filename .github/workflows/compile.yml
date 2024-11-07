@@ -21,8 +21,9 @@ jobs:
       
       - name: Install texliveonfly
         run: |
-          apk add python3 pipx
-          pipx install sltx
+          apk add python3 py3-pip
+          python3 -m pip config set global.break-system-packages true
+          pip3 install sltx
 
       - name: Build using latexmk
         run: |
