@@ -29,7 +29,7 @@ jobs:
       - name: Commit and push slides
         uses: dmnemec/copy_file_to_another_repo_action@main
         env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+          API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN }}
         with:
           source_file: 'pdfs'
           destination_repo: 'Laqco/wwu-info1-ws24'
