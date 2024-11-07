@@ -3,7 +3,7 @@ on: [push]
 jobs:
   build_latex:
     runs-on: ubuntu-latest
-    container: kjarosh/latex:2024.4
+    container: kjarosh/latex:2024.4-minimal
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -19,6 +19,10 @@ jobs:
           git clone https://github.com/EagleoutIce/sopra-collection.git
           ls -lR
           export TEXINPUTS=./texinputs//:
+      
+      - name: Install texliveonfly
+        run: |
+          tlmgr install texliveonfly
 
       - name: Build using latexmk
         run: |
