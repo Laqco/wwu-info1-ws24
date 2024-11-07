@@ -18,15 +18,15 @@ jobs:
           git clone https://github.com/EagleoutIce/color-palettes.git
           git clone https://github.com/EagleoutIce/sopra-collection.git
 
-      - name: Build LaTeX sources
-        run: | # omfg it took me about 15 hrs to realize that texinputs is in .. directory and not . FML
+      - name: Compile PDFs # texinputs is in .. -.-
+        run: |
           for texfile in Tut*/*.tex
           do
             latexmk -interaction=nonstopmode -file-line-error -pdf -cd "-emulate-aux-dir" -auxdir=. -outdir=../pdfs -e "ensure_path('TEXINPUTS','../texinputs//:')" $texfile
             latexmk -C $texfile
           done
 
-      - name: Commit and push slides
+      - name: Push slides to builds
         uses: dmnemec/copy_file_to_another_repo_action@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN }}
