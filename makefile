@@ -10,6 +10,7 @@ $(TUTS):
 	+$(MAKE) --directory="$@" --file="../makefile.meta" tut
 	mkdir -p pdfs
 	cp $@/*.pdf pdfs/
+	ls pdfs
 
 docker:
 	docker build --pull --tag "mydocker" --file "Dockerfile" .
