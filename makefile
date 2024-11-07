@@ -7,7 +7,7 @@ all: ${TUTS} collect
 
 $(TUTS):
 	+echo "Building: '$@'"
-	+$(MAKE) --directory="$@" --file="../makefile" tut
+	+$(MAKE) --directory="$@" --file="../makefile.meta" tut
 
 collect:
 	mkdir -p pdfs
@@ -15,18 +15,3 @@ collect:
 
 docker:
 	docker build --pull --tag "mydocker" --file "Dockerfile" .
-
-############
-
-PDFS := $(addsuffix .pdf,$(basename $(shell ls *.tex)))
-__FILENAME := ""
-
-tut: ${PDFS}
-
-%.pdf: __FILENAME = $(addsuffix .tex, $(basename $@))
-	$(dockerrun)
-
-define dockerrun
-	echo Compiling file: ${__FILENAME}
-	sltx raw-compile "${__FILENAME}"
-endef
