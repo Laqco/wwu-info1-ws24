@@ -8,9 +8,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install git
+      - name: Install git and make
         run: |
           apk add git
+          apk add make
 
       - name: Build LaTeX sources
         run: |
