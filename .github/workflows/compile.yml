@@ -21,9 +21,7 @@ jobs:
       
       - name: Install texliveonfly
         run: |
-          apk add --update --no-cache python3
-          ln -sf python3 /usr/bin/python
-          python3 -m ensurepip
+          apk add --no-cache python3 py3-pip
           pip3 install sltx
 
       - name: Build using latexmk
