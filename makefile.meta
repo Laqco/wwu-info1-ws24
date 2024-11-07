@@ -21,9 +21,11 @@ compile: ${SLIDESPDF}
 %.pdf: __FILENAME = $(addsuffix .tex, $(basename $@))
 
 pdf_%_noanim.pdf: __FILECONTENT = \\PassOptionsToClass{handout}{beamer}\\input{$*.tex}
+pdf_%_noanim.pdf:
 	$(dockerrun)
 
 pdf_%.pdf: __FILECONTENT = \\input{$*.tex}
+pdf_%.pdf:
 	$(dockerrun)
 
 define dockerrun
