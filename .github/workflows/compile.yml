@@ -17,8 +17,8 @@ jobs:
           git clone https://github.com/EagleoutIce/sopra-collection.git
           export TEXINPUTS=./texinputs//:
 
-      - name: Setup docker/Prepare
-        run: docker build --pull --tag 'mydocker' --file '.github/workflows/Dockerfile' .
+      - name: Setup docker image
+        run: make docker
       
-      - name: Run docker/Compile
-        run: docker run --volume "$(pwd):/root/data" mydocker:latest
+      - name: Compile PDFs
+        run: docker run --volume "$(pwd):/root/data" mydocker:latest "$@"
