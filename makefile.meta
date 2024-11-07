@@ -1,12 +1,38 @@
-PDFS := $(addsuffix .pdf,$(basename $(shell ls *.tex)))
-__FILENAME := ""
+SHELL := /usr/bin/env bash
 
-tut: ${PDFS}
+SLIDES_TEX := $(shell ls *.tex)
+SLIDES_BASE := $(addprefix pdf_, $(basename $(SLIDES_TEX)))
+SLIDES_NOANIM := $(addsuffix _noanim, ${SLIDES_BASE})
+SLIDES_ALL := ${SLIDES_BASE} ${SLIDES_NOANIM}
+SLIDESPDF := $(addsuffix .pdf, ${SLIDES_ALL})
+
+CLEANTARGETS := log aux out ind bbl blg lof lot toc idx acn acr alg glg glo gls fls fdb_latexmk auxlock md5 SATZE ZSM UB TOP listing upa ilg TOPIC DEFS vrb snm nav atfi run.xml bcf
+
+__FILENAME := ""
+__FILECONTENT := ""
+
+.PHONY = all compile clean dockerrun
+
+all: compile clean
+
+compile: ${SLIDESPDF}
+	@echo Built the pdfs: ${SLIDESPDF}
 
 %.pdf: __FILENAME = $(addsuffix .tex, $(basename $@))
+
+%_noanim.pdf: __FILECONTENT = \\PassOptionsToClass{handout}{beamer}\\input{$*.tex}
+%_noanim.pdf:
+	$(dockerrun)
+
+%.pdf: __FILECONTENT = \\input{$*.tex}
+%.pdf:
 	$(dockerrun)
 
 define dockerrun
-	echo Compiling file: ${__FILENAME}
+	echo "${__FILECONTENT}" > "${__FILENAME}"
 	sltx raw-compile "${__FILENAME}"
+	rm "${__FILENAME}"
 endef
+
+clean:
+	for fd in $(CLEANTARGETS); do rm -f *.$$fd; done
