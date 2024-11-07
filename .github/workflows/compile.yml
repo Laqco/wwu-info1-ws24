@@ -33,7 +33,7 @@ jobs:
         with:
           source_file: 'pdfs'
           destination_repo: 'Laqco/wwu-info1-ws24'
-          destination_branch: builds-test
+          destination_branch: builds
           user_email: 'action@github.com'
           user_name: 'GitHub Action'
           commit_message: 'Compiled slides'
