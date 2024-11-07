@@ -23,7 +23,7 @@ jobs:
         run: |
           apk add --update --no-cache python3
           ln -sf python3 /usr/bin/python
-          tlmgr install texliveonfly
+          tlmgr install texliveonfly latexmk
 
       - name: Build using latexmk
         run: |
