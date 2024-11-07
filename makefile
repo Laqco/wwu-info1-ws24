@@ -10,7 +10,7 @@ all: ${TUTS} collect
 
 $(TUTS):
 	+echo "Building: '$@'"
-	+$(MAKE) --directory="$@" --file="makefile.meta" all
+	+$(MAKE) --directory="$@" --file="../makefile.meta" all
 
 collect:
 	mkdir -p ${TARGET_DIR}
