@@ -22,8 +22,7 @@ jobs:
       - name: Install texliveonfly
         run: |
           apk add python3 py3-pip
-          python3 -m pip config set global.break-system-packages true
-          pip3 install sltx
+          tlmgr install texliveonfly
 
       - name: Build using latexmk
         run: |
@@ -32,7 +31,7 @@ jobs:
             cd $dir
             for texfile in *.tex
             do
-              sltx raw-compile $texfile
+              texliveonfly --compiler=latexmk --arguments="-interaction=nonstopmode -file-line-error -pdf" $texfile
             done
             cd ..
           done
