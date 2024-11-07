@@ -1,0 +1,51 @@
+\begin{frame}{Euklidischer Algorithmus}
+    \begin{exercise}[a)]
+        Führen Sie den Algorithmus \textit{schrittweise} für $m=27$ und $n=12$ aus.
+    \end{exercise}
+    \pause[]
+    \begin{solve}
+        \begin{minipage}{0.5\textwidth}
+        \scriptsize
+        \begin{algorithmic}
+            \\\Comment{\only<2-5>{$m=27,n=12$}\only<6-9>{$m=15,n=12$}\only<10-13>{$m=3,n=12$}\only<14-17>{$m=3,n=9$}\only<18-21>{$m=3,n=6$}\only<22-25>{$m=3,n=3$}\only<26-29>{$m=3,n=0$}}
+            \If{$m=0$}\only<3-29>\Comment{\only<3-6>{$27=0$?}\only<7-10>{$15=0$?}\only<11-14>{$3=0$?}\only<15-18>{$3=0$?}\only<19-22>{$3=0$?}\only<23-26>{$3=0$?}\only<27-29>{$3=0$?}}
+                \State result $\gets n$
+            \Else
+                \While{$n\neq 0$}\only<4-6,8-10,12-14,16-18,20-22,24-26,28-29>\Comment{\only<4-6>{$12\neq0$?}\only<8-10>{$12\neq0$?}\only<12-14>{$12\neq0$?}\only<16-18>{$9\neq0$?}\only<20-22>{$6\neq0$?}\only<24-26>{$3\neq0$?}\only<28-29>{$0\neq0$?}}
+                    \If{$m>n$}\only<5,6,9,10,13,14,17,18,21,22,25,26>\Comment{\only<5-6>{$27>12$?}\only<9-10>{$15>12$?}\only<13-14>{$3>12$?}\only<17-18>{$3>9$?}\only<21-22>{$3>6$?}\only<25-26>{$3>3$?}}
+                        \State $m\gets m-n$\only<6,10>\Comment{\only<6>{$m\gets27-12$?}\only<10>{$m\gets15-12$?}}
+                    \Else
+                        \State $n\gets n-m$\only<14,18,22,26>\Comment{\only<14>{$n\gets12-3$?}\only<18>{$n\gets9-3$?}\only<22>{$n\gets6-3$?}\only<26>{$n\gets3-3$?}}
+                    \EndIf
+                \EndWhile
+                \State result $\gets m$\only<29>\Comment{\only<29>{result $\gets3$}}
+            \EndIf
+        \end{algorithmic}
+    \end{minipage}
+    \end{solve}
+\end{frame}
+% copy to cleanup my code
+\addtocounter{exercise}{-1}\addtocounter{solve}{-1}% reset counters
+\begin{frame}[fragile]{Euklidischer Algorithmus}
+    \begin{exercise}[b)]
+        Welches Ergebnis produziert der Algorithmus? Warum führen die Subtraktionen zum gewünschten Ergebnis?
+    \end{exercise}
+    \pause[]
+    \begin{solve}[b)]
+        \begin{itemize}
+            \item Der Algorithmus berechnet den größten gemeinsamen Teiler (ggT) von $m$ und $n$.
+            \pause[]\item Jeder gemeinsame Teiler von $m>n$ muss auch Teiler von $m-n$ sein: $m=t\cdot k_1, n=t\cdot k_2\implies m-n=t\cdot k_1-t\cdot k_2=t\cdot\left(k_1-k_2\right)$
+        \end{itemize}
+    \end{solve}
+\end{frame}
+% copy to cleanup my code
+\addtocounter{exercise}{-1}\addtocounter{solve}{-1}% reset counters
+\begin{frame}[fragile]{Euklidischer Algorithmus}
+    \begin{exercise}[c)]
+        Geben Sie das Ergebnis in Form einer Nachbedingung an.
+    \end{exercise}
+    \pause[]
+    \begin{solve}[b)]
+        \T{result} $=ggT(m,n)$: \T{result} ist Teiler von $m$ und $n$ und für jede Zahl $z:z\mid m\wedge z\mid n$ gilt $z\leq$ \T{result}.
+    \end{solve}
+\end{frame}
