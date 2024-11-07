@@ -3,7 +3,7 @@ on: [push]
 jobs:
   build_latex:
     runs-on: ubuntu-latest
-    container: kjarosh/latex:2024.4-medium
+    container: kjarosh/latex:2024.4
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -19,20 +19,20 @@ jobs:
           git clone https://github.com/EagleoutIce/sopra-collection.git
           export TEXINPUTS=./texinputs//:
       
-      - name: Install texliveonfly
+      - name: Install sltx
         run: |
           apk add python3 py3-pip
           python3 -m pip config set global.break-system-packages true
           pip3 install sltx
 
-      - name: Build using latexmk
+      - name: Build LaTeX sources
         run: |
           for dir in Tut*
           do
             cd $dir
             for texfile in *.tex
             do
-              sltx raw-compile --recipe "texliveonfly" --args "--compiler=latexmk --arguments='-interaction=nonstopmode -file-line-error -pdf'" $texfile
+              sltx raw-compile $texfile
             done
             cd ..
           done
