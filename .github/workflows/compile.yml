@@ -22,7 +22,7 @@ jobs:
         run: |
           for texfile in Tut*/*.tex
           do
-            latexmk -interaction=nonstopmode -file-line-error -pdf -cd "-emulate-aux-dir" -auxdir=. -outdir=../pdfs -e "ensure_path('TEXINPUTS','./texinputs//:')" $texfile
+            latexmk -interaction=nonstopmode -file-line-error -pdf -cd "-emulate-aux-dir" -auxdir=. -outdir=../pdfs -e "ensure_path('TEXINPUTS','../texinputs//:')" $texfile
             latexmk -C $texfile
           done
 
