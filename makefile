@@ -1,21 +1,32 @@
 SHELL := /usr/bin/env bash
 
-all:
-    $(dockerrun)
+TUTS := $(wildcard Tut*)
+
+all: ${TUTS} collect
+    echo -e "\033[32mRun for: $(TUTS)\033[m"
+
+$(TUTS):
+	+echo "Building: '$@'"
+	+$(MAKE) --directory="$@" --file="../makefile" tut
+
+collect:
+    mkdir -p pdfs
+    cp Tut*/*.pdf pdfs/
 
 docker:
-	docker build --pull --tag 'mydocker' --file 'Dockerfile' .
+	docker build --pull --tag "mydocker" --file "Dockerfile" .
+
+############
+
+PDFS := $(addsuffix .pdf,$(basename $(shell ls *.tex)))
+__FILENAME := ""
+
+tut: ${PDFS}
+
+%.pdf: __FILENAME = $(addsuffix .tex, $(basename $@))
+    $(dockerrun)
 
 define dockerrun
-    for dir in Tut*
-    do
-        echo Directory: $dir
-        cd $dir
-        for texfile in *.tex
-        do
-            echo Compiling file: $texfile
-            sltx raw-compile $texfile
-        done
-        cd ..
-    done
+    echo Compiling file: ${__FILENAME}
+    sltx raw-compile "${__FILENAME}"
 endef

@@ -22,3 +22,16 @@ jobs:
       
       - name: Compile PDFs
         run: docker run --volume "$(pwd):/root/data" mydocker:latest "$@"
+      
+      # - name: Commit
+      #   run: |
+      #     git config --local user.email "action@github.com"
+      #     git config --local user.name "GitHub Action"
+      #     git add -f "pdfs/"
+      #     git commit -m "Compiled slides"
+      # - name: Push changes
+      #   uses: ad-m/github-push-action@master
+      #   with:
+      #     branch: build
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     force: true
