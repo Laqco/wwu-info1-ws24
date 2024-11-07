@@ -8,16 +8,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install git and make
+      - name: Download custom libraries
         run: |
           apk add git
-          apk add make
+          mkdir -p ./texinputs/tex/latex
+          cd ./texinputs/tex/latex
+          git clone https://github.com/EagleoutIce/beamer-themes.git
+          git clone https://github.com/EagleoutIce/code-animation.git
+          git clone https://github.com/EagleoutIce/color-palettes.git
+          git clone https://github.com/EagleoutIce/sopra-collection.git
 
       - name: Build LaTeX sources
         run: |
           for texfile in Tut*/*.tex
           do
-            latexmk -interaction=nonstopmode -file-line-error -pdf -cd "-emulate-aux-dir" -auxdir=. -outdir=../pdfs -use-make $texfile
+            latexmk -interaction=nonstopmode -file-line-error -pdf -cd "-emulate-aux-dir" -auxdir=. -outdir=../pdfs -e "ensure_path('TEXINPUTS','./texinputs//:')" $texfile
             latexmk -C $texfile
           done
 
