@@ -8,33 +8,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Download custom libraries
+      - name: Install git
         run: |
-          mkdir -p ./texinputs/tex/latex
-          cd ./texinputs/tex/latex
           apk add git
-          git clone https://github.com/EagleoutIce/beamer-themes.git
-          git clone https://github.com/EagleoutIce/code-animation.git
-          git clone https://github.com/EagleoutIce/color-palettes.git
-          git clone https://github.com/EagleoutIce/sopra-collection.git
-          export TEXINPUTS=./texinputs//:
-      
-      - name: Install sltx
-        run: |
-          apk add python3 py3-pip
-          python3 -m pip config set global.break-system-packages true
-          pip3 install sltx
 
       - name: Build LaTeX sources
         run: |
-          for dir in Tut*
+          for texfile in Tut*/*.tex
           do
-            cd $dir
-            for texfile in *.tex
-            do
-              sltx raw-compile $texfile
-            done
-            cd ..
+            latexmk -interaction=nonstopmode -file-line-error -pdf -cd "-emulate-aux-dir" -auxdir=. -outdir=../pdfs -use-make $texfile
+            latexmk -C $texfile
           done
 
       - name: Commit
