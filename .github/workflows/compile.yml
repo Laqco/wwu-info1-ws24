@@ -19,22 +19,21 @@ jobs:
           git clone https://github.com/EagleoutIce/sopra-collection.git
 
       - name: Build LaTeX sources
-        run: |
+        run: | # omfg it took me about 15 hrs to realize that texinputs is in .. directory and not . FML
           for texfile in Tut*/*.tex
           do
             latexmk -interaction=nonstopmode -file-line-error -pdf -cd "-emulate-aux-dir" -auxdir=. -outdir=../pdfs -e "ensure_path('TEXINPUTS','../texinputs//:')" $texfile
             latexmk -C $texfile
           done
 
-      - name: Commit
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add -f "pdfs/"
-          git commit -m "Compiled slides"
-      - name: Push changes
-        uses: ad-m/github-push-action@master
+      - name: Commit and push slides
+        uses: dmnemec/copy_file_to_another_repo_action@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          branch: test-build
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          force: true
+          source_file: 'pdfs'
+          destination_repo: 'Laqco/wwu-info1-ws24'
+          destination_branch: builds-test
+          user_email: 'action@github.com'
+          user_name: 'GitHub Action'
+          commit_message: 'Compiled slides'
