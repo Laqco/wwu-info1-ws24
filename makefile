@@ -2,7 +2,7 @@ SHELL := /usr/bin/env bash
 
 FILES = $(find . -name "*.sty")
 
-.PHONY: all %.sty
+.PHONY: all color-palettes.sty colorful-dream.sty code-animation.sty sopra-listings.sty
 
 all:
 	mkdir -p ./texinputs/tex/latex
