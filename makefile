@@ -1,6 +1,6 @@
 SHELL := /usr/bin/env bash
 
-all:
+%.sty:
 	mkdir -p ./texinputs/tex/latex
 	cd ./texinputs/tex/latex
 	git clone https://github.com/EagleoutIce/beamer-themes.git
