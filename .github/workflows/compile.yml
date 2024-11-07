@@ -3,6 +3,7 @@ on: [push]
 jobs:
   build_latex:
     runs-on: ubuntu-latest
+    container: kjarosh/latex:2024.4
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -15,14 +16,19 @@ jobs:
           git clone https://github.com/EagleoutIce/code-animation.git
           git clone https://github.com/EagleoutIce/color-palettes.git
           git clone https://github.com/EagleoutIce/sopra-collection.git
-          git clone https://github.com/EagleoutIce/fancyqr.git
           export TEXINPUTS=./texinputs//:
 
-      - name: Setup docker image
-        run: make docker
-      
-      - name: Compile PDFs
-        run: docker run --volume "$(pwd):/root/data" mydocker:latest "$@"
+      - name: Build using latexmk
+        run: |
+          for dir in Tut*
+          do
+            cd $dir
+            for texfile in *.tex
+            do
+              latexmk -interaction=nonstopmode -file-line-error -pdf $texfile
+            done
+            cd ..
+          done
 
       - name: Commit
         run: |
