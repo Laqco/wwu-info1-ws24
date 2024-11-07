@@ -23,7 +23,7 @@ jobs:
         run: |
           apk add --update --no-cache python3
           ln -sf python3 /usr/bin/python
-          tlmgr install texliveonfly latexmk
+          pip3 install sltx
 
       - name: Build using latexmk
         run: |
@@ -32,7 +32,7 @@ jobs:
             cd $dir
             for texfile in *.tex
             do
-              texliveonfly --compiler=latexmk --arguments="-interaction=nonstopmode -file-line-error -pdf" $texfile
+              sltx raw-compile $texfile
             done
             cd ..
           done
