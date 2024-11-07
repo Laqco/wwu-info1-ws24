@@ -31,7 +31,7 @@ jobs:
             cd $dir
             for texfile in *.tex
             do
-              latexmk -interaction=nonstopmode -file-line-error -pdf $texfile
+              texliveonfly --compiler=latexmk --args="-interaction=nonstopmode -file-line-error -pdf" $texfile
             done
             cd ..
           done
