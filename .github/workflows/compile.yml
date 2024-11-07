@@ -21,7 +21,8 @@ jobs:
       
       - name: Install texliveonfly
         run: |
-          apk add python
+          apk add --update --no-cache python3
+          ln -sf python3 /usr/bin/python
           tlmgr install texliveonfly
 
       - name: Build using latexmk
