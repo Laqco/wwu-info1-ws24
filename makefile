@@ -1,5 +1,7 @@
 SHELL := /usr/bin/env bash
 
+.PHONY: all %.sty
+
 all:
 	mkdir -p ./texinputs/tex/latex
 	cd ./texinputs/tex/latex
