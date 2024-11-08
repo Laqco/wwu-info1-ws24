@@ -1,0 +1,28 @@
+\begin{frame}[fragile]{Kommandozeile}
+    \begin{onlyenv}<1> % do i rly wanna use this?
+    \begin{exercise}
+        \begin{enumerate}[a)]
+            \item Euer Betriebssystem?
+            \item Arbeit mit der Kommandozeile
+        \end{enumerate}
+    \end{exercise}
+    \end{onlyenv}
+    \pause[]
+    \begin{solve}[b) Arbeit mit der Kommandozeile]
+        \begin{plainbash}
+*\only<.(8)->{\vspace{-\baselineskip}}\onslide<+-.(7)>*mkdir Studium
+*\only<.(8)->{\vspace{-\baselineskip}}\onslide<+-.(7)>*cd Studium
+*\only<.(7)->{\vspace{-\baselineskip}}\onslide<+-.(7)>*mkdir 2024-WiSe
+*\only<.(7)->{\vspace{-\baselineskip}}\onslide<+-.(6)>*mkdir 2024-WiSe/Informatik-I
+*\only<.(7)->{\vspace{-\baselineskip}}\onslide<+-.(6)>*cd 2024-WiSe/Informatik-I
+*\only<.(7)->{\vspace{-\baselineskip}}\onslide<+-.(6)>*mkdir Folien
+*\only<.(7)->{\vspace{-\baselineskip}}\onslide<+-.(6)>*mkdir Übungen
+*\only<-.>{\vspace{-\baselineskip}}\onslide<+->*cd ~/Downloads
+*\only<-.>{\vspace{-2\baselineskip}}\onslide<+->*mv 00_Organisatorisches_v2.pdf ~/Studium/2024-WiSe/Informatik-I/Folien
+*\only<-.>{\vspace{-\baselineskip}}\onslide<+->*cd ~/Studium/2024-WiSe/Informatik-I/Übungen
+*\only<-.>{\vspace{-\baselineskip}}\onslide<+->*ghc -o hello hello.hs
+*\only<-.>{\vspace{-\baselineskip}}\onslide<+->*ls
+*\only<-.>{\vspace{-\baselineskip}}\onslide<+->*/hello
+        \end{plainbash}
+    \end{solve}
+\end{frame}
