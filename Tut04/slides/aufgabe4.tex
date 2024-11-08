@@ -1,0 +1,50 @@
+\begin{frame}{Haskell}
+    \begin{exercise}
+        Programmieren Sie folgende Funktionen in Haskell:
+        \begin{enumerate}[a)]
+            \item inchesToCentimeters
+            \item footToCentimeters
+            \item circleArea
+        \end{enumerate}
+    \end{exercise}
+\end{frame}
+% copy to cleanup my code
+\begin{frame}[fragile]{Haskell}
+    \begin{solve}[b) inchesToCentimeters]
+        \begin{plainhaskell}
+!*\onslide<+->*!-- 1 Zoll = 2,54 cm
+!*\onslide<+->*!centimetersPerInch :: Float
+!*\onslide<.->*!centimetersPerInch = 2.54
+
+!*\onslide<+->*!-- Einfach nur multiplizieren :D
+!*\onslide<+->*!inchesToCentimeters :: Float -> Float
+!*\onslide<.->*!inchesToCentimeters inches = inches * centimetersPerInch
+        \end{plainhaskell}
+    \end{solve}
+\end{frame}
+% copy to cleanup my code
+\addtocounter{solve}{-1}% reset counters
+\begin{frame}[fragile]{Haskell}
+    \begin{solve}[b) footToCentimeters]
+        \begin{plainhaskell}
+!*\onslide<+->*!-- 1 Fuß = 12 Zoll
+!*\onslide<+->*!inchesPerFoot :: Float
+!*\onslide<.->*!inchesPerFoot = 12
+
+!*\onslide<+->*!-- Multiplizieren und Umwandeln
+!*\onslide<+->*!footToCentimeters :: Float -> Float
+!*\onslide<.->*!footToCentimeters foot = inchesToCentimeters (foot * inchesPerFoot)
+        \end{plainhaskell}
+    \end{solve}
+\end{frame}
+% copy to cleanup my code
+\addtocounter{solve}{-1}% reset counters
+\begin{frame}[fragile]{Haskell}
+    \begin{solve}[b) circleArea]
+        \begin{plainhaskell}
+!*\onslide<+->*!-- Radius -> cm -> pi * r^2
+!*\onslide<+->*!circleArea :: Float -> Float
+!*\onslide<.->*!circleArea radiusFoot = pi * (footToCentimeters radiusFoot)^2
+        \end{plainhaskell}
+    \end{solve}
+\end{frame}
