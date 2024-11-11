@@ -1,5 +1,5 @@
-\begin{frame}[fragile]{Kommandozeile}
-    \begin{onlyenv}<1> % do i rly wanna use this?
+\begin{frame}<handout:7,15>[fragile]{Kommandozeile}
+    \begin{onlyenv}<1|handout:0> % do i rly wanna use this?
     \begin{exercise}
         \begin{enumerate}[a)]
             \item Euer Betriebssystem?
@@ -10,21 +10,21 @@
     \pause[]
     \begin{solve}[b) Arbeit mit der Kommandozeile]
         \begin{plainbash}
-*\only<.(8)->{\vspace{-\baselineskip}}\onslide<+-.(7)>*mkdir Studium
-*\only<.(8)->{\vspace{-\baselineskip}}\onslide<+-.(7)>*cd Studium
-*\only<.(7)->{\vspace{-\baselineskip}}\onslide<+-.(7)>*mkdir 2024-WiSe
-*\only<.(7)->{\vspace{-\baselineskip}}\onslide<+-.(6)>*mkdir 2024-WiSe/Informatik-I
-*\only<.(7)->{\vspace{-\baselineskip}}\onslide<+-.(6)>*cd 2024-WiSe/Informatik-I
-*\only<.(7)->{\vspace{-\baselineskip}}\onslide<+-.(6)>*mkdir Folien
-*\only<.(7)->{\vspace{-\baselineskip}}\onslide<+-.(6)>*mkdir Übungen
-*\only<-.>{\vspace{-\baselineskip}}\onslide<+->*cd ~/Downloads
-*\only<-.>{\vspace{-2\baselineskip}}\onslide<+->*mv 00_Organisatorisches_v2.pdf ~/Studium/2024-WiSe/Informatik-I/Folien
-*\only<-.>{\vspace{-\baselineskip}}\onslide<+->*cd ~/Studium/2024-WiSe/Informatik-I/Übungen
-*\only<-.>{\vspace{-\baselineskip}}\onslide<+->*ghc -o hello hello.hs
-*\only<-.>{\vspace{-\baselineskip}}\onslide<+->*ls
-*\only<-.>{\vspace{-\baselineskip}}\onslide<+->*/hello
+*\only<.(8)-|handout:15>{\vspace{-\baselineskip}}\onslide<+-.(7)|handout:7>*mkdir Studium
+*\only<.(8)-|handout:15>{\vspace{-\baselineskip}}\onslide<+-.(7)|handout:7>*cd Studium
+*\only<.(7)-|handout:15>{\vspace{-\baselineskip}}\onslide<+-.(7)|handout:7>*mkdir 2024-WiSe
+*\only<.(7)-|handout:15>{\vspace{-\baselineskip}}\onslide<+-.(6)|handout:7>*mkdir 2024-WiSe/Informatik-I
+*\only<.(7)-|handout:15>{\vspace{-\baselineskip}}\onslide<+-.(6)|handout:7>*cd 2024-WiSe/Informatik-I
+*\only<.(7)-|handout:15>{\vspace{-\baselineskip}}\onslide<+-.(6)|handout:7>*mkdir Folien
+*\only<.(7)-|handout:15>{\vspace{-\baselineskip}}\onslide<+-.(6)|handout:7>*mkdir Übungen
+*\only<-.|handout:7>{\vspace{-\baselineskip}}\onslide<+-|handout:15>*cd ~/Downloads
+*\only<-.|handout:7>{\vspace{-2\baselineskip}}\onslide<+-|handout:15>*mv 00_Organisatorisches_v2.pdf ~/Studium/2024-WiSe/Informatik-I/Folien
+*\only<-.|handout:7>{\vspace{-\baselineskip}}\onslide<+-|handout:15>*cd ~/Studium/2024-WiSe/Informatik-I/Übungen
+*\only<-.|handout:7>{\vspace{-\baselineskip}}\onslide<+-|handout:15>*ghc -o hello hello.hs
+*\only<-.|handout:7>{\vspace{-\baselineskip}}\onslide<+-|handout:15>*ls                       #> hello hello.hi hello.hs hello.o
+*\only<-.|handout:7>{\vspace{-\baselineskip}}\onslide<+-|handout:15>*/hello                   #> Hello World!
         \end{plainbash}
     \end{solve}
     \pause[15]
-    \Tiny Hier sollte eine tolle Animation hin, aber es ist $\stackrel{\text{04:56}}{\text{\sout{04:33}}}$...
+    \onslide<handout:0|15>\Tiny Hier sollte eine tolle Animation hin, aber es ist $\stackrel{\text{04:56}}{\text{\sout{04:33}}}$...
 \end{frame}
