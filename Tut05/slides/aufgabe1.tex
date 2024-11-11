@@ -1,0 +1,13 @@
+\begin{frame}
+    \begin{exercise}[\textit{schrittweise} Klammerung]
+        Setzen Sie Klammern, um zu zeigen, in welcher Reihenfolge die Teilausdrücke ausgewertet werden, und geben Sie das Ergebnis der Auswertung an.
+    \end{exercise}
+    \begin{solve}[a) \lstcolorlet{numbers}{paletteD}\color{lightgray}\bhaskell{3 * 4 - 2 ^ 2 ^ 4}]
+    \begin{itemize}
+        \item \textbf{Potenz}: Bindungsstärke $8$, rechts-assoziativ:\hfill\bhaskell{3 * 4 - (2 ^ (2 ^ 4))}
+        \item \textbf{Multiplikation}: Bindungsstärke $7$:\hfill\bhaskell{(3 * 4) - (2 ^ (2 ^ 4))}
+        \item \textbf{Subtraktion}: Bindungsstärke $6$:\hfill\bhaskell{(3 * 4) - (2 ^ (2 ^ 4))}\\
+        \hfill$12 - 65536 = -65524$
+    \end{itemize}
+    \end{solve}
+\end{frame}
