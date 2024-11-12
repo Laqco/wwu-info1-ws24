@@ -1,0 +1,28 @@
+\begin{frame}[fragile]
+    \only<2>{\scriptsize}\only<3->{\Tiny}
+    \begin{exercise}[Betrachten Sie das Cavete-Szenario.]
+    \begin{itemize}
+        \item Weitergehende Studien haben ergeben, dass die Änderungen an den Anzahlen verkaufter Gerichte besser durch ein kubisches Polynom beschrieben werden können als durch die Konstante \T{dec\_portions}, und zwar durch $f(x) = x^3 + ax$ für eine Preiserhöhung um $x$ Euro. (Positive $x$-Werte stellen Preiserhöhungen dar; der Funktionswert gibt dann an, wie viele Portionen weniger verkauft werden. Negative $x$-Werte stellen reduzierte Preise dar, bis hin zu ,,Bezahlungen'' für Bestellungen, und führen zu weiteren Verkäufen.)
+        \item Es kommt ein Einkaufsrabatt von $5\%$ auf den \T{price\_per\_portion} zustande, wenn mindestens $150$ Gerichte verkauft werden.
+        \item Aufgrund eines beschränkten Lagerraumes für Zutaten kann maximal die Obergrenze von $300$ Gerichten verkauft werden.
+    \end{itemize}
+    \begin{enumerate}[a)]
+        \item erechnen Sie den Wert der Konstante $a$ in obigem Polynom, so dass $f(1) = 10$ (was den Wert $10$ für \T{dec\_portions} verallgemeinert).
+        \item Ergänzen Sie das Programm der Vorlesung um geeignete Konstanten für obige Angaben.
+        \item Ändern Sie das Programm der Vorlesung, um obige Sachverhalte abzubilden. Folgen Sie dem Vorgehen der Vorlesung, um notwendige weitere Funktionen einzuführen (von Funktionsköpfen über Beispiele, die typische Fälle zeigen und sich leicht berechnen lassen, zu Funktionsrümpfen und exemplarischen Aufrufen). Beachten Sie zudem nachfolgende Vorgaben.
+        \begin{itemize}\only<2>{\scriptsize}\only<3->{\Tiny}
+            \item Lassen Sie die Signaturen der Funktionen \T{costs} und \T{portions} unverändert. Ändern Sie nur deren Definitionen.
+            \item Nutzen Sie \T{if-then-else} in einer der neuen Funktionen, um den Preis pro Portion in Abhängigkeit von der Menge (und damit dem möglichen Rabatt) zu berechnen.
+            \item Stellen Sie durch die Verwendung von \textit{Wächtern} in einer der neuen Funktionen sicher, dass weder negative Anzahlen von Gerichten berechnet werden noch mehr als die oben genannte Obergrenze.
+            \item Nutzen Sie lediglich in der Vorlesung vorgestellte Haskell-Konstrukte.
+        \end{itemize}
+    \end{enumerate}
+    \end{exercise}
+    \begin{solve}
+    \ihaskell[numbers=none,frame=none,backgroundcolor={}]{sources/cavete_loesung.hs}
+    \end{solve}
+    \only<4>{\begin{tikzpicture}[overlay,remember picture]
+        \draw[fill=black,fill opacity=0.3] (current page.north west) rectangle (current page.south east);
+        \node at (current page.center) {\Huge\twemoji[scale=5]{loudly crying face}};
+    \end{tikzpicture}}
+\end{frame}
