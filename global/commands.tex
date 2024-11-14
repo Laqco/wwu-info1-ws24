@@ -15,7 +15,7 @@
 \newlength\tibtY \setlength\tibtY{-6em}
 \titleimage{\begin{minipage}[c][#1\tibheight]{#2}\vspace*{#1\tibtY}%
     \begin{tcolorbox}[boxrule=0.1pt]%
-    \centering#3
+    \centering#3% TODO: bug: not centered if too wide
     \end{tcolorbox}%
 \end{minipage}}}
 
