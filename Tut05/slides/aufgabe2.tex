@@ -1,31 +1,31 @@
-\begin{frame}[fragile]
+\begin{frame}[fragile]\onslide<+->% init animation
     \begin{exercise}[a) + b)]
         Programmieren Sie in Haskell einen zweistelligen, links-assoziativen Infix-Operator \textasciitilde\textasciitilde~mit der Bindungsstärke 5, der den Mittelwert zweier Float-Zahlen berechnet.
     \end{exercise}
     \begin{solve}[a) + b)]
     \begin{plainhaskell}
--- Bindungsstärke 5
+!*\onslide<+->*!-- Bindungsstärke 5
 infixl 5 ~~
 
--- Operator im Klammern
+!*\onslide<+->*!-- Signatur, Operator in Klammern
 (~~) :: Float -> Float -> Float
 
--- Mittelwert: Summe, geteilt durch 2
+!*\onslide<+->*!-- Mittelwert: Summe, geteilt durch 2
 x ~~ y = (x + y)/2
     \end{plainhaskell}
     \end{solve}
 \end{frame}
 % copy to cleanup my code
 \addtocounter{exercise}{-1}\addtocounter{solve}{-1}% reset counters
-\begin{frame}
+\begin{frame}\onslide<+->% init animation
     \begin{exercise}[c)]
         Geben Sie an, wie der Ausdruck \bhaskell{3 + 4 ~~ 5 * 6} ausgewertet wird. Welche Änderungen würden sich bei den Bindungsstärken $6$ oder $7$ ergeben?
     \end{exercise}
     \begin{solve}[c)]
     \begin{itemize}
-        \item Bindungsstärke $5$: \bhaskell{*} \faAngleRight~\bhaskell{+} \faAngleRight{}~\bhaskell{\~~}:\hfill\bhaskell{(3 + 4) ~~ (5 * 6)}$= 18.5$
-        \item Bindungsstärke $6$: \bhaskell{*} \faAngleRight~\bhaskell{+}$\mid$\bhaskell{\~~}, also links-assoziativ:\\\hfill\bhaskell{(3 + 4) ~~ (5 * 6)}$=18.5$
-        \item Bindungsstärke $7$: \bhaskell{*}$\mid$\bhaskell{\~~} \faAngleRight~\bhaskell{+}, also links-assoziativ:\\\hfill\bhaskell{3 + ((4 ~~ 5) * 6)}$=30$
+        \item<+-> Bindungsstärke $5$: \bhaskell{*} \faAngleRight~\bhaskell{+} \faAngleRight{}~\bhaskell{\~~}:\hfill\bhaskell{(3 + 4) ~~ (5 * 6)}$= 18.5$
+        \item<+-> Bindungsstärke $6$: \bhaskell{*} \faAngleRight~\bhaskell{+}$\mid$\bhaskell{\~~}, also links-assoziativ:\\\hfill\bhaskell{(3 + 4) ~~ (5 * 6)}$=18.5$
+        \item<+-> Bindungsstärke $7$: \bhaskell{*}$\mid$\bhaskell{\~~} \faAngleRight~\bhaskell{+}, also links-assoziativ:\\\hfill\bhaskell{3 + ((4 ~~ 5) * 6)}$=30$
     \end{itemize}
     \end{solve}
 \end{frame}

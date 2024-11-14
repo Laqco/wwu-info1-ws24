@@ -1,8 +1,8 @@
-\begin{frame}
+\begin{frame}\onslide<+->% init animation
     \begin{exercise}[a)]
         Die Veränderung der verkauften Portionen bei einer Preiserhöhung um $x$ wird besser durch die Funktion $f(x) = x^3 + ax$ beschrieben.
     \end{exercise}
-    \begin{solve}[a) Berechnen Sie $a$, so dass $f(1)=10$.]\vspace{-\abovedisplayskip}
+    \begin{solve}[a) Berechnen Sie $a$, so dass $f(1)=10$.]\vspace{-\abovedisplayskip}\onslide<+->
         $$f(x)=x^3+ax$$
         $$f(1)=1^3+a\cdot1$$
         $$1+a=10 \implies a=9$$
@@ -10,24 +10,24 @@
 \end{frame}
 % copy to cleanup my code
 \addtocounter{exercise}{-1}\addtocounter{solve}{-1}% reset counters
-\begin{frame}[fragile]
+\begin{frame}[fragile]\onslide<+->% init animation
     \begin{exercise}[b)]
         Es können maximal $300$ Gerichte verkauft werden, mit einem Mengenrabatt von $5\%$ ab $150$ Gerichten.
     \end{exercise}
     \begin{solve}[b) Ergänzen Sie das Programm um geeignete Konstanten]
     \vspace{-\abovedisplayskip}\begin{minipage}[t]{0.5\linewidth}
     \begin{plainhaskell}
--- Mengenrabatt
+!*\onslide<+->*!-- Mengenrabatt
 discount :: Double
 discount = 0.05
 
--- Schwellwert
+!*\onslide<+->*!-- Schwellwert
 discount_threshold :: Int
 discount_threshold = 150
     \end{plainhaskell}
     \end{minipage}\begin{minipage}[t]{0.5\linewidth}
     \begin{plainhaskell}
--- Maximalmenge
+!*\onslide<+->*!-- Maximalmenge
 max_portions :: Int
 max_portions = 300
     \end{plainhaskell}
@@ -36,10 +36,10 @@ max_portions = 300
 \end{frame}
 % copy to cleanup my code
 \addtocounter{exercise}{-1}\addtocounter{solve}{-1}% reset counters
-\begin{frame}[fragile]
+\begin{frame}[fragile]\onslide<+->% init animation
     \begin{exercise}[c)]
         Passen Sie das Programm an und führen Sie neue Funktionen mit passenden Beispielen ein.
-    \end{exercise}
+    \end{exercise}\onslide<+->
     \begin{solve}[c) Wir haben bereits...]
     \vspace{-\abovedisplayskip}\begin{minipage}[t]{0.5\linewidth}
     \begin{plainhaskell}
@@ -62,7 +62,7 @@ max_portions = 300
 \end{frame}
 % copy to cleanup my code
 \addtocounter{exercise}{-1}\addtocounter{solve}{-1}% reset counters
-\begin{frame}[noframenumbering,fragile]
+\begin{frame}[noframenumbering,fragile]\onslide<+->% init animation
     \begin{exercise}[c)]
         Passen Sie das Programm an und führen Sie neue Funktionen mit passenden Beispielen ein.
     \end{exercise}
@@ -92,16 +92,16 @@ base_portions = 100
 \end{frame}
 % copy to cleanup my code
 \addtocounter{exercise}{-1}\addtocounter{solve}{-1}% reset counters
-\begin{frame}[noframenumbering,fragile]
+\begin{frame}[noframenumbering,fragile]\onslide<+->% init animation
     \begin{exercise}[c)]
         Passen Sie das Programm an und führen Sie neue Funktionen mit passenden Beispielen ein.
     \end{exercise}
     \begin{solve}[c) Die neue Formel:]
     \begin{plainhaskell}
--- Verkaufsrückgang pro Euro Preisanstieg
+!*\onslide<+->*!-- Verkaufsrückgang pro Euro Preisanstieg
 demand_decrease :: Double -> Int
 demand_decrease delta = round (delta^3 + 9*delta)
-
+!*\onslide<+->*!
 {-
 -- wir entfernen dafür dec_portions
 dec_portions :: Int
@@ -112,13 +112,13 @@ dec_portions = 10
 \end{frame}
 % copy to cleanup my code
 \addtocounter{exercise}{-1}\addtocounter{solve}{-1}% reset counters
-\begin{frame}[noframenumbering,fragile]
+\begin{frame}[noframenumbering,fragile]\onslide<+->% init animation
     \begin{exercise}[c)]
         Passen Sie das Programm an und führen Sie neue Funktionen mit passenden Beispielen ein.
     \end{exercise}
     \begin{solve}[c) Obergrenze für den Verkauf:]
     \begin{plainhaskell}
--- Beschränkt die Anzahl der Portionen
+!*\onslide<+->*!-- Beschränkt die Anzahl der Portionen
 capped_portions :: Int -> Int
 capped_portions portions
     | portions < 0            = 0
@@ -129,13 +129,13 @@ capped_portions portions
 \end{frame}
 % copy to cleanup my code
 \addtocounter{exercise}{-1}\addtocounter{solve}{-1}% reset counters
-\begin{frame}[noframenumbering,fragile]
+\begin{frame}[noframenumbering,fragile]\onslide<+->% init animation
     \begin{exercise}[c)]
         Passen Sie das Programm an und führen Sie neue Funktionen mit passenden Beispielen ein.
     \end{exercise}
     \begin{solve}[c) Rabatt einberechnen:]
     \begin{plainhaskell}
--- Berechnet Preis inklusive Rabatt
+!*\onslide<+->*!-- Berechnet Preis inklusive Rabatt
 portion_price :: Int -> Double
 portion_price meals =
     if meals >= discount_threshold
@@ -146,17 +146,17 @@ portion_price meals =
 \end{frame}
 % copy to cleanup my code
 \addtocounter{exercise}{-1}\addtocounter{solve}{-1}% reset counters
-\begin{frame}[noframenumbering,fragile]
+\begin{frame}[noframenumbering,fragile]\onslide<+->% init animation
     \begin{exercise}[c)]
         Passen Sie das Programm an und führen Sie neue Funktionen mit passenden Beispielen ein.
     \end{exercise}
     \begin{solve}[c) \T{portions} und \T{costs}:]
     \begin{plainhaskell}
--- Verkaufte Portionen für einen Preis
+!*\onslide<+->*!-- Verkaufte Portionen für einen Preis
 portions :: Double -> Int
 portions price = capped_portions (base_portions - demand_decrease (price - base_price))
 
--- Ausgaben für einen Preis
+!*\onslide<+->*!-- Ausgaben für einen Preis
 costs :: Double -> Double
 costs price = base_costs + fromIntegral (portions price) * portion_price (portions price)
     \end{plainhaskell}
@@ -164,7 +164,7 @@ costs price = base_costs + fromIntegral (portions price) * portion_price (portio
 \end{frame}
 % copy to cleanup my code
 \addtocounter{exercise}{-1}\addtocounter{solve}{-1}% reset counters
-\begin{frame}[noframenumbering,fragile]
+\begin{frame}[noframenumbering,fragile]\onslide<+->% init animation
     \begin{exercise}[c)]
         Passen Sie das Programm an und führen Sie neue Funktionen mit passenden Beispielen ein.
     \end{exercise}
