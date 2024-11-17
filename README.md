@@ -4,11 +4,9 @@
 
 Quellcode meiner LaTeX-Folien für das "Informatik I" Tutorium an der Universität Münster im Wintersemester 2024/2025.
 
+Die kompilierten Folien befinden sich im branch [`builds`](https://github.com/Laqco/wwu-info1-ws24/tree/builds/pdfs).
+
 Alle persönlichen Daten sind aus dem Code entfernt und in der [user.tex](global/user.tex) definiert.
-
-## TODO
-
-- [ ] Automatically build handout and full slides.
 
 ## Lizenz
 
