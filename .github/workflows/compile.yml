@@ -22,8 +22,13 @@ jobs:
         run: |
           for texfile in Tut*/*.tex
           do
+            mv $texfile ${texfile/.tex/_anim.tex}
+            animfile=${texfile#*/}
+            echo "\\PassOptionsToClass{handout}{beamer}\\input{${animfile/.tex/_anim.tex}}" > $texfile;
             latexmk -interaction=nonstopmode -file-line-error -pdf -cd "-emulate-aux-dir" -auxdir=. -outdir=../pdfs -e "ensure_path('TEXINPUTS','../texinputs//:')" $texfile
             latexmk -C $texfile
+            latexmk -interaction=nonstopmode -file-line-error -pdf -cd "-emulate-aux-dir" -auxdir=. -outdir=../pdfs -e "ensure_path('TEXINPUTS','../texinputs//:')" ${texfile/.tex/_anim.tex}
+            latexmk -C ${texfile/.tex/_anim.tex}
           done
 
       - name: Push slides to builds
