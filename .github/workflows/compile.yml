@@ -27,6 +27,8 @@ jobs:
             echo "\\PassOptionsToClass{handout}{beamer}\\input{${animfile/.tex/_anim.tex}}" > $texfile;
             latexmk -interaction=nonstopmode -file-line-error -pdf -cd "-emulate-aux-dir" -auxdir=. -outdir=../pdfs -e "ensure_path('TEXINPUTS','../texinputs//:')" $texfile
             latexmk -C $texfile
+            latexmk -interaction=nonstopmode -file-line-error -pdf -cd "-emulate-aux-dir" -auxdir=. -outdir=../pdfs -e "ensure_path('TEXINPUTS','../texinputs//:')" ${texfile/.tex/_anim.tex}
+            latexmk -C ${texfile/.tex/_anim.tex}
           done
 
       - name: Push slides to builds
@@ -36,7 +38,7 @@ jobs:
         with:
           source_file: 'pdfs'
           destination_repo: 'Laqco/wwu-info1-ws24'
-          destination_branch: builds_test
+          destination_branch: builds
           user_email: 'action@github.com'
           user_name: 'GitHub Action'
           commit_message: 'Compiled slides'
