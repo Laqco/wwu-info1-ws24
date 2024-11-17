@@ -22,6 +22,9 @@ jobs:
         run: |
           for texfile in Tut*/*.tex
           do
+            mv $texfile ${texfile/.tex/_anim.tex}
+            animfile=${texfile#*/}
+            echo "\\PassOptionsToClass{handout}{beamer}\\input{${animfile/.tex/_anim.tex}}" > $texfile;
             latexmk -interaction=nonstopmode -file-line-error -pdf -cd "-emulate-aux-dir" -auxdir=. -outdir=../pdfs -e "ensure_path('TEXINPUTS','../texinputs//:')" $texfile
             latexmk -C $texfile
           done
@@ -33,7 +36,7 @@ jobs:
         with:
           source_file: 'pdfs'
           destination_repo: 'Laqco/wwu-info1-ws24'
-          destination_branch: builds
+          destination_branch: builds_test
           user_email: 'action@github.com'
           user_name: 'GitHub Action'
           commit_message: 'Compiled slides'
