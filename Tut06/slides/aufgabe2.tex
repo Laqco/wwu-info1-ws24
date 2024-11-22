@@ -1,0 +1,47 @@
+\begin{frame}[fragile]\onslide<+->% init animation
+    \begin{exercise}[a)]
+    Schreiben Sie eine Funktion für \T{NAND}.
+    \end{exercise}
+    \begin{solve}[a)]
+    \begin{plainhaskell}
+nand :: Bool -> Bool -> Bool
+nand a b = not (a && b)
+    \end{plainhaskell}
+    \end{solve}
+    \onslide<+-|handout:0>
+    \T{NAND}-Gatter sind ein vollständiges Logiksystem:\par\smallskip
+    \begin{tabular}{l|c|c}
+        \T{NOT} x & x \T{NAND} x\\
+        \hline
+        x \T{AND} y & (x \T{NAND} y) \T{NAND} (x \T{NAND} y) & \textit{NOT (x NAND y)}\\
+        \hline
+        x \T{OR} y & (x \T{NAND} x) \T{NAND} (y \T{NAND} y) & \textit{De-Morgan}\\
+        \hline
+        & $\cdots$
+    \end{tabular}\par\smallskip
+    $\Rightarrow$ Standartbaustein für Digitaltechnik
+\end{frame}
+\resetframecounters
+\begin{frame}[fragile,noframenumbering]\onslide<+->% init animation
+    \begin{exercise}[b)]
+    Schreiben Sie eine Funktion für \T{XOR}.
+    \end{exercise}
+    \begin{solve}[b)]
+    \begin{plainhaskell}
+xor :: Bool -> Bool -> Bool
+xor a b = (a && not b) || (not a && b)
+    \end{plainhaskell}
+    \end{solve}
+\end{frame}
+\resetframecounters
+\begin{frame}<handout:0>[fragile,noframenumbering]\onslide<+->% init animation
+    \begin{exercise}[b)]
+    Schreiben Sie eine Funktion für \T{XOR}.
+    \end{exercise}
+    \begin{solve}[b) Idee von I13\_a1]
+    \begin{plainhaskell}
+xor :: Bool -> Bool -> Bool
+xor a b = (a || b) && (nand a b)
+    \end{plainhaskell}
+    \end{solve}
+\end{frame}

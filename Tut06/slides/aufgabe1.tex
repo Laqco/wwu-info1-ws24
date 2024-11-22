@@ -1,0 +1,43 @@
+\begin{frame}\onslide<+->% init animation
+    \begin{exercise}
+    Beweisen Sie die De-Morgan'schen Gesetze mit Wahrheitstafeln.
+    \end{exercise}
+    \begin{solve}[$\overline{a\sqcap b} = \overline a\sqcup\overline b$]
+        \begin{center}\begin{tabular}{|c|c|c|c|c|c|c|}
+            \hline
+            $a$&$b$&$a\sqcap b$&$\overline{(a\sqcap b)}$&$\overline a$&$\overline b$&$\overline a\sqcup\overline b$ \\
+            \hline
+            0&0&0&1&1&1&1 \\
+            \hline
+            0&1&0&1&1&0&1 \\
+            \hline
+            1&0&0&1&0&1&1 \\
+            \hline
+            1&1&1&0&0&0&0 \\
+            \hline
+        \end{tabular}\end{center}
+        Spalten 4 und 7 stimmen überein. Daher sind die Ausdrücke gleich.
+    \end{solve}
+\end{frame}
+\resetframecounters
+\begin{frame}[noframenumbering]\onslide<+->% init animation
+    \begin{exercise}
+        Beweisen Sie die De-Morgan'schen Gesetze mit Wahrheitstafeln.
+        \end{exercise}
+    \begin{solve}[$\overline{a\sqcup b} = \overline a\sqcap\overline b$]
+        \begin{center}\begin{tabular}{|c|c|c|c|c|c|c|}
+            \hline
+            $a$&$b$&$a\sqcup b$&$\overline{(a\sqcup b)}$&$\overline a$&$\overline b$&$\overline a\sqcap\overline b$ \\
+            \hline
+            0&0&0&1&1&1&1 \\
+            \hline
+            0&1&1&0&1&0&0 \\
+            \hline
+            1&0&1&0&0&1&0 \\
+            \hline
+            1&1&1&0&0&0&0 \\
+            \hline
+        \end{tabular}\end{center}
+        Spalten 4 und 7 stimmen überein. Daher sind die Ausdrücke gleich.
+    \end{solve}
+\end{frame}

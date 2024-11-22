@@ -1,0 +1,24 @@
+\begin{frame}[fragile]\onslide<+->% init animation
+    \begin{exercise}
+    Programmieren Sie zweistellige Boole'sche Funktion \T{quiet\_atmosphere}, die zurückgeben soll, ob es ruhig genug ist, um der Vorlesung zu folgen.
+    \end{exercise}
+    \begin{solve}[mit \T{UND} und \T{NICHT}]
+    \begin{plainhaskell}
+quiet_atmosphere :: Bool -> Bool -> Bool
+quiet_atmosphere quiet_neighbors construction_noise = quiet_neighbors && not construction_noise
+    \end{plainhaskell}
+    \end{solve}
+\end{frame}
+\resetframecounters
+\begin{frame}[noframenumbering,fragile]\onslide<+->% init animation
+    \begin{exercise}
+    Programmieren Sie zweistellige Boole'sche Funktion \T{quiet\_atmosphere}, die zurückgeben soll, ob es ruhig genug ist, um der Vorlesung zu folgen.
+    \end{exercise}
+    \begin{solve}[mit \T{ODER} und \T{NICHT}]
+    \begin{plainhaskell}
+quiet_atmosphere :: Bool -> Bool -> Bool
+quiet_atmosphere quiet_neighbors construction_noise = !*\sol@styles@lst@comments\sol@lst@prebreak*!
+   not (not quiet_neighbors || construction_noise)
+    \end{plainhaskell}
+    \end{solve}
+\end{frame}

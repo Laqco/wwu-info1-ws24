@@ -1,0 +1,46 @@
+\begin{frame}[fragile]\onslide<+->% init animation
+    \begin{exercise}[a)]
+    Programmieren Sie Algorithmus aus Aufgabe 2 von Übungsblatt 3 als rekursive Funktion. Welche Basisfälle lassen sich ableiten?
+    \end{exercise}
+    \begin{solve}[a)]
+    \begin{plainhaskell}
+euclid :: Integer -> Integer -> Integer
+euclid m n
+  | m < 0 || n < 0   = error "Eingabe negativ!"
+  | m == 0           = n                -- Basisfall 1
+  | n == 0           = m                -- Basisfall 2
+  | m > n            = euclid (m - n) n -- rekursive Aufrufe
+  | otherwise        = euclid m (n - m)
+    \end{plainhaskell}
+    \end{solve}
+\end{frame}
+\resetframecounters
+\begin{frame}<handout:0>[fragile,noframenumbering]\onslide<+->% init animation
+    \begin{exercise}[a)]
+    Programmieren Sie Algorithmus aus Aufgabe 2 von Übungsblatt 3 als rekursive Funktion. Welche Basisfälle lassen sich ableiten?
+    \end{exercise}
+    \begin{solve}[a) I10\_a6: Näher am Pseudocode geht nicht!]
+    \begin{plainhaskell}
+euclid :: Integer -> Integer -> Integer
+euclid m n
+  | m < 0 || n < 0       = error "Eingabe negativ!"
+  | m == 0               = n                -- Basisfall 1
+  | n /= 0 && m > n      = euclid (m - n) n
+  | n /= 0 && otherwise  = euclid m (n - m)
+  | otherwise            = m                -- Basisfall 2
+    \end{plainhaskell}
+    \end{solve}
+\end{frame}
+\resetframecounters
+\begin{frame}[noframenumbering]\onslide<+->% init animation
+    \begin{exercise}[b)]
+    Wieso terminiert Ihr Algorithmus?
+    \end{exercise}
+    \begin{solve}[b)]
+    Im Fehlerfall oder bei Erreichen eines Basisfalls endet der Algorithmus.\par\bigskip
+    In den rekursiven Aufrufen wird einer der Parameter um eine Zahl ungleich $0$ reduziert. Dies kann nur endlich oft geschehen, bevor ein Basisfall mit Terminierung erreicht wird.
+    \onslide<+-|handout:0>\par\bigskip
+    \textit{\lqfirstname s Ergänzung: (inpiriert von I10\_a4)}\par
+    Es wird immer um eine Zahl reduziert, die kleiner als der Minuend ist. Damit kann der Fehlerfall nur beim initialen Aufruf erreicht werden; ansonsten wird immer schließlich ein Basisfall erreicht!
+    \end{solve}
+\end{frame}
