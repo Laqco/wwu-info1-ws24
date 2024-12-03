@@ -1,0 +1,106 @@
+\begin{frame}[fragile]{Mengen in Haskell}
+    Wir möchten Mengen\tikzmark{mengen} in Haskell verwalten.
+
+    \begin{tikzpicture}[overlay,remember picture]
+        \node[below = 1em of pic cs:mengen,inner sep=2pt,draw,rounded corners,anchor=west] (n0) {\textbf{Keine Reihenfolge und keine Duplikate!}};
+        \node[below left = 2px and 2em of pic cs:mengen,inner sep=0pt] (n1) {};
+        \draw[thick] (n1) edge[->,bend right=30] (n0.west);
+    \end{tikzpicture}
+    
+    \begin{exercise}[a)]
+    \bhaskell{is_empty}: Prüft, ob eine Menge leer ist.
+    \end{exercise}
+    \begin{solve}[a)]
+    \begin{plainhaskell}
+is_empty :: [Integer] -> Bool
+is_empty [] = True
+is_empty _ = False
+    \end{plainhaskell}
+    \end{solve}
+\end{frame}
+\resetframecounters
+\begin{frame}[fragile]{Mengen in Haskell}
+    \begin{exercise}[b)]
+        \bhaskell{is_elem}: Prüft, ob ein Wert in einer Menge enthalten ist.
+        \end{exercise}
+        \begin{solve}[b)]
+        \begin{plainhaskell}
+is_elem :: Integer -> [Integer] -> Bool
+is_elem _ [] = False
+is_elem x (y:ys)
+    | x == y = True
+    | otherwise = is_elem x ys
+        \end{plainhaskell}
+        \end{solve}
+\end{frame}
+\resetframecounters
+\begin{frame}[fragile]{Mengen in Haskell}
+    \begin{exercise}[c)]
+        \bhaskell{is_subset}: Prüft, ob die erste Menge in der zweiten enthalten ist.
+        \end{exercise}
+        \begin{solve}[c)]
+        \begin{plainhaskell}
+is_subset :: [Integer] -> [Integer] -> Bool
+is_subset [] _ = True
+is_subset _ [] = False
+is_subset (x:xs) set2
+    | is_elem x set2 = is_subset xs set2
+    | otherwise = False
+        \end{plainhaskell}
+        \end{solve}
+\end{frame}
+\resetframecounters
+\begin{frame}[fragile]{Mengen in Haskell}
+    \begin{exercise}[d)]
+        \bhaskell{is_equal}: Prüft, ob zwei Mengen gleich sind.
+        \end{exercise}
+        \begin{solve}[d)]
+        \begin{plainhaskell}
+is_equal :: [Integer] -> [Integer] -> Bool
+is_equal set1 set2 = is_subset set1 set2 && is_subset set2 set1
+        \end{plainhaskell}
+        \end{solve}
+\end{frame}
+\resetframecounters
+\begin{frame}[fragile]{Mengen in Haskell}
+    \begin{exercise}[e)]
+        \bhaskell{delete}: Löscht ein Element aus einer Menge.
+        \end{exercise}
+        \begin{solve}[e)]
+        \begin{plainhaskell}
+delete :: Integer -> [Integer] -> [Integer]
+delete _ [] = []
+delete x (y:ys)
+    | x == y = ys
+    | otherwise = y : delete x ys
+        \end{plainhaskell}
+        \end{solve}
+\end{frame}
+\resetframecounters
+\begin{frame}[fragile]{Mengen in Haskell}
+    \begin{exercise}[f)]
+        \bhaskell{insert}: Fügt ein Element zu einer Menge hinzu.
+        \end{exercise}
+        \begin{solve}[f)]
+        \begin{plainhaskell}
+insert :: Integer -> [Integer] -> [Integer]
+insert x [] = [x]
+insert x set
+    | is_elem x set = set
+    | otherwise = x : set
+        \end{plainhaskell}
+        \end{solve}
+\end{frame}
+\resetframecounters
+\begin{frame}[fragile]{Mengen in Haskell}
+    \begin{exercise}[g)]
+        \bhaskell{union}: Bildet die Vereinigung zweier Mengen.
+        \end{exercise}
+        \begin{solve}[g)]
+        \begin{plainhaskell}
+union :: [Integer] -> [Integer] -> [Integer]
+union [] set2 = set2
+union (x:xs) set2 = insert x (union xs set2)
+        \end{plainhaskell}
+        \end{solve}
+\end{frame}
