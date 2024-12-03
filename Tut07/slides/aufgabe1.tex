@@ -100,6 +100,7 @@ insert x set
         \begin{plainhaskell}
 union :: [Integer] -> [Integer] -> [Integer]
 union [] set2 = set2
+union set1 [] = set1 -- effizienzhalber
 union (x:xs) set2 = insert x (union xs set2)
         \end{plainhaskell}
         \end{solve}
