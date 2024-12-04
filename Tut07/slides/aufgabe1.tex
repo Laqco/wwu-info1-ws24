@@ -1,16 +1,16 @@
-\begin{frame}[fragile]{Mengen in Haskell}
+\begin{frame}[fragile]{Mengen in Haskell}\onslide<+->% init animation
     Wir möchten Mengen\tikzmark{mengen} in Haskell verwalten.
 
-    \begin{tikzpicture}[overlay,remember picture]
+    \onslide<+->\begin{tikzpicture}[overlay,remember picture]
         \node[below = 1em of pic cs:mengen,inner sep=2pt,draw,rounded corners,anchor=west] (n0) {\textbf{Keine Reihenfolge und keine Duplikate!}};
         \node[below left = 2px and 2em of pic cs:mengen,inner sep=0pt] (n1) {};
         \draw[thick] (n1) edge[->,bend right=30] (n0.west);
     \end{tikzpicture}
     
-    \begin{exercise}[a)]
+    \onslide<+->\begin{exercise}[a)]
     \bhaskell{is_empty}: Prüft, ob eine Menge leer ist.
     \end{exercise}
-    \begin{solve}[a)]
+    \onslide<+->\begin{solve}[a)]
     \begin{plainhaskell}
 is_empty :: [Integer] -> Bool
 is_empty [] = True
@@ -19,11 +19,11 @@ is_empty _ = False
     \end{solve}
 \end{frame}
 \resetframecounters
-\begin{frame}[fragile]{Mengen in Haskell}
+\begin{frame}[fragile]{Mengen in Haskell}\onslide<+->% init animation
     \begin{exercise}[b)]
         \bhaskell{is_elem}: Prüft, ob ein Wert in einer Menge enthalten ist.
         \end{exercise}
-        \begin{solve}[b)]
+        \onslide<+->\begin{solve}[b)]
         \begin{plainhaskell}
 is_elem :: Integer -> [Integer] -> Bool
 is_elem _ [] = False
@@ -34,11 +34,11 @@ is_elem x (y:ys)
         \end{solve}
 \end{frame}
 \resetframecounters
-\begin{frame}[fragile]{Mengen in Haskell}
+\begin{frame}[fragile]{Mengen in Haskell}\onslide<+->% init animation
     \begin{exercise}[c)]
         \bhaskell{is_subset}: Prüft, ob die erste Menge in der zweiten enthalten ist.
         \end{exercise}
-        \begin{solve}[c)]
+        \onslide<+->\begin{solve}[c)]
         \begin{plainhaskell}
 is_subset :: [Integer] -> [Integer] -> Bool
 is_subset [] _ = True
@@ -50,11 +50,11 @@ is_subset (x:xs) set2
         \end{solve}
 \end{frame}
 \resetframecounters
-\begin{frame}[fragile]{Mengen in Haskell}
+\begin{frame}[fragile]{Mengen in Haskell}\onslide<+->% init animation
     \begin{exercise}[d)]
         \bhaskell{is_equal}: Prüft, ob zwei Mengen gleich sind.
         \end{exercise}
-        \begin{solve}[d)]
+        \onslide<+->\begin{solve}[d)]
         \begin{plainhaskell}
 is_equal :: [Integer] -> [Integer] -> Bool
 is_equal set1 set2 = is_subset set1 set2 && is_subset set2 set1
@@ -62,11 +62,11 @@ is_equal set1 set2 = is_subset set1 set2 && is_subset set2 set1
         \end{solve}
 \end{frame}
 \resetframecounters
-\begin{frame}[fragile]{Mengen in Haskell}
+\begin{frame}[fragile]{Mengen in Haskell}\onslide<+->% init animation
     \begin{exercise}[e)]
         \bhaskell{delete}: Löscht ein Element aus einer Menge.
         \end{exercise}
-        \begin{solve}[e)]
+        \onslide<+->\begin{solve}[e)]
         \begin{plainhaskell}
 delete :: Integer -> [Integer] -> [Integer]
 delete _ [] = []
@@ -77,11 +77,11 @@ delete x (y:ys)
         \end{solve}
 \end{frame}
 \resetframecounters
-\begin{frame}[fragile]{Mengen in Haskell}
+\begin{frame}[fragile]{Mengen in Haskell}\onslide<+->% init animation
     \begin{exercise}[f)]
         \bhaskell{insert}: Fügt ein Element zu einer Menge hinzu.
         \end{exercise}
-        \begin{solve}[f)]
+        \onslide<+->\begin{solve}[f)]
         \begin{plainhaskell}
 insert :: Integer -> [Integer] -> [Integer]
 insert x [] = [x]
@@ -92,11 +92,11 @@ insert x set
         \end{solve}
 \end{frame}
 \resetframecounters
-\begin{frame}[fragile]{Mengen in Haskell}
+\begin{frame}[fragile]{Mengen in Haskell}\onslide<+->% init animation
     \begin{exercise}[g)]
         \bhaskell{union}: Bildet die Vereinigung zweier Mengen.
         \end{exercise}
-        \begin{solve}[g)]
+        \onslide<+->\begin{solve}[g)]
         \begin{plainhaskell}
 union :: [Integer] -> [Integer] -> [Integer]
 union [] set2 = set2

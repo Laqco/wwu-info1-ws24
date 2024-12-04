@@ -1,70 +1,70 @@
-\begin{frame}[fragile]{Jonglieren mit Variablen}
+\begin{frame}[fragile]{Jonglieren mit Variablen}\onslide<+->% init animation
     \begin{exercise}
     Nutzen Sie in dieser Aufgabe die Kommandozeile zum Kompilieren und Ausführen von Java-Code.
     \medskip
     Lesen Sie zwei Zahlen von der Kommandozeile ein und speichern Sie diese als Variablen. Tauschen Sie die Werte der beiden Variablen und geben Sie den größeren Wert aus.
     \end{exercise}
 \end{frame}
-\begin{frame}[fragile]{Jonglieren mit Variablen}
+\begin{frame}[fragile]{Jonglieren mit Variablen}\onslide<+->% init animation
     \begin{solve}[a) + b) + c)]
     \begin{plainjava}
-// Deklaration (a)
+!*\onslide<+->*!// Deklaration (a)
 int x, y;
 
-// Eingabe (b)
+!*\onslide<+->*!// Eingabe (b)
 x = IOTools.readInt("Eingabe x: ");
 y = IOTools.readInt("Eingabe y: ");
 
-// Ausgabe (c)
+!*\onslide<+->*!// Ausgabe (c)
 System.out.println("x: " + x + " - y: " + y);
     \end{plainjava}
     \end{solve}
 \end{frame}
 \resetframecounters
-\begin{frame}[fragile]{Jonglieren mit Variablen}
+\begin{frame}[fragile]{Jonglieren mit Variablen}\onslide<+->% init animation
     \begin{solve}[d)]
     \begin{plainjava}
-// Tauschen (mit Hilfsvariable)
+// Tauschen!*\onslide<+->*! (mit Hilfsvariable)
 int z = x;
-x = y;
-y = z;
+!*\onslide<+->*!x = y;
+!*\onslide<+->*!y = z;
 
-// Ausgabe
+!*\onslide<+->*!// Ausgabe
 System.out.println("x: " + x + " - y: " + y);
     \end{plainjava}
     \end{solve}
 \end{frame}
 \resetframecounters
-\begin{frame}[fragile]{Jonglieren mit Variablen}
+\begin{frame}[fragile]{Jonglieren mit Variablen}\onslide<+->% init animation
     \begin{solve}[e)]
     \begin{plainjava}
-// Vergleich
+!*\onslide<+->*!// Vergleich
 int largerValue;
 if (x >= y)
     largerValue = x;
 else
     largerValue = y;
 
-System.out.println("Der größere Wert von beiden ist: " + largerValue);
+!*\onslide<+->*!System.out.println("Der größere Wert von beiden ist: " + largerValue);
     \end{plainjava}
 \end{solve}
-Ja, das ist eigentlich nur der ,,nicht-kleinere'' Wert!
+\onslide<+->Ja, das ist eigentlich nur der ,,nicht-kleinere'' Wert!
 \end{frame}
 \resetframecounters
-\begin{frame}[fragile]{Jonglieren mit Variablen}
+\begin{frame}[fragile]{Jonglieren mit Variablen}\onslide<+->% init animation
     \vspace{-0.5\baselineskip}
     \begin{solve}[d) + e), aber schöner!]
     \begin{plainjava}
-// Tauschen (mit XOR)
-x = x ^ y;
-y = x ^ y; // x ^ y ^ y = x
-x = x ^ y; // x ^ y ^ x = y
+// Tauschen!*\onslide<+->*! (mit XOR)
+!*\onslide<+->*!x = x ^ y;
+!*\onslide<+->*!y = x ^ y;!*\onslide<+->*! // x ^ y ^ y = x
+!*\onslide<+->*!x = x ^ y;!*\onslide<+->*! // x ^ y ^ x = y
 
-// besserer Vergleich
-int largerValue = x;
-if (y > x) largerValue = y;
+!*\onslide<+->*!// besserer Vergleich
+int largerValue!*\onslide<+->*! = x;
+!*\onslide<+->*!if (y > x) largerValue = y;
 
-// oder direkt mit ternärem Operator
+!*\onslide<+->*!// oder direkt mit ternärem Operator
 System.out.println("Der größere Wert von beiden ist: " + (x >= y) ? x : y);
     \end{plainjava}
     \end{solve}

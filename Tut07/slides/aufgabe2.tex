@@ -1,8 +1,8 @@
-\begin{frame}[fragile]{Warum so faul?}
+\begin{frame}[fragile]{Warum so faul?}\onslide<+->% init animation
     \begin{exercise}[a)]
     Programmieren Sie eine Funktion, die für einen Integer-Wert prüft, ob dieser eine Primzahl ist.
     \end{exercise}
-    \begin{solve}[a)]
+    \onslide<+->\begin{solve}[a)]
     \begin{plainhaskell}
 is_prime :: Integer -> Bool
 is_prime n
@@ -12,23 +12,23 @@ is_prime n
     | otherwise = null [ x | x <- [3,5 .. floor (sq!*\tikzmark{sqrt}*!rt (fromIntegral n))], n `mod` x == 0]
     \end{plainhaskell}
     \end{solve}
-    \begin{tikzpicture}[overlay,remember picture]
+    \onslide<+->\begin{tikzpicture}[overlay,remember picture]
         \node[above=0cm of pic cs:sqrt] (n0) {};
         \node[above=2em of n0,inner sep=2pt,draw,rounded corners,anchor=south] (n1) {\shortstack{$\forall n=x\cdot y:$ \\ $x\geq\sqrt{n}\implies y \leq\sqrt{n}$}};
         \draw (n0) edge[->,dashed] (n1.south);
     \end{tikzpicture}
 \end{frame}
 \resetframecounters
-\begin{frame}[fragile]{Warum so faul?}
+\begin{frame}[fragile]{Warum so faul?}\onslide<+->% init animation
     \begin{exercise}[b)]
     Definieren Sie unter Nutzung von \bhaskell{is_prime} eine Liste aller Primzahlen.
     \end{exercise}
-    \begin{solve}[b)]
+    \onslide<+->\begin{solve}[b)]
     \begin{plainhaskell}
 primes :: [Integer]
 primes = [ n | n <- [2..], is_prime n ]
     \end{plainhaskell}
-    oder effizienter:
+    \onslide<+->oder effizienter:
     \begin{plainhaskell}
 primes :: [Integer]
 primes = [2] ++ [ n | n <- [3,5 ..], is_prime n ]
@@ -36,16 +36,16 @@ primes = [2] ++ [ n | n <- [3,5 ..], is_prime n ]
     \end{solve}
 \end{frame}
 \resetframecounters
-\begin{frame}[fragile]{Warum so faul?}
+\begin{frame}[fragile]{Warum so faul?}\onslide<+->% init animation
     \begin{exercise}[c)]
     Extrahieren Sie die 42. Primzahl.
     \end{exercise}
-    \begin{solve}[c)]
+    \onslide<+->\begin{solve}[c)]
     \begin{plainhaskell}
 prime_no :: Int -> Integer
 prime_no n = last (take n primes)
     \end{plainhaskell}
-    \begin{plainbash}
+    \onslide<+->\begin{plainbash}
 > prime_no 42
 181
     \end{plainbash}
