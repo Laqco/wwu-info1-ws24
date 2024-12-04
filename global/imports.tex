@@ -23,6 +23,7 @@
 \usetikzlibrary{tikzmark}
 \usetikzlibrary{calc}
 \usetikzlibrary{automata}
+\usetikzlibrary{decorations.pathreplacing}
 
 \usepackage{csquotes}
 \usepackage{hyperref}
@@ -30,13 +31,13 @@
 
 % flo
 \usepackage{fancyqr}
-\usepackage{color-palettes}
+\usepackage[addons]{color-palettes}
 \usepackage[encoding,noloadlangs,cpalette,numinpar,fakeminted]{sopra-listings}
 \usepackage{code-animation}
 
 \usetheme[theorems]{colorful-dream}
 
-% languages
+% languages fix
 \let\originalsolLoadLanguage\solLoadLanguage
 \def\solLoadLanguage#1{%
     \def\temp{#1}

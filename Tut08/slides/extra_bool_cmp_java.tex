@@ -1,7 +1,7 @@
 \begin{frame}[fragile]{Übungsaufgabe}\onslide<+->% init animation
-    \begin{exercise*}{Vereinfachen Sie den folgenden Java-Code:}
+    \begin{exercise*}[Vereinfachen Sie den folgenden Java-Code.]
         \begin{plainjava}
-public static boolean nand(boolean a, boolean b) {
+public boolean nand(boolean a, boolean b) {
     if (a == false) return true;
     else if (a == true) {
         if (b == false) return true;
@@ -10,4 +10,273 @@ public static boolean nand(boolean a, boolean b) {
 }
         \end{plainjava}
     \end{exercise*}
+\end{frame}
+\begin{frame}[fragile]{Übungsaufgabe}\onslide<+->% init animation
+    \UsePalette{UniMawi}
+    \begin{solve*}[\bjava{public boolean nand(boolean a, boolean b) \{...\}}]
+    \UsePalette{GreenWater}\vspace{-\abovedisplayskip}
+    \begin{minipage}[t]{0.5\linewidth}\raggedright
+        \begin{plainjava}
+if (a == false) return true;
+else if (a == true) {
+    if (b == false) return true;
+    if (b == true) return false;
+}
+        \end{plainjava}
+    \end{minipage}\begin{minipage}[t]{0.5\linewidth}\raggedright
+        \begin{plainjava}
+!*\onslide<+->*!if (!a) return true;
+!*\onslide<+->*!else if (a) {
+!*\onslide<+->*!    if (!b) return true;
+!*\onslide<+->*!    if (b)  !*~*!return false;
+!*\onslide<.(-2)->*!}
+        \end{plainjava}
+    \end{minipage}
+    \end{solve*}
+\end{frame}
+\begin{frame}[fragile,noframenumbering]{Übungsaufgabe}\onslide<+->% init animation
+    \UsePalette{UniMawi}
+    \begin{solve*}[\bjava{public boolean nand(boolean a, boolean b) \{...\}}]
+    \UsePalette{GreenWater}\vspace{-\abovedisplayskip}
+    \begin{minipage}[t]{0.5\linewidth}\raggedright
+        \begin{plainjava}
+if (a == false) return true;
+else if (a == true) {
+    if (b == false) return true;
+    if (b == true) return false;
+}
+        \end{plainjava}
+    \end{minipage}\begin{minipage}[t]{0.5\linewidth}\raggedright
+        \begin{plainjava}
+if (!a) return !a;
+else if (a) {
+    if (!b) return (!b);!*\tikzmark{r0r}*!
+    if (b) !*~\tikzmark{r0l}*!return (!b);
+}
+        \end{plainjava}
+    \end{minipage}
+    \end{solve*}
+    \begin{tikzpicture}[overlay,remember picture]
+        \path
+            % returns
+            (pic cs:r0l) + (-0.05, -0.1) coordinate (r0l)
+            (pic cs:r0r) + (0.025, 0.3) coordinate (r0r)
+            % text
+            (r0r) + (0.5, -1) coordinate (t0)
+            % shifted coordinates
+            (r0r) + (0, -0.4) coordinate (r0rs0)
+        ;
+        \draw<+->[draw=gray, opacity=0.5, thin, rounded corners]
+            % boxes
+            (r0l) rectangle (r0r) % returns
+            % arrows
+            (r0rs0) edge[->,bend left=50] (t0) % returns
+            % nodes
+            (t0) node[anchor=north] {redundant} % returns
+        ;
+    \end{tikzpicture}
+\end{frame}
+\begin{frame}[fragile,noframenumbering]{Übungsaufgabe}\onslide<+->% init animation
+    \UsePalette{UniMawi}
+    \begin{solve*}[\bjava{public boolean nand(boolean a, boolean b) \{...\}}]
+    \UsePalette{GreenWater}\vspace{-\abovedisplayskip}
+    \begin{minipage}[t]{0.5\linewidth}\raggedright
+        \begin{plainjava}
+if (a == false) return true;
+else if (a == true) {
+    if (b == false) return true;
+    if (b == true) return false;
+}
+        \end{plainjava}
+    \end{minipage}\begin{minipage}[t]{0.5\linewidth}\raggedright
+        \begin{plainjava}
+!*\tikzmark{l0l}*!if (!a) return !a;!*\tikzmark{l0r}*!
+else if (a) {
+    return (!b);
+
+}
+        \end{plainjava}
+    \end{minipage}
+    \end{solve*}
+    \begin{tikzpicture}[overlay,remember picture]
+        \path
+            % !a
+            (pic cs:l0l) + (-0.05, -0.1) coordinate (l0l)
+            (pic cs:l0r) + (0.025, 0.3) coordinate (l0r)
+            % text
+            (l0r) + (0, -0.07) coordinate (t0)
+            % shifted coordinates
+            (l0r) + (0, -0.2) coordinate (l0rs0)
+            (t0) + (0.3, 0) coordinate (t0s0)
+            (l0r) + (-1, -2.3) coordinate (l0rs1)
+            (l0rs0) + (0, -0.2) coordinate (l0rs2)
+        ;
+        \draw<+->[draw=gray, opacity=0.5, thin, rounded corners]
+            % boxes
+            (l0l) rectangle (l0r) % !a
+            % arrows
+            (l0rs0) edge[->,bend right=30] (t0s0) % !a
+            % nodes
+            (t0) node[anchor=south] {Das können wir zusammenfassen!} % !a
+        ;
+        \draw<+->[draw=gray!70!red, opacity=0.5, thin, rounded corners]
+            % arrows
+            (l0rs2) edge[->, double, bend left=60] (l0rs1)
+        ;
+    \end{tikzpicture}
+\end{frame}
+\begin{frame}[fragile,noframenumbering]{Übungsaufgabe}\onslide<+->% init animation
+    \UsePalette{UniMawi}
+    \begin{solve*}[\bjava{public boolean nand(boolean a, boolean b) \{...\}}]
+    \UsePalette{GreenWater}\vspace{-\abovedisplayskip}
+    \begin{minipage}[t]{0.5\linewidth}\raggedright
+        \begin{plainjava}
+if (a == false) return true;
+else if (a == true) {
+    if (b == false) return true;
+    if (b == true) return false;
+}
+        \end{plainjava}
+    \end{minipage}\begin{minipage}[t]{0.5\linewidth}\raggedright
+        \begin{plainjava}
+
+if (a) {!*\tikzmark{b0u}*!
+    return (!b);!*\tikzmark{b0d}*!
+
+} else
+return !a;
+        \end{plainjava}
+    \end{minipage}
+    \end{solve*}
+    \begin{tikzpicture}[overlay,remember picture]
+        \path
+            % bracket
+            (pic cs:b0u) + (0.025, 0.3) coordinate (b0u)
+            (pic cs:b0d) + (0.025, -0.1) coordinate (b0d)
+            % shifted coordinates
+            ($(b0u -| b0d)!0.5!(b0d)$) coordinate (c0s0)
+            (c0s0) + (0.2, 0) coordinate (c0s1)
+        ;
+        \draw<+>[draw=gray, opacity=0.5, thin, rounded corners]
+            % bracket
+            (b0u -| b0d) edge[decorate, decoration={brace, amplitude=10pt}] (b0d)
+            % nodes
+            node[anchor=west] () at (c0s1) {\shortstack{Kombination\\durch \T{AND}}}
+        ;
+    \end{tikzpicture}
+\end{frame}
+\begin{frame}[fragile,noframenumbering]{Übungsaufgabe}\onslide<+->% init animation
+    \UsePalette{UniMawi}
+    \begin{solve*}[\bjava{public boolean nand(boolean a, boolean b) \{...\}}]
+    \UsePalette{GreenWater}\vspace{-\abovedisplayskip}
+    \begin{minipage}[t]{0.5\linewidth}\raggedright
+        \begin{plainjava}
+if (a == false) return true;
+else if (a == true) {
+    if (b == false) return true;
+    if (b == true) return false;
+}
+        \end{plainjava}
+    \end{minipage}\begin{minipage}[t]{0.5\linewidth}\raggedright
+        \begin{plainjava}
+
+// if (a)!*\tikzmark{b1u}*!
+    return (a && !b);!*\tikzmark{b1d}*!
+
+// else
+return !a;!*\tikzmark{b1d1}*!
+        \end{plainjava}
+    \end{minipage}
+    \end{solve*}
+    \begin{tikzpicture}[overlay,remember picture]
+        \path
+            % bracket
+            (pic cs:b1u) + (0.025, 0.3) coordinate (b1u)
+            (pic cs:b1d) + (0.025, -0.1) coordinate (b1d)
+            (pic cs:b1d1) + (0.025, -0.1) coordinate (b1d1)
+
+            ($(b1u -| b1d)!0.5!(b1d1 -| b1d)$) coordinate (c1s2)
+            (c1s2) + (0.2, 0) coordinate (c1s3)
+        ;
+        \draw<+>[draw=gray, opacity=0.5, thin, rounded corners]
+            % bracket
+            (b1u -| b1d) edge[decorate, decoration={brace, amplitude=10pt}] (b1d1 -| b1d)
+            % nodes
+            node[anchor=west] () at (c1s3) {\shortstack{Kombination\\durch \T{OR}}}
+        ;
+    \end{tikzpicture}
+\end{frame}
+\begin{frame}[fragile,noframenumbering]{Übungsaufgabe}\onslide<+->% init animation
+    \UsePalette{UniMawi}
+    \begin{solve*}[\bjava{public boolean nand(boolean a, boolean b) \{...\}}]
+    \UsePalette{GreenWater}\vspace{-\abovedisplayskip}
+    \begin{minipage}[t]{0.5\linewidth}\raggedright
+        \begin{plainjava}
+if (a == false) return true;
+else if (a == true) {
+    if (b == false) return true;
+    if (b == true) return false;
+}
+        \end{plainjava}
+    \end{minipage}\begin{minipage}[t]{0.5\linewidth}\raggedright
+        \begin{plainjava}
+
+
+    return !*\tikzmark{r1l}*!(a && !b) || !a!*\tikzmark{r1r}*!;
+
+
+
+        \end{plainjava}
+    \end{minipage}
+    \end{solve*}
+    \begin{tikzpicture}[overlay,remember picture]
+        \path
+            % expression
+            (pic cs:r1l) + (-0.05, -0.1) coordinate (r1l)
+            (pic cs:r1r) + (0.025, 0.3) coordinate (r1r)
+            % text
+            (r1l) + (0.5, -0.25) coordinate (t1)
+            % shifted coordinates
+            (t1) + (-1, 0) coordinate (t1s0)
+        ;
+        \draw<+->[draw=gray, opacity=0.5, thin, rounded corners]
+            % boxes
+            (r1l) rectangle (r1r) % expression
+            % arrows
+            (r1l) edge[->,bend right=40] (t1s0) % expression
+            % nodes
+            (t1) node[anchor=north] {Das geht einfacher!} % expression
+        ;
+    \end{tikzpicture}
+\end{frame}
+\begin{frame}[fragile,noframenumbering]{Übungsaufgabe}\onslide<+->% init animation
+    \UsePalette{UniMawi}
+    \begin{solve*}[\bjava{public boolean nand(boolean a, boolean b) \{...\}}]
+    \UsePalette{GreenWater}\vspace{-\abovedisplayskip}
+    \begin{minipage}[t]{0.5\linewidth}\raggedright
+        \begin{plainjava}
+if (a == false) return true;
+else if (a == true) {
+    if (b == false) return true;
+    if (b == true) return false;
+}
+        \end{plainjava}
+    \end{minipage}\begin{minipage}[t]{0.5\linewidth}\raggedright
+        \begin{plainjava}
+
+
+    return !(a && b);
+
+
+
+        \end{plainjava}
+    \end{minipage}
+    \end{solve*}
+    \onslide<+->
+    \begin{block}{Vergleich: Blatt 5 Aufgabe 2 a)}
+    \begin{plainhaskell}
+nand :: Bool -> Bool -> Bool
+nand a b = not (a && b)
+    \end{plainhaskell}
+    \end{block}
 \end{frame}
