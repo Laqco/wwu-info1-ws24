@@ -1,0 +1,193 @@
+\begin{frame}[fragile]{True-Vergleiche}\onslide<+->% init animation % TODO: handout
+    \begin{block}{Warum ist der folgende Code schlecht?}
+        \begin{plainhaskell}
+negate :: Bool -> Bool
+negate !*\tikzmark{b0l}*!b!*\tikzmark{b0r}*!
+    !*\tikzmark{g0}*!| !*\tikzmark{c0l}*!(b == True)!*\tikzmark{c0r}*!  = False
+    !*\tikzmark{g1}*!| !*\tikzmark{c1l}*!(b == False)!*\tikzmark{c1r}*! = True
+        \end{plainhaskell}
+    \end{block}
+    \begin{tikzpicture}[overlay,remember picture]
+        \path
+            % parameter b
+            (pic cs:b0l) + (-0.05, -0.05) coordinate (b0l)
+            (pic cs:b0r) + (0.025, 0.3) coordinate (b0r)
+            % True comparision
+            (pic cs:c0l) + (-0.05, -0.1) coordinate (c0l)
+            (pic cs:c0r) + (0.025, 0.3) coordinate (c0r)
+            % False comparision
+            (pic cs:c1l) + (-0.05, -0.1) coordinate (c1l)
+            (pic cs:c1r) + (0.025, 0.3) coordinate (c1r)
+            % guards
+            (pic cs:g0) + (0, 0.1) coordinate (g0)
+            (pic cs:g1) + (0, 0.1) coordinate (g1)
+            % text
+            (b0r) + (1.6, 0.6) coordinate (t0)
+            (c0r) + (3, 0) coordinate (t1)
+            (c1r) + (3, -0.4) coordinate (_t2)
+            (_t2 -| t1) coordinate (t2)
+            (g1) + (-0.1, -0.2) coordinate (t3)
+            % shifted coordinates
+            (c1r) + (0, -0.4) coordinate (c1rs0)
+            (t0) + (-0.1, 0) coordinate (t0s0)
+            (t3) + (0.1, -0.1) coordinate (t3s0)
+        ;
+        \draw<.(1)->[draw=gray, opacity=0.5, thin, rounded corners]
+            % boxes
+            (b0l) rectangle (b0r) % parameter b
+            (c0l) rectangle (c0r) % True comparision
+            (c1l) rectangle (c1r) % False comparision
+            % arrows
+            (b0r) .. controls +(0.25, 0.6) and +(-1, 0) .. (t0s0) edge[->] (t0) % parameter b
+            (g0) edge[->, bend right=50] (t3s0) % True guard
+            (g1) edge[bend right=50] (t3s0) % False guard
+            % nodes
+            (t3) node[anchor=north west] {Prüft \bhaskell{Bool}s} % guards
+        ;
+        \draw<.(2)->[draw=gray, opacity=0.5, thin, rounded corners]
+            % arrows
+            (c0r) edge[->, bend left=15] (t1) % True comparision
+            (c1rs0) edge[->, bend right=10] (t2) % False comparision
+        ;
+
+        \draw<+>[draw=gray, opacity=0.5, thin, rounded corners]
+            (t0) node[anchor=west] {\bhaskell{Bool}} % parameter b
+        ;
+        \draw<+>[draw=gray, opacity=0.5, thin, rounded corners]
+            (t1) node[anchor=west] {\bhaskell{(True\ \ == True)}} % True comparision
+            (t2) node[anchor=west] {\bhaskell{(True\ \ == False)}} % False comparision
+        ;
+        \draw<.-.(2)>[draw=gray, opacity=0.5, thin, rounded corners]
+            (t0) node[anchor=west] {\bhaskell{True}} % parameter b
+        ;
+        \draw<+>[draw=gray, opacity=0.5, thin, rounded corners]
+            (t1) node[anchor=west] {\bhaskell{(True\ \ == True)\ \ = True}} % True comparision
+            (t2) node[anchor=west] {\bhaskell{(True\ \ == False) = False}} % False comparision
+        ;
+        \draw<+>[draw=gray, opacity=0.5, thin, rounded corners]
+            (t1) node[anchor=west] {\bhaskell{(True\ \ == True)\ \ = True\ \ =\ \ \ \ \ b}} % True comparision
+            (t2) node[anchor=west] {\bhaskell{(True\ \ == False) = False = not b}} % False comparision
+        ;
+        \draw<+>[draw=gray, opacity=0.5, thin, rounded corners]
+            (t0) node[anchor=west] {\bhaskell{False}} % parameter b
+            (t1) node[anchor=west] {\bhaskell{(False == True)\ \ = False =\ \ \ \ \ b}} % True comparision
+            (t2) node[anchor=west] {\bhaskell{(False == False) = True\ \ = not b}} % False comparision
+        ;
+    \end{tikzpicture}
+    \vspace{-\baselineskip}
+    \begin{itemize}
+        \item<3-> Wir vergleichen Wahrheitswerte\onslide<4->~und erhalten Wahrheitswerte.\\
+        \onslide<5->\faAngleRight~\alert{Boole'sche Operatoren}
+    \end{itemize}
+\end{frame}
+\begin{frame}[fragile]{Bedingungen und Alternativen}\onslide<+->% init animation
+    \begin{block}{Wie können wir den Code verbessern?\vphantom{g}}
+        \begin{plainhaskell}
+negate :: Bool -> Bool
+negate b
+    | (b)     = False
+    | !*\tikzmark{c2l}*!(not b)!*\tikzmark{c2r}*! = True
+        \end{plainhaskell}
+    \end{block}
+    \begin{tikzpicture}[overlay,remember picture]
+        \path
+            % otherwise
+            (pic cs:c2l) + (-0.05, -0.1) coordinate (c2l)
+            (pic cs:c2r) + (0.025, 0.3) coordinate (c2r)
+            % text
+            (c2l) + (-0.1, -0.05) coordinate (t4)
+            % shifted coordinates
+            (c2l) + (-0.05, 0.2) coordinate (c2ls0)
+            (t4) + (0.1, -0.1) coordinate (t4s0)
+        ;
+        \draw<.(1)->[draw=gray, opacity=0.5, thin, rounded corners]
+            % boxes
+            (c2l) rectangle (c2r) % otherwise
+            % arrows
+            (c2ls0) edge[->,bend right=50] (t4s0) % otherwise
+            % nodes
+            (t4) node[anchor=north west] {\bhaskell{b} ist nicht \bhaskell{True}, also bleibt uns nur noch ein Fall} % otherwise
+        ;
+    \end{tikzpicture}
+    \vspace{-\baselineskip}
+    \begin{itemize}
+        \item Wir vergleichen Wahrheitswerte und erhalten Wahrheitswerte.\\
+            \faAngleRight~\alert{Boole'sche Operatoren}
+        \item<2-> Wir können redundante Vergleiche reduzieren.\\
+            \faAngleRight~\alert{\bhaskell{otherwise} (oder \bhaskell{else})}
+    \end{itemize}
+\end{frame}
+\begin{frame}[fragile]{(redundante) Boolean-Rückgabe}\onslide<+->% init animation % TODO: handout
+    \begin{block}{Warum ist das immernoch nicht perfekt?\vphantom{g}}
+        \begin{plainhaskell}
+negate :: Bool -> Bool
+negate b
+    | b         = False!*\tikzmark{c3r}*!
+    | otherwise = !*\tikzmark{c3l}*!True
+        \end{plainhaskell}
+    \end{block}
+    \begin{tikzpicture}[overlay,remember picture]
+        \path
+            % return
+            (pic cs:c3l) + (-0.05, -0.1) coordinate (c3l)
+            (pic cs:c3r) + (0.025, 0.3) coordinate (c3r)
+            % text
+            (c3r) + (0.9, -0.2) coordinate (t5)
+            % shifted coordinates
+            (c3r) + (0, -0.45) coordinate (c3rs0)
+            (t5) + (0, \baselineskip) coordinate (t5s0)
+            (pic cs:c3l) + (2.1, 0.27) coordinate (t6)
+            (t6) + (0, -\baselineskip) coordinate (t7)
+        ;
+        \draw<.(1)->[draw=gray, opacity=0.5, thin, rounded corners]
+            % boxes
+            (c3l) rectangle (c3r) % return
+            % arrows
+            (c3rs0) edge[->,bend left=20] (t5) % return
+        ;
+        \draw<+>[draw=gray, opacity=0.5, thin, rounded corners]
+            (t5) node[anchor=west] {Booleans} % return
+        ;
+        \draw<+>[draw=gray, opacity=0.5, thin, rounded corners]
+            (t6) node[anchor=south west, opacity=1] {\bhaskell{| (b)\ \ \ \ }{\color{sol@colors@lst@comments}\T{\ == True\ }}\bhaskell{= False}}
+            (t7) node[anchor=south west, opacity=1] {\bhaskell{| (not b)}{\color{sol@colors@lst@comments}\T{\ == True\ }}\bhaskell{= True}}
+        ;
+        \draw<.->[draw=gray, opacity=0.5, thin, rounded corners]
+            (t5s0) node[anchor=west] {Wir erinnern uns:} % return
+        ;
+        \draw<+>[draw=gray, opacity=0.5, thin, rounded corners]
+            (t6) node[anchor=south west, opacity=1] {\bhaskell{| (b)\ \ \ \ }{\color{sol@colors@lst@comments}\T{\ == True\ }}\bhaskell{= not (b) -- False}}
+            (t7) node[anchor=south west, opacity=1] {\bhaskell{| (not b)}{\color{sol@colors@lst@comments}\T{\ == True\ }}\bhaskell{= True}}
+        ;
+        \draw<+>
+            (t6) node[anchor=south west, opacity=1] {\bhaskell{| (b)\ \ \ \ }{\color{sol@colors@lst@comments}\T{\ == True\ }}\bhaskell{= not (b) -- False}}
+            (t7) node[anchor=south west, opacity=1] {\bhaskell{| (not b)}{\color{sol@colors@lst@comments}\T{\ == True\ }}\bhaskell{= (not b) -- True}}
+        ;
+    \end{tikzpicture}
+    \vspace{-\baselineskip}
+    \begin{itemize}
+        \item Wir vergleichen Wahrheitswerte und erhalten Wahrheitswerte.\\
+            \faAngleRight~\alert{Boole'sche Operatoren}
+        \item Wir können redundante Vergleiche reduzieren.\\
+            \faAngleRight~\alert{\bhaskell{otherwise} (oder \bhaskell{else})}
+        \item<3-> Wir geben Wahrheitswerte explizit zurück.\\
+        \onslide<5->\faAngleRight~\alert{Boole'sche Operatoren}
+    \end{itemize}
+    \vspace{-1em}
+\end{frame}
+\begin{frame}[fragile]{Vergleich}\onslide<+->% init animation
+    \begin{block}{Schlechter Code\vphantom{g}}
+        \begin{plainhaskell}
+negate :: Bool -> Bool
+negate b
+    | (b == True)  = False
+    | (b == False) = True
+        \end{plainhaskell}
+    \end{block}
+    \begin{block}{Verbesserter Code\vphantom{g}}
+        \begin{plainhaskell}
+negate :: Bool -> Bool
+negate b = not b
+        \end{plainhaskell}
+    \end{block}
+\end{frame}
