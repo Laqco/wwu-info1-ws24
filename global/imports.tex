@@ -36,6 +36,18 @@
 
 \usetheme[theorems]{colorful-dream}
 
+% languages
+\let\originalsolLoadLanguage\solLoadLanguage
+\def\solLoadLanguage#1{%
+    \def\temp{#1}
+    \def\tempcompare{java}
+    \ifx\temp\tempcompare
+        \input{../global/fix_language_java.cfg}
+    \else
+        \originalsolLoadLanguage{#1}
+    \fi
+}
+
 % unnumbered theorems
 \usepackage{amsthm}
 \theoremstyle{exercise}
