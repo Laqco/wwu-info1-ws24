@@ -2,6 +2,18 @@
 \institute{Universität Münster}
 
 \author{\lqfullname}
-\email{\hbox{{\lqemail}@uni-muenster.de}}
+\email{\lqemail @uni-muenster.de}
 
-% TODO: fix mailto
+% fix email
+\makeatletter
+\let\originalhref\href
+\renewcommand{\href}[2]{%
+    \def\temp{#2}
+    \def\tempcompare{\btcd@email}
+    \ifx\temp\tempcompare
+        \originalhref{mailto:#2}{\hbox{#2}}
+    \else
+        \originalhref{#1}{#2}
+    \fi
+}
+\makeatother
