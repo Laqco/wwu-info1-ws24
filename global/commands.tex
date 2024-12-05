@@ -34,6 +34,9 @@
 % listing style for file input listings
 \lstdefinestyle{files}{numbersep=-8pt,xleftmargin=-8pt,frame=none,numbers=none,backgroundcolor={}}
 
+% small footnote
+\newcommand{\nicefootnote}[1]{\tikz[overlay,remember picture]{\node[anchor=south,text width=\dimexpr\textwidth+2em\relax,align=center,above=1em of current page.south] (nicefootnote) {\hrule\vskip 1pt\footnotesize#1};}}
+
 % console example calls % TODO
 % \newcommand<>\excall[1]{%
 % \only<handout:0>{%

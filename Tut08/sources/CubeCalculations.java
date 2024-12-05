@@ -6,10 +6,10 @@ public class CubeCalculations {
 
     static Scanner IOTools = new Scanner(System.in);
 
-    private static final int DENSITY_PLASTIC = 5;
-    private static final int DENSITY_WOOD = 15;
-    private static final int DENSITY_IRON = 25;
-    private static final int DENSITY_PLUTONIUM = 10000;
+    public static final int DENSITY_PLASTIC = 5;
+    public static final int DENSITY_WOOD = 15;
+    public static final int DENSITY_IRON = 25;
+    public static final int DENSITY_PLUTONIUM = 10000;
 
     public static void main(String[] args) {
         printIntroduction();
@@ -26,17 +26,17 @@ public class CubeCalculations {
         printOutro();
     }
 
-    private static void printIntroduction() {
+    public static void printIntroduction() {
         System.out.println("Hello, test subject. Welcome to Aperture Science's computer-aided enrichment center.");
         System.out.println("Before we begin, we must configure your Aperture Science Weighted Storage Cube.");
     }
 
-    private static int getCubeLength() {
+    public static int getCubeLength() {
         System.out.print("\nPlease input your desired length (in centimeters): ");
         return IOTools.nextInt();
     }
 
-    private static int getMaterialDensity() {
+    public static int getMaterialDensity() {
         System.out.println("\nExcellent. Now, please choose a material for your cube.");
         System.out.println("  1 - Plastic");
         System.out.println("  2 - Wood");
@@ -69,27 +69,27 @@ public class CubeCalculations {
         return density;
     }
 
-    private static double calculateVolume(int lengthCm) {
+    public static double calculateVolume(int lengthCm) {
         double lengthMeters = lengthCm / 100.0;
         return lengthMeters * lengthMeters * lengthMeters;
     }
 
-    private static double calculateWeight(int density, double volume) {
+    public static double calculateWeight(int density, double volume) {
         return density * volume;
     }
 
-    private static double calculateStiction(double weight) {
+    public static double calculateStiction(double weight) {
         double gravity = 9.81;
         double stictionCoefficient = 1.0;
         double stiction = weight * gravity * stictionCoefficient;
         return stiction;
     }
 
-    private static double roundToThreeDecimals(double value) {
+    public static double roundToThreeDecimals(double value) {
         return (double) ((int) (value * 1000)) / 1000;
     }
 
-    private static void displayCubeProperties(int length, double weight, double stiction) {
+    public static void displayCubeProperties(int length, double weight, double stiction) {
         weight = roundToThreeDecimals(weight);
         System.out.println("\n-----------------------------");
         System.out.println("Cube Dimensions: " + length + "x" + length + "x" + length + " cm^3");
@@ -98,7 +98,7 @@ public class CubeCalculations {
         System.out.println("-----------------------------");
     }
 
-    private static void printOutro() {
+    public static void printOutro() {
         System.out.println("\nPlease proceed to the chamberlock. And don't worry... you'll be fine... probably.");
     }
 }

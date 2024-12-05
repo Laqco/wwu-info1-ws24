@@ -1,0 +1,41 @@
+\begin{frame}[fragile]{\T{CAFEBABE} und \T{B00B135}}\onslide<+->% init animation
+    \begin{exercise}
+        Erstellen Sie ein Java-Programm, das Hexadezimal-Strings in Dezimalzahlen umwandelt.
+    \end{exercise}
+    \vspace{-0.25\baselineskip}\begin{solve}[Ausgabe aller gültigen Zeichen]
+        \vspace{-0.25\baselineskip}\scriptsize%
+        \begin{plainjava}
+char[] validChars = !*\sol@styles@lst@comments\sol@lst@prebreak*!
+    {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+        \end{plainjava}\vspace{-\abovedisplayskip}
+        \ijava[style=files,xleftmargin=-30pt,linerange={6-11}]{sources/HexStringConverter.java}\vspace{-0.5\baselineskip}
+    \end{solve}
+    \nicefootnote{\tiny\begin{itemize}
+        \item[\TINY \raisebox{0.75ex}{$\blacktriangleright$}] Die magische Zahl \T{CAFEBABE} am Anfang von Java-Bytecode-Dateien kennzeichnet sie für die Ausführung durch die Java-VM.
+        \item[\TINY \raisebox{0.75ex}{$\blacktriangleright$}] In der Virtualisierungssoftware XEN war \T{B00B135} früher eine Benutzer-ID, die für den Zugriff auf das System erforderlich war.
+    \end{itemize}}
+\end{frame}
+\resetsolve
+\begin{frame}[fragile]{\T{CAFEBABE} und \T{B00B135}}\onslide<+->% init animation
+    \begin{solve}[Gültigkeit prüfen]
+        \scriptsize%
+        \ijava[style=files,xleftmargin=-30pt,linerange={16-17}]{sources/HexStringConverter.java}\vspace{-\abovedisplayskip}
+        \ijava[style=files,xleftmargin=-14pt,linerange={26-39}]{sources/HexStringConverter.java}
+    \end{solve}
+\end{frame}
+\resetsolve
+\begin{frame}[fragile]{\T{CAFEBABE} und \T{B00B135}}\onslide<+->% init animation
+    \vspace{-0.25\baselineskip}\begin{solve}[Dezimalzahl berechnen]
+        \vspace{-0.25\baselineskip}\scriptsize%
+        \ijava[style=files,xleftmargin=-44pt,linerange={19}]{sources/HexStringConverter.java}\vspace{-\abovedisplayskip}
+        \ijava[style=files,xleftmargin=-14pt,linerange={40-56}]{sources/HexStringConverter.java}\vspace{-0.5\baselineskip}
+    \end{solve}
+\end{frame}
+\resetsolve
+\begin{frame}[fragile]{\T{CAFEBABE} und \T{B00B135}}\onslide<+->% init animation
+    \vspace{-0.25\baselineskip}\begin{solve}[Alternative]
+        \vspace{-0.25\baselineskip}\scriptsize%
+        \ijava[style=files,xleftmargin=-44pt,linerange={21}]{sources/HexStringConverter.java}\vspace{-\abovedisplayskip}
+        \ijava[style=files,xleftmargin=-14pt,linerange={57-73}]{sources/HexStringConverter.java}\vspace{-0.5\baselineskip}
+    \end{solve}
+\end{frame}
