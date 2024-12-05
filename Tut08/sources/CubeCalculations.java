@@ -1,5 +1,3 @@
-//if (material < 1 || material > 3) {
-
 import java.util.Scanner;
 
 public class CubeCalculations {
