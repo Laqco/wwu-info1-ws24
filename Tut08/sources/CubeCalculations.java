@@ -84,7 +84,7 @@ public class CubeCalculations {
     }
 
     public static double roundToThreeDecimals(double value) {
-        return (double) ((int) (value * 1000)) / 1000;
+        return (int)(value * 1000) / 1000.0;
     }
 
     public static void displayCubeProperties(int length, double weight, double stiction) {
