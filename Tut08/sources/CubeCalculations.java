@@ -6,7 +6,6 @@ public class CubeCalculations {
 
     static Scanner IOTools = new Scanner(System.in);
 
-    // material constants
     private static final int DENSITY_PLASTIC = 5;
     private static final int DENSITY_WOOD = 15;
     private static final int DENSITY_IRON = 25;
