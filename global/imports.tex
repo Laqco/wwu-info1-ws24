@@ -41,12 +41,15 @@
 \let\originalsolLoadLanguage\solLoadLanguage
 \def\solLoadLanguage#1{%
     \def\temp{#1}
-    \def\tempcompare{java}
-    \ifx\temp\tempcompare
+    \def\tempjava{java}
+    \def\temptext{text}
+    \ifx\temp\tempjava
         \input{../global/fix_language_java.cfg}
+    \else\ifx\temp\temptext
+        \input{../global/language_text.cfg}
     \else
         \originalsolLoadLanguage{#1}
-    \fi
+    \fi\fi
 }
 
 % unnumbered theorems

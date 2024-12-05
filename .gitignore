@@ -1,3 +1,7 @@
 /out/
 global/user.tex
 *Notes.txt
+*.class
+*.hi
+*.o
+*.exe

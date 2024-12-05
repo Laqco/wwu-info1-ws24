@@ -1,0 +1,62 @@
+\begin{frame}[fragile]{Well done, android.}\onslide<+->% init animation
+    \begin{exercise}
+        Erstellen Sie einen Konfigurationsdialog für einen Würfel, bei dem der Benutzer die gewünschte Seitenlänge (in Zentimetern) und das gewünschte Material angibt, und berechnen Sie das Gewicht (in Kilogramm) und die Haftreibung des Würfels mit drei Nachkommastellen.
+        \par\medskip
+        Verfügbare Materialien und deren Dichte:\begin{itemize}
+            \item Plastik: $5~kg/m^3$
+            \item Holz: $15~kg/m^3$
+            \item Eisen: $25~kg/m^3$
+        \end{itemize}
+        Für andere Eingaben wird Plutonium mit einer Dichte von $10000~kg/m^3$ verwendet.
+    \end{exercise}
+\end{frame}
+\begin{frame}[fragile]{Well done, android.}\onslide<+->% init animation
+    \begin{solve}
+        \scriptsize%
+        \ijava[style=files,linerange={30-39,77-80}]{sources/CubeCalculations.java}
+    \end{solve}
+\end{frame}
+\resetsolve
+\begin{frame}[fragile]{Well done, android.}\onslide<+->% init animation
+    \begin{solve}
+        \scriptsize%
+        \ijava[style=files,linerange={40,47-49,51-60,69-71}]{sources/CubeCalculations.java}
+    \end{solve}
+    \vspace{-1em}
+\end{frame}
+\resetsolve
+\begin{frame}[fragile]{Well done, android.}\onslide<+->% init animation
+    \begin{solve}
+        \scriptsize%
+        \ijava[style=files,linerange={78-91}]{sources/CubeCalculations.java}
+    \end{solve}
+\end{frame}
+\resetsolve
+\begin{frame}[fragile]{Well done, android.}\onslide<+->% init animation
+    \begin{solve}
+        \tiny%
+        \begin{plaintext}
+Hello, test subject. Welcome to Aperture Science's computer-aided enrichment center.
+Before we begin, we must configure your Aperture Science Weighted Storage Cube.
+
+Please input your desired length (in centimeters): !*\textcolor{sol@colors@lst@numbers}{13}*!
+
+Excellent. Now, please choose a material for your cube.
+  1 - Plastic
+  2 - Wood
+  3 - Iron
+Awaiting selection...: !*\textcolor{sol@colors@lst@numbers}{7}*!
+
+The Enrichment Center regrets to inform you that your selection is... impossible.
+As a result, we have chosen Lead-coated Plutonium for you. It's terribly unsafe, but you're a test subject, not a survivor.
+
+-----------------------------
+Cube Dimensions: 13x13x13 cm^3
+Cube Weight:     21.97 kg
+Cube Stiction:   215.525 kg
+-----------------------------
+
+Please proceed to the chamberlock. And don't worry... you'll be fine... probably.
+        \end{plaintext}
+    \end{solve}
+\end{frame}
