@@ -1,0 +1,73 @@
+\begin{frame}[fragile]{Archive: ZIP}\onslide<+->% init animation
+    \begin{minipage}[t][6cm]{0.3\textwidth}
+        \hspace*{-1em}\begin{minipage}[t]{\textwidth}
+            \vspace{1em}
+            \dirtree{%
+            .1 /.
+            .2 Abgabe.pdf.
+            .2 Abgabe.zip.
+            .3 Code.java.
+            .3 Euclid.java.
+            }
+        \end{minipage}%
+    \end{minipage}\onslide<+->\nobreak\hfill\vline\hfill\begin{minipage}[t][6cm]{0.3\textwidth}
+        \hspace*{-1em}\begin{minipage}[t]{\textwidth}
+            \vspace{1em}
+            \dirtree{%
+            .1 /.
+            .2 Abgabe.pdf.
+            .2 Abgabe.zip.
+            .3 \_\_MACOSX.
+            .4 .\_Code.java.
+            .4 .\_Euclid.java.
+            .3 Abgabe.
+            .4 Code.java.
+            .4 Euclid.java.
+            }
+        \end{minipage}%
+    \end{minipage}\onslide<+->\nobreak\hfill\vline\hfill\begin{minipage}[t][6cm]{0.3\textwidth}
+        \hspace*{-1em}\begin{minipage}[t]{\textwidth}
+            \vspace{1em}
+            \dirtree{%
+            .1 /.
+            .2 Abgabe.pdf.
+            .2 Abgabe.zip.
+            .3 Abgabe.
+            .4 .settings.
+            .5 org.eclipse.core.resources.prefs.
+            .5 org.eclipse.jdt.core.prefs.
+            .4 bin.
+            .5 Code.class.
+            .5 Euclid.class.
+            .4 lib.
+            .5 Prog1Tools.jar.
+            .4 src.
+            .5 Code.java.
+            .5 Euclid.java.
+            .4 .classpath.
+            .4 .project.
+            }
+        \end{minipage}%
+    \end{minipage}\par
+    \onslide<+>\begin{tikzpicture}[overlay,remember picture]
+        \draw[draw=none,fill=red, opacity=0.3] (0.6\paperwidth, -1.4) + (-0.15,0) rectangle (\paperwidth, 6.8);
+        \node[anchor=east, left=1cm of current page.east] {\Huge \twemoji[scale=3]{dizzy_face}};
+    \end{tikzpicture}
+\end{frame}
+\begin{frame}[fragile]{Archive: ZIP}\onslide<+->% init animation
+    \begin{block}{Kommandozeile (CLI)}
+        \begin{plainbash}
+zip archive.zip file0 file1 file2
+
+# directories
+zip -r archive.zip directory0 directory1 # file0 file1 ...
+        \end{plainbash}
+    \end{block}
+    \begin{block}{Visuell (GUI)}
+        \begin{itemize}
+            \item 7zip
+            \item Explorer/Finder/FileManager/...
+            \item ...
+        \end{itemize}
+    \end{block}
+\end{frame}
