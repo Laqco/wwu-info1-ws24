@@ -1,0 +1,384 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{listings}
+\lstset{
+    morecomment=[s]{//}{//}
+}
+\usepackage[ngerman]{babel}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage[final, babel]{microtype}
+\usepackage[final]{graphicx}
+\usepackage{float}
+\usepackage[colorlinks,allcolors=black,breaklinks]{hyperref}
+\usepackage{cleveref}
+\usepackage[a4paper, margin=2cm]{geometry}
+\usepackage{tikz}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+
+\input{../global/user.tex}
+
+\setlength{\parindent}{0pt}
+
+\AddToHook{shipout/background}{%
+    \ifdim\pagetotal>\pagegoal% There is content overflow on this page
+        \begin{tikzpicture}[overlay, remember picture]
+            \node[above left=0.5cm, font=\itshape] at(current page.south east) {\footnotesize($\rightarrow$)};
+        \end{tikzpicture}
+    \fi%
+}
+
+\begin{document}
+% title page
+\thispagestyle{empty}
+\begin{center}
+    \vspace*{1em}
+    {\fontsize{40}{48}\selectfont Weihnachtsaufgaben}\par
+    \bigskip\bigskip
+    {\Large Version 1 --- 20. Dezember 2024}\par
+    \bigskip\smallskip
+    {\lqfullname}\par
+    \vspace*{6em}
+    \begin{tikzpicture}
+    \begin{scope}[scale=1.5]
+        % Tree layers
+        \fill[green!70!black] (0,-2) -- (-2,-4) -- (2,-4) -- cycle; % Bottom layer
+        \fill[green!70!black] (0,-1) -- (-1.5,-3) -- (1.5,-3) -- cycle; % Middle layer
+        \fill[green!70!black] (0,0) -- (-1,-2) -- (1,-2) -- cycle; % Top layer
+        
+        % Trunk
+        \fill[brown] (-0.4,-4) rectangle (0.4,-5);
+        
+        % Ornaments
+        \fill[blue] (0.1,-1) circle (2pt);
+        \fill[yellow] (-0.7,-2.4) circle (2pt);
+        \fill[green] (-0.2,-1.7) circle (2pt);
+        \fill[orange] (0.9,-2.7) circle (2pt);
+        \fill[blue] (0.4,-2.3) circle (2pt);
+        \fill[red] (-0.4,-3.2) circle (2pt);
+        \fill[yellow] (0.2,-3.4) circle (2pt);
+        \fill[green] (-1.3,-3.6) circle (2pt);
+        \fill[blue] (1.2,-3.7) circle (2pt);
+    \end{scope}
+    \end{tikzpicture}
+    \vfill\hrule\bigskip
+    {\small Frohe Weihnachten und einen guten Rutsch ins neue Jahr!}
+\end{center}
+
+\newpage
+\tableofcontents
+
+% motivation
+\newpage
+\addcontentsline{toc}{part}{Motivation}
+
+\section*{Motivation}
+
+Programmieren zu lernen ist ein Prozess, der vor allem durch Ausprobieren und Anwenden geschieht – "learning by doing". Genau das ist der Grund, warum ich euch diese Aufgaben über die Ferien mitgebe. Durch kleine Projekte könnt ihr eure Programmierfähigkeiten weiterentwickeln und könnt mit euren Ergebnissen herumspielen. Ich hoffe, dass ihr Spaß an den Aufgaben habt, und dabei auch etwas lernt!
+
+% aufgaben
+\newpage
+\addcontentsline{toc}{part}{Aufgaben}
+
+% weihnachtsbaum
+\section{Der perfekte Weihnachtsbaum}
+
+Die kalte Winterzeit hat das Dorf erreicht und die ersten Schneeflocken haben sich leise auf den Dächern niedergelassen. Inmitten dieser festlichen Atmosphäre kommt eine Gruppe von Dorfbewohnern auf die Idee, den schönsten Weihnachtsbaum zu erschaffen – allerdings nicht irgendeinen Baum, sondern einen digitalen Baum, der auf dem Bildschirm erstrahlen soll.
+
+\smallskip
+
+Die Dorfbewohner sind überzeugt, dass ein solcher Baum den Dorfplatz nicht nur verschönern, sondern auch die Herzen aller beflügeln wird. Sie haben von deiner Fähigkeit gehört, mit Code Wunder zu vollbringen, und so wenden sie sich an dich mit ihrem besonderen Wunsch: Sie möchten einen Weihnachtsbaum, der nicht nur in ASCII-Grafik erstrahlt, sondern auch die Magie der Festtage spüren lässt.
+
+\smallskip
+
+Mit einer klaren Vorstellung und einer Menge Ideen wollen sie, dass du diesen Baum erschaffst. Doch je mehr du dich mit dem Baum beschäftigst, desto mehr Wünsche erreichen dich. Es kommen Vorschläge, wie der Baum noch schöner, festlicher und kreativer gestaltet werden kann. Am Ende soll er nicht nur ein gewöhnlicher Baum sein, sondern ein wahres Meisterwerk der digitalen Kunst!
+
+\subsection{Aufgabe}
+
+Dein Programm soll einen Weihnachtsbaum zeichnen, dessen Höhe vom Nutzer bestimmt werden kann. Der Baum besteht aus einer symmetrischen Spitze und mehreren Ebenen, die nach unten hin breiter werden. Am Fuß des Baums befindet sich ein stabiler Stamm.
+\begin{center}
+\begin{tcolorbox}[frame empty,nobeforeafter,colback=gray!5]
+\centering%
+\begin{tabular}{c}
+\begin{lstlisting}
+  *
+ ***
+*****
+  *
+\end{lstlisting}
+\end{tabular}
+\end{tcolorbox}
+\textit{\small Weihnachtsbaum mit Höhe 3}
+\end{center}
+
+\bigskip
+
+\subsection{Erweiterungen}
+Die Dorfbewohner sind schon begeistert von dieser Grundversion, aber sie haben weitere Vorschläge gemacht, um den Baum noch beeindruckender zu gestalten.
+
+\begin{itemize}
+    \item Dekorationen\par
+    Der digitale Weihnachtsbaum soll nicht nur aus seinen grünen Zweigen bestehen, sondern auch festlich geschmückt werden, um die Dorfbewohner wirklich in Weihnachtsstimmung zu versetzen. Die Dorfgemeinschaft hat bereits einige Vorschläge gemacht, um den Baum noch prächtiger zu gestalten. Dein Auftrag ist es, diese Dekorationen hinzuzufügen, sodass die Dorfbewohner den Baum individuell gestalten können.
+    \begin{itemize}
+        \item Schnee (\texttt{\textasciitilde})\par
+        Die kalte Winterluft hat sich im Dorf ausgebreitet, und nun beginnt der erste Schnee zu fallen. Feine Flocken wirbeln vom Himmel und setzen sich sanft auf den Baum. Lasse den Schnee durch die Luft tanzen und den Baum in eine winterliche Kulisse verwandeln.
+        \item Geschenke (\texttt{.})\par
+        Die Dorfbewohner haben liebevoll Päckchen vorbereitet und unter den Baum gelegt. Sorge dafür, dass sich einige Geschenke darunter befinden, die ein Hauch von Magie und Überraschung versprechen. Die Kinder werden sich freuen, wenn sie beim Blick auf den Baum sehen, dass ihre Geschenke bereits darauf warten, ausgepackt zu werden.
+        \item \textit{Lichterkette (\texttt{o})}\par
+        Es wird Zeit, den Baum zum Leuchten zu bringen! Die Dorfbewohner haben eine Lichterkette aufgehängt, die in bunten Farben erstrahlt. Doch die Lichter sollen nicht nur leuchten, sondern auch tanzen! Lasse die Lichterkette in einer sanften Animation flimmern, sodass der Baum immer wieder in neuem Glanz erstrahlt. Der glitzernde Baum wird die Dorfbewohner in Staunen versetzen und den Dorfplatz in ein magisches Licht tauchen.
+        \begin{center}
+        \begin{tcolorbox}[frame empty,nobeforeafter,colback=gray!5]
+        \centering%
+        \begin{tabular}{c}
+        \begin{lstlisting}[escapeinside={/!}{!/}]
+  ~
+ ~*/!\textcolor{red}{o}!/
+*/!\textcolor{blue}{o}\textcolor{orange}{o}!/~*
+  *
+        \end{lstlisting}
+        \end{tabular}
+        \end{tcolorbox}
+        \textit{\small Weihnachtsbaum mit Schnee und Lichterkette}
+        \end{center}
+    \end{itemize}
+    \item Andere Baumarten\par
+    Die Dorfbewohner haben begonnen, ihre eigenen Vorstellungen vom perfekten Baum zu äußern. Einige wünschen sich einen Baum, der sich von der klassischen Form unterscheidet. Diese Baumarten sollen auffälliger und markanter wirken, mit schärferen, spitzeren Zweigen. Lasse verschiedene Baumdesigns entstehen, damit jeder Dorfbewohnerin ihren oder seinen eigenen Baum erschaffen kann.
+    \begin{center}
+    \begin{tcolorbox}[frame empty,nobeforeafter,colback=gray!5]
+    \centering%
+    \begin{tabular}{c}
+    \begin{lstlisting}
+     *
+    ***
+   *****
+  *******
+ *********
+  *******
+ *********
+***********
+    ***
+    \end{lstlisting}
+    \end{tabular}
+    \end{tcolorbox}
+    \textit{\small Ein anderer Weihnachtsbaum}
+    \end{center}
+    \item Zufällige Bäume\par
+    Einige Dorfbewohner lieben es, sich überraschen zu lassen. Sie möchten einen Baum, der nicht immer gleich aussieht, sondern jedes Mal anders. Lasse daher zufällig generierte Bäume entstehen, die für jede Eingabe einzigartig sind. 
+\end{itemize}
+\newpage
+
+%
+\section{Conway's Game of Life}
+
+Im Jahr 1970 entwickelte der britische Mathematiker John Conway das „Spiel des Lebens“ – ein zelluläres Automatenmodell, bei dem die Entwicklung von Zellen ausschließlich durch eine einfache Reihe von Regeln bestimmt wird. Jede Zelle kann entweder lebendig oder tot sein und verändert sich im Laufe der Zeit basierend auf den Zellen in ihrer direkten Nachbarschaft. Es handelt sich dabei um eine Simulation ohne äußere Eingriffe, in der das Verhalten der Zellen ausschließlich durch ihre Umgebung beeinflusst wird.
+
+Das „Spiel des Lebens“ erregte rasch das Interesse von Wissenschaftlern und Mathematikern, da es auf faszinierende Weise komplexe Muster aus einfachen Regeln entstehen lässt. Zahlreiche Forscher begannen daraufhin, das Modell zu simulieren, um zu untersuchen, wie sich aus diesen simplen Regeln überraschende und teils lebendig wirkende Strukturen entwickeln können.
+
+\subsection{Aufgabe}
+
+Du wirst eine Simulation von Conway's Game of Life implementieren. In dieser Simulation gibt es ein zweidimensionales Gitter, in dem Zellen nach den oben beschriebenen Regeln leben, sterben oder sich fortpflanzen. Deine Aufgabe besteht darin, das Verhalten der Zellen über mehrere Zyklen hinweg zu simulieren, basierend auf den folgenden Regeln:
+
+\begin{itemize}
+    \item Eine lebendige Zelle bleibt am Leben, wenn sie genau zwei oder drei lebendige Nachbarn hat. Andernfalls stirbt sie (entweder durch Überbevölkerung oder durch Einsamkeit).
+    \item Eine tote Zelle wird wiederbelebt, wenn sie genau drei lebendige Nachbarn hat.
+\end{itemize}
+
+Die Simulation läuft über mehrere Zyklen hinweg und zeigt, wie sich das Muster der Zellen mit der Zeit entwickelt.
+
+\bigskip
+
+\subsection{Erweiterungen}
+
+Nachdem du die Grundversion des Spiels implementiert hast, gibt es einige spannende Erweiterungen, die das Spiel noch interaktiver und interessanter machen können:
+
+\begin{itemize}
+    \item Anpassbare Feldgröße\par
+    Der Benutzer soll zu Beginn der Simulation die Größe des Spielfelds festlegen können.
+
+    \item Geschwindigkeit anpassen\par 
+    Der Benutzer soll die Geschwindigkeit der Simulation anpassen können.
+    
+    \item Simulation pausieren\par
+    Der Benutzer soll die Simulation jederzeit pausieren können.
+    
+    \item Zellen platzieren\par
+    Der Benutzer soll Zellen manuell auf dem Spielfeld platzieren können, entweder durch Eingabe von Koordinaten oder mithilfe eines grafischen Interfaces.
+
+    \item Zufällige Startmuster\par
+    Der Benutzer soll die Simulation mit einem zufälligen Startmuster beginnen können.
+\end{itemize}
+
+% anhang
+\newpage
+\addcontentsline{toc}{part}{Anhang}
+\setcounter{section}{0}
+\renewcommand{\thesection}{\Roman{section}}
+
+\section{Formatierung mit ANSI}
+
+In der Welt der Terminal-Programmierung ist ANSI eine weit verbreitete Möglichkeit, Text mithilfe von Steuersequenzen zu formatieren. Mit ANSI-Codes können Textfarben, Hintergrundfarben, Formatierungen wie Fett oder Kursiv und vieles mehr festgelegt werden. Diese Codes sind besonders nützlich, um die Benutzererfahrung zu verbessern, indem sie Text visuell hervorheben.
+
+Ein Beispiel für eine ANSI-Farbsequenz ist:
+\texttt{\textbackslash033[31mDieser Text ist rot\textbackslash033[0m.}
+
+In diesem Beispiel bewirkt \texttt{\textbackslash033[31m}, dass der Text rot wird, und \texttt{\textbackslash033[0m} setzt die Formatierung zurück.
+
+Für eine vollständige Liste der verfügbaren ANSI-Codes, inklusive Farben und Formatierungen, kannst du die folgende Ressource einsehen:
+
+\url{https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797}
+
+\newpage
+\section{Formatierung mit den Prog1Tools}
+
+Ihr könnt davon ausgehen, dass die Methoden alle mit folgendem Beispiel arbeiten:
+
+\begin{tcolorbox}[frame empty,nobeforeafter,colback=gray!5]
+\begin{lstlisting}[language=java,basicstyle=\ttfamily]
+TextScreen screen = TextScreen.getInstance();
+screen.setTitle("My cool documentation");
+
+// Schreibt den Text "Hallo" an die Position
+screen.write(y, x, "Hello");
+\end{lstlisting}
+\end{tcolorbox}
+
+\paragraph{Text schreiben}\
+
+\begin{tcolorbox}[frame empty,nobeforeafter,colback=gray!5]
+\begin{lstlisting}[language=java,basicstyle=\ttfamily]
+screen.write(int y, int x, String text);
+\end{lstlisting}
+\end{tcolorbox}
+
+\paragraph{Text einfärben}\
+
+\begin{tcolorbox}[frame empty,nobeforeafter,colback=gray!5]
+\begin{lstlisting}[language=java,basicstyle=\ttfamily]
+screen.setForegroundColor(int y, int x, Color color);
+screen.setBackgroundColor(int y, int x, Color color);
+\end{lstlisting}
+\end{tcolorbox}
+
+Ihr könnt verschiedene vorgefertigte Farben benutzen:
+
+\begin{tcolorbox}[frame empty,nobeforeafter,colback=gray!5]
+\begin{lstlisting}[language=java,basicstyle=\ttfamily]
+Color.white
+Color.lightGray
+Color.gray
+Color.darkGray
+Color.black
+Color.red
+Color.pink
+Color.orange
+Color.yellow
+Color.green
+Color.magenta
+Color.cyan
+Color.blue
+\end{lstlisting}
+\end{tcolorbox}
+
+Ihr könnt außerdem RGB-Farben benutzen:
+
+\begin{tcolorbox}[frame empty,nobeforeafter,colback=gray!5]
+\begin{lstlisting}[language=java,basicstyle=\ttfamily]
+new Color(int r, int g, int b);
+\end{lstlisting}
+\end{tcolorbox}
+
+\paragraph{Bildschirm löschen}\
+
+\begin{tcolorbox}[frame empty,nobeforeafter,colback=gray!5]
+\begin{lstlisting}[language=java,basicstyle=\ttfamily]
+screen.clearScreen();
+\end{lstlisting}
+\end{tcolorbox}
+
+\paragraph{Verzögerung erstellen}\
+
+\begin{tcolorbox}[frame empty,nobeforeafter,colback=gray!5]
+\begin{lstlisting}[language=java,basicstyle=\ttfamily]
+TextScreen.pause(int timeInMs);
+\end{lstlisting}
+\end{tcolorbox}
+
+\paragraph{Gedrückte Taste abfragen}\
+
+Das zuletzt gedrückte Zeichen bekommt ihr durch:
+
+\begin{tcolorbox}[frame empty,nobeforeafter,colback=gray!5]
+\begin{lstlisting}[language=java,basicstyle=\ttfamily]
+char c = screen.getSelectedKeyChar();
+\end{lstlisting}
+\end{tcolorbox}
+
+Falls ihr diesen Code in einer Schleife ausführt, so wird sich das Zeichen erst ändern, wenn der Benutzer ein weiteres drückt.
+
+Um dem vorzubeugen, könnt ihr das Zeichen nach dem Lesen wieder löschen durch:
+
+\begin{tcolorbox}[frame empty,nobeforeafter,colback=gray!5]
+\begin{lstlisting}[language=java,basicstyle=\ttfamily]
+screen.resetKeyEvent();
+\end{lstlisting}
+\end{tcolorbox}
+
+Beachtet bitte, dass "kein Zeichen" als Leerzeichen dargestellt wird. Somit kann dies nicht genutzt werden, um die Leertaste abzufragen.
+
+Falls ihr trotzdem das Leerzeichen abfragen wollt, so könnt ihr folgenden Code benutzen:
+
+\begin{tcolorbox}[frame empty,nobeforeafter,colback=gray!5]
+\begin{lstlisting}[language=java,basicstyle=\ttfamily]
+Character c = screen.getSelectedKeyChar();
+if (c == ' ' && screen.getSelectedKeyCode() == 0)
+    c = null;
+
+if (c == null); // kein Zeichen
+if (c != null); // Leerzeichen
+\end{lstlisting}
+\end{tcolorbox}
+
+\paragraph{Mausposition abfragen}\
+
+Die Mausposition ist nur für das ganze Fenster selbst bestimmbar. Sprich, es ist nicht direkt möglich, das geklickte Zeichen abzufragen.
+
+Jedoch versucht folgender Code, die richtige X/Y- bzw. Reihen-/Zeilenposition zu erkennen:
+
+\begin{tcolorbox}[frame empty,nobeforeafter,colback=gray!5]
+\begin{lstlisting}[language=java,basicstyle=\ttfamily]
+var pt = screen.getMousePosition();
+if (pt != null) {
+    int pxlX = (int) ((double) pt.x / (double) screen.getWidth() * 80 + .5d);
+    int pxlY = (int) ((double) pt.y / (double) screen.getHeight() * 25 - .5d);
+\end{lstlisting}
+\end{tcolorbox}
+
+Ihr müsst hier darauf achten, ob `pt == null` ist. Falls dem so ist, ist die Maus nicht auf dem Fenster.
+
+Die Variablen `pxlX` und `pxlY` sind hierbei die Position des Zeichens, über welches der Benutzer gerade hovert.
+
+\bigskip
+\hrule
+\bigskip
+
+Damit habt ihr nun die grundlegenden Funktionen zur Verwendung des `TextScreen` in der Prog1Tools.jar kennengelernt. Viel Spaß beim Programmieren! \textit{- Noah}
+
+% quellen
+\newpage
+\addcontentsline{toc}{part}{Quellen}
+\setcounter{section}{0}
+\renewcommand{\thesection}{\arabic{section}}
+
+\section{Contributors}
+Danke Noah für die Dokumentation zu den Prog1Tools!
+
+(Ich schreib das noch besser, versprochen!)
+
+\end{document}
