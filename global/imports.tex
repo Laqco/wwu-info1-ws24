@@ -60,4 +60,18 @@
 \theoremstyle{solve}
 \newtheorem*{solve*}{Lösung}
 
+% fix email
+\makeatletter
+\let\originalhref\href
+\renewcommand{\href}[2]{%
+    \def\temp{#2}
+    \def\tempcompare{\btcd@email}
+    \ifx\temp\tempcompare
+        \originalhref{mailto:#2}{\hbox{#2}}
+    \else
+        \originalhref{#1}{#2}
+    \fi
+}
+\makeatother
+
 % TODO: cleanup?
