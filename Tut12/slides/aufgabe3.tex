@@ -1,0 +1,85 @@
+\begin{frame}[fragile]{DoublyLinkedList}
+    \begin{solve}
+    \begin{plainjava}
+public class DoublyLinkedList {
+    private DLLElement head, tail;
+
+    public DoublyLinkedList() {
+        head = new DLLElement();
+        tail = new DLLElement();
+
+        head.setNext(tail);
+        tail.setPrevious(head);
+    }
+}
+    \end{plainjava}
+    \end{solve}
+\end{frame}
+\resetframecounters
+\begin{frame}[fragile]{DoublyLinkedList}\onslide<+->
+    \begin{solve}
+    \begin{plainjava}
+public void insertFirst(Object object) {
+!*\onslide<+->*!    DLLElement element = new DLLElement();
+!*\onslide<+->*!    element.setObject(object);
+
+!*\onslide<+->*!    element.setNext(head.getNext());
+!*\onslide<+->*!    head.getNext().setPrevious(element);
+!*\onslide<+->*!    head.setNext(element);
+!*\onslide<+->*!    element.setPrevious(head);
+}
+    \end{plainjava}
+    \end{solve}
+\end{frame}
+\resetframecounters
+\begin{frame}[fragile]{DoublyLinkedList}
+    \begin{solve}
+    \begin{plainjava}
+public void insertLast(Object object) {
+    DLLElement element = new DLLElement();
+    element.setObject(object);
+
+    element.setPrevious(tail.getPrevious());
+    tail.getPrevious().setNext(element);
+    tail.setPrevious(element);
+    element.setNext(tail);
+}
+    \end{plainjava}
+    \end{solve}
+\end{frame}
+\resetframecounters
+\begin{frame}[fragile]{DoublyLinkedList}\onslide<+->
+    \begin{solve}
+    \begin{plainjava}
+public void remove(Object object) {
+!*\onslide<+->*!    for (DLLElement current = head.getNext(); current != tail; current = current.getNext()) { // iteriert durch Elemente
+
+!*\onslide<+->*!            if (current.getObject().equals(object)) {
+!*\onslide<+->*!                current.getPrevious().setNext(current.getNext());
+!*\onslide<+->*!                current.getNext().setPrevious(current.getPrevious());
+!*\onslide<+->*!                return; // Abbruch der Suche
+            }
+    }
+}
+    \end{plainjava}
+    \end{solve}
+\end{frame}
+\resetframecounters
+\begin{frame}[fragile]{DoublyLinkedList}
+    \begin{solve}
+    \begin{plainjava}
+@Override
+public String toString() {
+    String result = "[";
+    for (DLLElement current = head.getNext(); current != tail; current = current.getNext()) { // iteriert durch Elemente
+
+            result += current.getObject(); // implizites toString()
+
+            if (current != tail) result += ", ";
+    }
+    result += "]";
+    return result;
+}
+    \end{plainjava}
+    \end{solve}
+\end{frame}

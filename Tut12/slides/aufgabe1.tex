@@ -1,0 +1,55 @@
+\begin{frame}[fragile]{RingGame}
+    \begin{solve}[a) Die.java]
+    \begin{plainjava}
+public class Die {
+    private int value;
+    
+    public Die() {toss();}
+
+    public int getTossedValue() {return value;}
+    public void toss() {
+        value = (int)(Math.random() * 6) + 1;
+    }
+}
+    \end{plainjava}
+    \end{solve}
+\end{frame}
+\resetframecounters
+\begin{frame}[fragile]{RingGame}
+    \begin{solve}[b) Player.java]
+    \begin{plainjava}
+public class Player {
+    private static int counter = 0;
+
+    private int id;
+    private String playerName;
+    private Player nextPlayer; // default: null
+
+    public Player(String playerName) {
+        this.id = ++counter;
+        this.playerName = playerName;
+    }
+
+    // getter and setter
+}
+    \end{plainjava}
+    \end{solve}
+\end{frame}
+\resetframecounters
+\begin{frame}[fragile]{RingGame}
+    \begin{solve}[c) RingGame.java]
+        \textbf{Spielerliste erzeugen}
+        \begin{itemize}
+            \item erster Spieler $\rightarrow$ \bjava{firstPlayer} und \bjava{playerToTheNext}
+            \item ab zweitem Spieler: \bjava{playerToTheNext.setNextPlayer(player)}
+            \item letzter Spieler: Verkettung mit \bjava{firstPlayer} (Kreisbildung)
+        \end{itemize}
+        \textbf{Spieler entfernen}
+        \begin{itemize}
+            \item falls \bjava{ringBearer == firstPlayer}: aktualisiere \bjava{firstPlayer = firstPlayer.getNextPlayer()}
+            \item \bjava{while}-Schleife um Vorgänger von \bjava{ringBearer} zu finden\\
+            (dessen Nachfolger muss also \bjava{ringBearer} sein!)
+            \item dort neuen Nachfolger eintragen (\bjava{ringBearer} ,,\textit{überspringen}'')
+        \end{itemize}
+    \end{solve}
+\end{frame}
