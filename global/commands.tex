@@ -9,13 +9,13 @@
 % a1
 
 % title image: box
-% (inverse scale, width, content)
-\newcommand\titleimagebox[3]{%
+% ([vshift], inverse scale, width, content)
+\newcommand\titleimagebox[4][0pt]{%
 \newlength\tibheight \setlength\tibheight{4cm}
 \newlength\tibtY \setlength\tibtY{-6em}
-\titleimage{\begin{minipage}[c][#1\tibheight]{#2}\vspace*{#1\tibtY}%
-    \begin{tcolorbox}[boxrule=0.1pt]%
-    \centering#3% TODO: bug: not centered if too wide
+\titleimage{\begin{minipage}[c][#2\tibheight]{#3}\vspace*{#2\tibtY}%
+    \vspace*{#1}\begin{tcolorbox}[boxrule=0.1pt]%
+    \centering#4% TODO: bug: not centered if too wide
     \end{tcolorbox}%
 \end{minipage}}}
 
