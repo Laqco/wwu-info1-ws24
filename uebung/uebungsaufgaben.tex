@@ -1,0 +1,76 @@
+\documentclass[aspectratio=169,usepdftitle=true,11pt,ngerman,t]{beamer}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+
+\input{../global/user.tex}
+
+\usetheme[darkmode,nobib]{digital-minimal}
+
+\usepackage{fancyqr}
+\usepackage[addons]{color-palettes}
+\UsePalette{Peach}
+\usepackage[cpalette,fakeminted]{sopra-listings}
+
+% languages fix
+\let\originalsolLoadLanguage\solLoadLanguage
+\def\solLoadLanguage#1{%
+    \def\temp{#1}
+    \def\tempjava{java}
+    \def\temptext{text}
+    \ifx\temp\tempjava
+        \input{../global/fix_language_java.cfg}
+    \else\ifx\temp\temptext
+        \input{../global/language_text.cfg}
+    \else
+        \originalsolLoadLanguage{#1}
+    \fi\fi
+}
+
+\solLoadLanguage{java}
+\solLoadLanguage{haskell}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subtitle{Tutorium 12 -- Übungsaufgaben}
+\date{17. Januar 2025}
+\title{Informatik I}
+\author{\lqfullname}
+
+\outro{\centering{\textbf{Viel Erfolg beim Üben!}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\lstfs{11}
+
+\section{Altklausur WS21/22 Aufgabe 2}
+
+\begin{frame}[fragile]{Java}\onslide<+->
+    \begin{plainjava}
+public static double arctan(double x) {
+!*\onslide<+->*!	double result = 0;
+	for (int k = 0; !*\onslide<+->*!Math.pow(x,2*k+1) / (2*k + 1) >= 0.000001; !*\onslide<+->*!k++) {
+!*\onslide<+->*!		result += Math.pow(-1, k) * Math.pow(x,2*k+1) / (2*k + 1);
+	}
+!*\onslide<+->*!	return result;
+}
+    \end{plainjava}
+\end{frame}
+
+\begin{frame}[fragile]{Haskell}\onslide<+->
+    \begin{plainhaskell}
+!*\onslide<+->*!arctan :: Double -> Double
+arctan x = arctansum 0 x
+
+!*\onslide<+->*!arctansum :: Int -> Double -> Double
+arctansum k x = arctansumstep k x + arctansum (k+1) x
+
+!*\onslide<+->*!arctansumstep :: Int -> Double -> Double
+arctansumstep k x = (-1) ^ k * x ^ (2*k + 1) / (2*k + 1)
+    \end{plainhaskell}
+\end{frame}
+
+\end{document}
