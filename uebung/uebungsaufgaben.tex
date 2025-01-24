@@ -60,6 +60,26 @@ public static double arctan(double x) {
     \end{plainjava}
 \end{frame}
 
+\begin{frame}[fragile]{Java by ChatGPT}
+    \begin{plainjava}
+public static double arctan(double x) {
+    if (Math.abs(x) > 1) throw new IllegalArgumentException();
+
+    double sum = 0.0;
+    double term;
+    int k = 0;
+
+    do {
+        term = Math.pow(-1, k) * Math.pow(x, 2 * k + 1) / (2 * k + 1);
+        sum += term;
+        k++;
+    } while (Math.abs(term) >= 0.000001);
+
+    return sum;
+}
+    \end{plainjava}
+\end{frame}
+
 \begin{frame}[fragile]{Haskell}\onslide<+->
     \begin{plainhaskell}
 !*\onslide<+->*!arctan :: Double -> Double
@@ -70,6 +90,25 @@ arctansum k x = arctansumstep k x + arctansum (k+1) x
 
 !*\onslide<+->*!arctansumstep :: Int -> Double -> Double
 arctansumstep k x = (-1) ^ k * x ^ (2*k + 1) / (2*k + 1)
+    \end{plainhaskell}
+\end{frame}
+
+\begin{frame}[fragile]{Haskell by ChatGPT}
+    \begin{plainhaskell}
+arctan :: Double -> Double
+arctan x
+  | abs x > 1 = error "x muss im Bereich [-1, 1] liegen!"
+  | otherwise = arctanSum x 0 0
+
+arctanSum :: Double -> Int -> Double -> Double
+arctanSum x k sum
+  | abs term < 0.000001 = sum
+  | otherwise = arctanSum x (k + 1) (sum + term)
+  where
+    term = arctanTerm x k
+
+arctanTerm :: Double -> Int -> Double
+arctanTerm x k = ((-1) ** fromIntegral k) * (x ** fromIntegral (2 * k + 1)) / fromIntegral (2 * k + 1)
     \end{plainhaskell}
 \end{frame}
 
