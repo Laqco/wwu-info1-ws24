@@ -1,0 +1,72 @@
+\begin{frame}[fragile]{Signatur}
+    \begin{exercise}
+    \begin{plainjava}
+private void foo() {}
+public void foo() {}
+private int foo() {}
+private static int foo(int a) {}
+public int foo(int b) {}
+private int foo(int a, float b) {}
+private static float foo(int a, float b) {}
+private void bar() {}
+    \end{plainjava}
+    Geben Sie an, welche der obigen Deklarationen zusätzlich zusätzlich
+    \begin{plainjava}
+private int foo(int a, float b) {}
+    \end{plainjava}
+    in derselben Klasse vorkommen dürfen.
+    \end{exercise}
+\end{frame}
+\begin{frame}[fragile]{Signatur}
+    \begin{solve}
+    \begin{plainjava}
+!*\textcolor{lightgray}{private void}*! foo() !*\textcolor{lightgray}{\{\}}*!
+!*\textcolor{lightgray}{public void}*! foo() !*\textcolor{lightgray}{\{\}}*!
+!*\textcolor{lightgray}{private int}*! foo() !*\textcolor{lightgray}{\{\}}*!
+!*\textcolor{lightgray}{private static int}*! foo(int !*\textcolor{lightgray}{a}*!) !*\textcolor{lightgray}{\{\}}*!
+!*\textcolor{lightgray}{public int}*! foo(int !*\textcolor{lightgray}{b}*!) !*\textcolor{lightgray}{\{\}}*!
+!*\textcolor{lightgray}{private int}*! foo(int !*\textcolor{lightgray}{a}*!, float !*\textcolor{lightgray}{b}*!) !*\textcolor{lightgray}{\{\}}*!
+!*\textcolor{lightgray}{private static float}*! foo(int !*\textcolor{lightgray}{a}*!, float !*\textcolor{lightgray}{b}*!) !*\textcolor{lightgray}{\{\}}*!
+!*\textcolor{lightgray}{private void}*! bar() !*\textcolor{lightgray}{\{\}}*!
+    \end{plainjava}
+    \bigskip
+    \begin{plainjava}
+!*\textcolor{lightgray}{private int}*! foo(int !*\textcolor{lightgray}{a}*!, float !*\textcolor{lightgray}{b}*!) !*\textcolor{lightgray}{\{\}}*!
+    \end{plainjava}
+    \end{solve}
+\end{frame}
+\addtocounter{solve}{-1}
+\begin{frame}[fragile,noframenumbering]{Signatur}\onslide<+->
+    \begin{solve}
+    \begin{minipage}[t]{0.25\linewidth}
+    \begin{plainjava}
+foo()
+foo()
+foo()
+    \end{plainjava}
+    \end{minipage}\nolinebreak%
+    \begin{minipage}[t]{0.25\linewidth}
+    \begin{plainjava}
+foo(int)
+foo(int)
+    \end{plainjava}
+    \end{minipage}\nolinebreak%
+    \begin{minipage}[t]{0.25\linewidth}
+    \begin{plainjava}
+foo(int, float)
+foo(int, float)
+    \end{plainjava}
+    \bigskip
+    \begin{plainjava}
+foo(int, float)
+    \end{plainjava}
+    \end{minipage}\nolinebreak%
+    \begin{minipage}[t]{0.25\linewidth}
+    \begin{plainjava}
+bar()
+    \end{plainjava}
+    \end{minipage}
+
+    \onslide<+-> Maximal eine Methode pro Signatur erlaubt!
+    \end{solve}
+\end{frame}

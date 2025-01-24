@@ -1,0 +1,44 @@
+\begin{frame}[fragile]{Vererbung und dynamisches Binden}
+    \begin{solve}[a) b) c)]
+        \begin{itemize}
+            \item dynamisches Binden sorgt für Methodenaufrufe der speziellsten Klasse
+            \item impliziter \bjava{super()} call, falls nicht im Code explizit eine Überladung aufgerufen wird
+            \item casting oder Polymorphismus ändert die Ausgaben nicht
+        \end{itemize}
+    \end{solve}
+\end{frame}
+\addtocounter{solve}{-1}
+\begin{frame}[fragile]{Vererbung und dynamisches Binden}
+    \begin{solve}[d) i)]
+        \begin{itemize}
+            \item \bjava{anzahl} ist in Drogenhund eine lokale \textit{Instanzvariable} -- verdeckt die gleichnamige \textit{Klassenvariable} aus Tier
+            \item keine Ausgabe im Hund-Konstruktor, da expliziter super-call
+            \item bei d) casting zu Hund
+        \end{itemize}
+    \end{solve}
+\end{frame}
+\addtocounter{solve}{-1}
+\begin{frame}[fragile]{Vererbung und dynamisches Binden}
+    \begin{solve}[e) f) g)]
+        \begin{itemize}
+            \item Compile-Fehler
+            \item g) löst durch casting den Fehler aus f)
+        \end{itemize}
+    \end{solve}
+\end{frame}
+\addtocounter{solve}{-1}
+\begin{frame}[fragile]{Vererbung und dynamisches Binden}
+    \begin{solve}[h)]
+        \begin{itemize}
+            \item \dq echtes\dq Tier{\hfill\small\color{lightgray}\% <{-}{-}{-}{-}{-} \textbackslash dq für Quotes :D}
+        \end{itemize}
+    \end{solve}
+\end{frame}
+\addtocounter{solve}{-1}
+\begin{frame}[fragile]{Vererbung und dynamisches Binden}
+    \begin{solve}[j)]
+        \begin{itemize}
+            \item Laufzeitfehler beim casting
+        \end{itemize}
+    \end{solve}
+\end{frame}

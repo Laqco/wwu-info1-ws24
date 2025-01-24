@@ -1,0 +1,19 @@
+\begin{frame}[fragile]{Vererbung}
+    \begin{solve}[a)]
+        \begin{itemize}
+            \item \bjava{abstract class Person}
+            \item \bjava{private}/\bjava{protected} Instanzvariablen, \bjava{public} Methoden
+            \item keine Redundanz (z.B. \bjava{Person.toString()} wird in abgeleiteten Klassen benutzt)
+        \end{itemize}
+    \end{solve}%
+    \addtocounter{solve}{-1}
+    \begin{solve}[b)]
+        \begin{itemize}
+            \item hier: \textbf{gerichtet} (Kundschaft hat Bestellungen, aber Bestellung enthält keinen Verweis auf Kundschaft)
+            \item für einen solchen Verweis: Attribut in Bestellung \begin{itemize}
+                \item entweder im Konstruktor setzen (Kardinalität \texttt{1})
+                \item oder über setter (Kardinalität \texttt{0..1})
+            \end{itemize}
+        \end{itemize}
+    \end{solve}
+\end{frame}
