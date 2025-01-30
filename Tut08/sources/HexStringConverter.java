@@ -59,13 +59,13 @@ public class HexStringConverter {
         long result = 0;
         for (char hexChar : hexArray) {
             int hexValue = getHexValue(hexChar);
-            result = result * 16 + hexValue;
+            result = result * 16 + hexValue; // Horner Schema
         }
         return result;
     }
 
     public static int getHexValue(char hexChar) {
-        if (Character.isDigit(hexChar)) {
+        if (hexChar >= '0' && hexChar <= '9') {
             return hexChar - '0';
         } else {
             return hexChar - 'a' + 10;
