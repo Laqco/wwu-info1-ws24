@@ -37,6 +37,9 @@
 % small footnote
 \newcommand{\nicefootnote}[1]{\tikz[overlay,remember picture]{\node[anchor=south,text width=\dimexpr\textwidth+2em\relax,align=center,above=1em of current page.south] (nicefootnote) {\hrule\vskip 1pt\footnotesize#1};}}
 
+% italic for fonts that don't support itshape
+\newcommand{\itforce}[1]{\tikz[baseline]{\node[xslant=0.2,anchor=base,inner sep=0pt]{#1};}}
+
 % console example calls % TODO
 % \newcommand<>\excall[1]{%
 % \only<handout:0>{%
